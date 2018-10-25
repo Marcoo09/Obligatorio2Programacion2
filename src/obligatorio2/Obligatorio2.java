@@ -5,6 +5,9 @@
  */
 package obligatorio2;
 
+import Domains.*;
+import Windows.MenuWindow;
+
 
 /**
  *
@@ -12,12 +15,12 @@ package obligatorio2;
  */
 public class Obligatorio2 {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
         
-        //esta funcionandooooo
+        Game game = new Game();
+        MenuWindow window = new MenuWindow(game);
+        window.setVisible(true);
     }
     
 }

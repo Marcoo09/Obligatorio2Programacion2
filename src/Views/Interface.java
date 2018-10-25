@@ -1,12 +1,13 @@
 package Views;
 
+import Domains.*;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import domains.*;
+import Domains.*;
 import java.util.Arrays;
 import java.util.Iterator;
-import Domains.*;
 /**
  * @author Marco Fiorito and Felipe Najson
  */
