@@ -9,8 +9,11 @@ import domains.Game;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.applet.AudioClip;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.net.URL;
 
 
 public class MenuWindow extends javax.swing.JFrame {
@@ -26,12 +29,9 @@ public class MenuWindow extends javax.swing.JFrame {
         windowAddPlayer = new WindowAddPlayer(aGame);
         windowRanking =  new WindowRanking(aGame);
         this.setTransparent();
+        
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
         sound.play();
-        
-        Toolkit dim = Toolkit.getDefaultToolkit();
-       this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-       this.setLocationRelativeTo(null);
 
     }
     
@@ -79,6 +79,7 @@ public class MenuWindow extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1020, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1907, 958));
@@ -169,7 +170,7 @@ public class MenuWindow extends javax.swing.JFrame {
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/OGA3KP0_1.jpg"))); // NOI18N
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 700));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
