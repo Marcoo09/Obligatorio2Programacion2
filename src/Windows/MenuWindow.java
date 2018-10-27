@@ -9,6 +9,8 @@ import Domains.Game;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.applet.AudioClip;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 
 public class MenuWindow extends javax.swing.JFrame {
@@ -23,10 +25,14 @@ public class MenuWindow extends javax.swing.JFrame {
         game = aGame;
         windowAddPlayer = new WindowAddPlayer(aGame);
         windowRanking =  new WindowRanking(aGame);
-        this.setLocationRelativeTo(null);
         this.setTransparent();
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
         sound.play();
+        Toolkit dim = Toolkit.getDefaultToolkit();
+        
+       this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       this.setLocationRelativeTo(null);
+
     }
     
     public void setTransparent(){
