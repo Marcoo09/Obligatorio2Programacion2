@@ -33,7 +33,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
-        windowGameBoard = new WindowGameBoard(aGame, this);
+        windowGameBoard = new WindowGameBoard(aGame, menuWindow);
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -163,7 +163,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void manageClosingWindow(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageClosingWindow
-        // TODO add your handling code here:
         menuWindow.setVisible(true);
         
     }//GEN-LAST:event_manageClosingWindow

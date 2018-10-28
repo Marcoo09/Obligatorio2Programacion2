@@ -27,6 +27,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
 
     private Game game;
     private MenuWindow menuWindow;
+    
     public WindowAddPlayer(Game aGame,MenuWindow mainWindow) {
         initComponents();
         game = aGame;

@@ -1,5 +1,6 @@
     package domains;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
@@ -8,7 +9,7 @@ import java.util.Observable;
  * @author Felipe Najson and Marco Fiorito
  */
 
-public class Game  extends Observable{
+public class Game  extends Observable implements Serializable{
     private ArrayList<Match> listOfMatches;
     private ArrayList<Player> listOfPlayers;
     private boolean stateMusic;
