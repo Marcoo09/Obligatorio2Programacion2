@@ -1,6 +1,7 @@
 package domains;
 
 import java.util.ArrayList;
+import views.Interface;
 /**
  * @author Felipe Najson and Marco Fiorito
  */
@@ -209,5 +210,140 @@ public class GameBoard{
         
         return sum;
     }
+    
+       public static GameBoard movePiece(Player auxPlayer, GameBoard actualGameBoard, int positionOfTokenX, int positionOfTokenY, String movementDirection) {
+        Token[][] matrix = actualGameBoard.getTokenMatrix();
+
+        //Player Red
+        if (auxPlayer.equals(actualGameBoard.getPlayerRed())) {
+            if (movementDirection.equalsIgnoreCase("D")) {
+                matrix[positionOfTokenY - 1][positionOfTokenX + 1] = matrix[positionOfTokenY][positionOfTokenX];
+                matrix[positionOfTokenY][positionOfTokenX] = null;
+            }
+            if (movementDirection.equalsIgnoreCase("I")) {
+                matrix[positionOfTokenY - 1][positionOfTokenX - 1] = matrix[positionOfTokenY][positionOfTokenX];
+                matrix[positionOfTokenY][positionOfTokenX] = null;
+
+            }
+            if (movementDirection.equalsIgnoreCase("A")) {
+                matrix[positionOfTokenY - 1][positionOfTokenX] = matrix[positionOfTokenY][positionOfTokenX];
+                matrix[positionOfTokenY][positionOfTokenX] = null;
+
+            }
+        } //Player Blue
+        else if (auxPlayer.equals(actualGameBoard.getPlayerBlue())) {
+            if (movementDirection.equalsIgnoreCase("D")) {
+                matrix[positionOfTokenY + 1][positionOfTokenX - 1] = matrix[positionOfTokenY][positionOfTokenX];
+                matrix[positionOfTokenY][positionOfTokenX] = null;
+            }
+            if (movementDirection.equalsIgnoreCase("I")) {
+                matrix[positionOfTokenY + 1][positionOfTokenX + 1] = matrix[positionOfTokenY][positionOfTokenX];
+                matrix[positionOfTokenY][positionOfTokenX] = null;
+
+            }
+            if (movementDirection.equalsIgnoreCase("A")) {
+                matrix[positionOfTokenY + 1][positionOfTokenX] = matrix[positionOfTokenY][positionOfTokenX];
+                matrix[positionOfTokenY][positionOfTokenX] = null;
+
+            }
+        }
+
+        actualGameBoard.setTokenMatrix(matrix);
+        return actualGameBoard;
+    }
+       
+      /*public static boolean validatePositionMovement(Player auxPlayer, GameBoard actualGameBoard, int positionOfTokenX, int positionOfTokenY, String movementDirection) {
+        Token[][] matrix = actualGameBoard.getTokenMatrix();
+        Token auxTokenToCompare = null;
+
+        boolean isValidPositionMovement = false;
+        boolean isOutOfRangeY;
+        boolean isOutOfRangeX;
+
+        //Player Red
+        if (auxPlayer.equals(actualGameBoard.getPlayerRed())) {
+            isOutOfRangeY = Interface.validateRange(positionOfTokenY - 1, 0, 7);
+
+            if (movementDirection.equalsIgnoreCase("D")) {
+                isOutOfRangeX = Interface.validateRange(positionOfTokenX + 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = matrix[positionOfTokenY - 1][positionOfTokenX + 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+                }
+
+            } else if (movementDirection.equalsIgnoreCase("I")) {
+                isOutOfRangeX = Interface.validateRange(positionOfTokenX - 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = matrix[positionOfTokenY - 1][positionOfTokenX - 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+                }
+
+            } else if (movementDirection.equalsIgnoreCase("A")) {
+                isOutOfRangeX = Interface.validateRange(positionOfTokenX, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = matrix[positionOfTokenY - 1][positionOfTokenX];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            }
+        } //Player blue
+        else if (auxPlayer.equals(actualGameBoard.getPlayerBlue())) {
+
+            isOutOfRangeY = Interface.validateRange(positionOfTokenY + 1, 0, 7);
+
+            if (movementDirection.equalsIgnoreCase("D")) {
+                isOutOfRangeX = Interface.validateRange(positionOfTokenX - 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = matrix[positionOfTokenY + 1][positionOfTokenX - 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            } else if (movementDirection.equalsIgnoreCase("I")) {
+                isOutOfRangeX = Interface.validateRange(positionOfTokenX + 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = matrix[positionOfTokenY + 1][positionOfTokenX + 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            } else if (movementDirection.equalsIgnoreCase("A")) {
+                isOutOfRangeX = Interface.validateRange(positionOfTokenX, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = matrix[positionOfTokenY + 1][positionOfTokenX];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            }
+        }
+
+        return isValidPositionMovement;
+    }*/
 
 }

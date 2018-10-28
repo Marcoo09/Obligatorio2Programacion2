@@ -21,6 +21,7 @@ public class MenuWindow extends javax.swing.JFrame {
     private Game game;
     private WindowAddPlayer windowAddPlayer;
     private WindowRanking windowRanking;
+    private WindowMatch windowMatch;
     private AudioClip sound;
     
     public MenuWindow(Game aGame) {
@@ -28,6 +29,7 @@ public class MenuWindow extends javax.swing.JFrame {
         game = aGame;
         windowAddPlayer = new WindowAddPlayer(aGame);
         windowRanking =  new WindowRanking(aGame);
+        windowMatch = new WindowMatch(aGame);
         this.setTransparent();
         
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
@@ -184,7 +186,7 @@ public class MenuWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        // TODO add your handling code here:
+        windowMatch.setVisible(true);
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingActionPerformed
@@ -206,7 +208,6 @@ public class MenuWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSoundActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       
     }//GEN-LAST:event_jLabel1MouseClicked
 
     

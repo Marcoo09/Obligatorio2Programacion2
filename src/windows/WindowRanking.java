@@ -37,7 +37,7 @@ public class WindowRanking extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/OGA3KP0_1.jpg"))); // NOI18N
-        jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 1150, 730));
+        jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 1050, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

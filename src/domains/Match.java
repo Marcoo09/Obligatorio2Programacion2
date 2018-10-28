@@ -18,7 +18,7 @@ public class Match implements Comparable {
     private int qtyOfMovements;
     private boolean finished;
 
-    public static String[] ways = {"movimientos", "pieza", "piezas"};
+    public static String[] ways = {" Por cantidad de  movimientos", "Llevar una pieza", "Llevar todas las piezas"};
 
     public Match(Player player1, Player player2, String wayToFinish, int qtyOfMovements) {
         listOfPlayers = new ArrayList<>();
