@@ -2,15 +2,16 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
 
 /**
  * @author Felipe Najson and Marco Fiorito
  */
 
-public class Game {
+public class Game  extends Observable{
     private ArrayList<Match> listOfMatches;
     private ArrayList<Player> listOfPlayers;
-    
+    private boolean stateMusic;
     public Game(){
         listOfMatches = new ArrayList<>();      
         listOfPlayers = new ArrayList<>();
@@ -19,6 +20,16 @@ public class Game {
     public ArrayList<Match> getListOfMatches() {
         return listOfMatches;
     }
+
+    public boolean isStateMusic() {
+        return stateMusic;
+    }
+
+    public void setStateMusic(boolean stateMusic) {
+        this.stateMusic = stateMusic;
+        this.setChanged();
+        this.notifyObservers();
+    }    
 
     public void addMatch(Match match){
         this.getListOfMatches().add(match);
@@ -29,6 +40,8 @@ public class Game {
     
     public void addPlayer(Player player){
         this.getListOfPlayers().add(player);
+        this.setChanged();
+        this.notifyObservers();
     }
     
     public void sortMatchesByDateTime(){

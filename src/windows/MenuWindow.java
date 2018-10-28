@@ -13,25 +13,45 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
+import java.util.Observer;
+import javax.imageio.ImageIO;
 
 
-public class MenuWindow extends javax.swing.JFrame {
+public class MenuWindow extends javax.swing.JFrame implements Observer{
     
     private Game game;
     private WindowAddPlayer windowAddPlayer;
     private WindowRanking windowRanking;
     private WindowMatch windowMatch;
-    private AudioClip sound;
+    static AudioClip sound;
     
     public MenuWindow(Game aGame) {
         initComponents();
+        
         game = aGame;
+        game.addObserver(this);
         windowAddPlayer = new WindowAddPlayer(aGame);
         windowRanking =  new WindowRanking(aGame);
-        windowMatch = new WindowMatch(aGame);
-        this.setTransparent();
+        windowMatch =  new WindowMatch(aGame);
         
+        try {
+            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
+            JPanel panel = (JPanel) this.getContentPane();
+            panel.setBorder(fondo);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        //btnSound.setLocation((int)(screenSize.getHeight() - 100) , (int)(screenSize.getWidth() - 100));
+        this.setTransparent();
+        this.setLocationRelativeTo(null);
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
         sound.play();
 
@@ -67,7 +87,6 @@ public class MenuWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnAddPlayer = new javax.swing.JButton();
@@ -78,14 +97,11 @@ public class MenuWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        background = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1020, 700));
+        setPreferredSize(new java.awt.Dimension(1020, 725));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(1907, 958));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sumIcon-img.png"))); // NOI18N
         jLabel1.setToolTipText("");
@@ -94,12 +110,12 @@ public class MenuWindow extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, 320, 240));
 
-        jLabel3.setFont(new java.awt.Font("Snubnose DEMO", 0, 60)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Snubnose DEMO", 0, 70)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Juego de las Sumas");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, -1, -1));
 
         btnAddPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnAddPlayer.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,7 +127,7 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnAddPlayerActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
+        getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 420, -1, -1));
 
         btnPlay.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnPlay.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,7 +138,7 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnPlayActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, -1, -1));
+        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 520, -1, -1));
 
         btnRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnRanking.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,7 +149,7 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnRankingActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 510, 220, -1));
+        getContentPane().add(btnRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 620, 220, -1));
 
         btnExit.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +160,7 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 600, -1, -1));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 720, -1, -1));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
         btnSound.addActionListener(new java.awt.event.ActionListener() {
@@ -152,27 +168,27 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnSoundActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, -1, -1));
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 750, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("ChalkDust", 0, 70)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("1+1=2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 430, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 530, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("23+7=30");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("ChalkDust", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("X+Y=Z");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, -1, -1));
 
-        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/OGA3KP0_1.jpg"))); // NOI18N
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 770));
+        jLabel6.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("10/2");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 240, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -182,7 +198,8 @@ public class MenuWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        dispose();
+        System.exit(0);
+        
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -194,25 +211,20 @@ public class MenuWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRankingActionPerformed
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
-        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-      
-        if(btnSound.getIcon().toString().equals(iconOn.toString())){
-            btnSound.setIcon(iconOff);
-            sound.stop();
-        }else{
-            btnSound.setIcon(iconOn);
-            sound.play();
-        }
+       if(game.isStateMusic()){
+           game.setStateMusic(false);
+       }else{
+           game.setStateMusic(true);
+       }
         
     }//GEN-LAST:event_btnSoundActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+       
     }//GEN-LAST:event_jLabel1MouseClicked
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel background;
     private javax.swing.JButton btnAddPlayer;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnPlay;
@@ -223,6 +235,21 @@ public class MenuWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+                
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        System.out.println("entre");
+        if(game.isStateMusic()){
+            btnSound.setIcon(iconOn);
+            sound.play();
+        }else{
+            btnSound.setIcon(iconOff);
+            sound.stop();
+        }
+    }
 }

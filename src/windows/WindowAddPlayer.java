@@ -6,29 +6,58 @@
 package windows;
 
 import domains.Game;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import static windows.MenuWindow.sound;
 
 /**
  *
  * @author felip
  */
-public class WindowAddPlayer extends javax.swing.JFrame {
+public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
 
     private Game game;
     
     public WindowAddPlayer(Game aGame) {
         initComponents();
         game = aGame;
-        this.setLocationRelativeTo(null);
+        game.addObserver(this);
+        try {
+            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
+            JPanel panel = (JPanel) this.getContentPane();
+            panel.setBorder(fondo);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setTransparent();
     }
 
+    public void setTransparent() {
+        ArrayList jbuttons = new ArrayList<>();
+        jbuttons.add(btnSound);
+        for (int i = 0; i < jbuttons.size(); i++) {
+            JButton buttonAux = (JButton) jbuttons.get(i);
+            buttonAux.setOpaque(false);
+            buttonAux.setContentAreaFilled(false);
+            buttonAux.setBorderPainted(false);
+        }
+    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnAddPlayer = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         lblNickname = new javax.swing.JLabel();
@@ -36,73 +65,70 @@ public class WindowAddPlayer extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         txtNickName = new javax.swing.JTextField();
         txtAge = new javax.swing.JTextField();
-        lblBackground = new javax.swing.JLabel();
+        btnSound = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1020, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("Ingresar Jugador");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 560, 150, 50));
+        btnAddPlayer.setText("Ingresar Jugador");
+        getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 600, 150, 50));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Ingreso de jugador");
-        jPanel1.add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
 
-        txtName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtName.setOpaque(false);
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 160, 30));
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 300, 160, 30));
 
         lblNickname.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblNickname.setForeground(new java.awt.Color(255, 255, 255));
         lblNickname.setText("Alias:");
-        jPanel1.add(lblNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
+        getContentPane().add(lblNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, -1, -1));
 
         lblAge.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("Edad:");
-        jPanel1.add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+        getContentPane().add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, -1, -1));
 
         lblName.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("Nombre:");
-        jPanel1.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, -1, -1));
+        getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, -1, -1));
 
-        txtNickName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtNickName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtNickName.setOpaque(false);
-        jPanel1.add(txtNickName, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 160, 30));
+        getContentPane().add(txtNickName, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 160, 30));
 
-        txtAge.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtAge.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtAge.setOpaque(false);
-        jPanel1.add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 160, 30));
+        getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 520, 160, 30));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/OGA3KP0_1.jpg"))); // NOI18N
-        lblBackground.setToolTipText("");
-        jPanel1.add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSoundActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 700, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
+    private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
+        if(game.isStateMusic()){
+           game.setStateMusic(false);
+       }else{
+           game.setStateMusic(true);
+       }
+    }//GEN-LAST:event_btnSoundActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnAddPlayer;
+    private javax.swing.JButton btnSound;
     private javax.swing.JLabel lblAge;
-    private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNickname;
     private javax.swing.JLabel lblTitle;
@@ -110,4 +136,17 @@ public class WindowAddPlayer extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNickName;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        if(game.isStateMusic()){
+            btnSound.setIcon(iconOn);
+            sound.play();
+        }else{
+            btnSound.setIcon(iconOff);
+            sound.stop();
+        }
+    }
 }
