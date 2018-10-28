@@ -26,10 +26,13 @@ import static windows.MenuWindow.sound;
 public class WindowRanking extends javax.swing.JFrame implements Observer {
 
     private Game game;
-
-    public WindowRanking(Game aGame) {
+    private MenuWindow menuWindow;
+    
+    public WindowRanking(Game aGame, MenuWindow mainWindow) {
         initComponents();
         game = aGame;
+        menuWindow = mainWindow;
+        
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -68,6 +71,11 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                manageWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
@@ -101,6 +109,10 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
        }
 
     }//GEN-LAST:event_btnSoundActionPerformed
+
+    private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
+        menuWindow.setVisible(true);
+    }//GEN-LAST:event_manageWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSound;

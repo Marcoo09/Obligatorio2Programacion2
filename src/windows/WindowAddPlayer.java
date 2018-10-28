@@ -26,10 +26,11 @@ import static windows.MenuWindow.sound;
 public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
 
     private Game game;
-    
-    public WindowAddPlayer(Game aGame) {
+    private MenuWindow menuWindow;
+    public WindowAddPlayer(Game aGame,MenuWindow mainWindow) {
         initComponents();
         game = aGame;
+        menuWindow = mainWindow;
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -68,6 +69,11 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         btnSound = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                manageWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAddPlayer.setText("Ingresar Jugador");
@@ -123,6 +129,10 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
            game.setStateMusic(true);
        }
     }//GEN-LAST:event_btnSoundActionPerformed
+
+    private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
+        menuWindow.setVisible(true);
+    }//GEN-LAST:event_manageWindowClosing
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

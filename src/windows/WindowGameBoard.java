@@ -18,13 +18,13 @@ public class WindowGameBoard extends javax.swing.JFrame {
 
     private JButton[][] botones;
     private Game game;
-
-    public WindowGameBoard(Game aGame) {
+    private WindowMatch windoMatch;
+    
+    public WindowGameBoard(Game aGame,WindowMatch mainWindow) {
         initComponents();
         game = aGame;
-        this.setEnabled(false);
+        windoMatch = mainWindow;
         
-        // crear botones y agregarlos al panel
         panelJuego.setLayout(new GridLayout(8, 9));
         botones = new JButton[9][10];
         for (int i = 1; i <= 8; i++) {
@@ -48,6 +48,9 @@ public class WindowGameBoard extends javax.swing.JFrame {
                 }
             }
         }
+        
+       this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 
     }
 
@@ -58,6 +61,11 @@ public class WindowGameBoard extends javax.swing.JFrame {
         panelJuego = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                manageWindowClosing(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
         panelJuego.setLayout(panelJuegoLayout);
@@ -83,6 +91,10 @@ public class WindowGameBoard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
+        windoMatch.setVisible(true);
+    }//GEN-LAST:event_manageWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

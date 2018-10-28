@@ -34,9 +34,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         
         game = aGame;
         game.addObserver(this);
-        windowAddPlayer = new WindowAddPlayer(aGame);
-        windowRanking =  new WindowRanking(aGame);
-        windowMatch =  new WindowMatch(aGame);
+        windowAddPlayer = new WindowAddPlayer(aGame, this);
+        windowRanking =  new WindowRanking(aGame, this);
+        windowMatch =  new WindowMatch(aGame,this);
         
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -82,6 +82,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         AudioClip sound;
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
         sound.stop();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -195,6 +196,8 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
 
     private void btnAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlayerActionPerformed
         windowAddPlayer.setVisible(true);
+        this.setVisible(false);
+
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -204,10 +207,13 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
         windowMatch.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingActionPerformed
         windowRanking.setVisible(true);
+        this.setVisible(false);
+
     }//GEN-LAST:event_btnRankingActionPerformed
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed

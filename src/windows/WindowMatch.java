@@ -27,11 +27,13 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
 
    private Game game;
    private WindowGameBoard windowGameBoard;
-
-    public WindowMatch(Game aGame) {
+    private MenuWindow menuWindow;
+    
+    public WindowMatch(Game aGame, MenuWindow mainWindow) {
         initComponents();
         game = aGame;
-        windowGameBoard = new WindowGameBoard(aGame);
+        menuWindow = mainWindow;
+        windowGameBoard = new WindowGameBoard(aGame, this);
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -75,6 +77,11 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
         btnSound = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                manageClosingWindow(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblWayToFinish.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -152,7 +159,14 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         windowGameBoard.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void manageClosingWindow(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageClosingWindow
+        // TODO add your handling code here:
+        menuWindow.setVisible(true);
+        
+    }//GEN-LAST:event_manageClosingWindow
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
