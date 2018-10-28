@@ -5,7 +5,9 @@
  */
 package windows;
 
+import controllers.utils;
 import domains.Game;
+import domains.Player;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,6 +80,11 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAddPlayer.setText("Ingresar Jugador");
+        btnAddPlayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPlayerActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 600, 150, 50));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -134,6 +141,41 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
     private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
         menuWindow.setVisible(true);
     }//GEN-LAST:event_manageWindowClosing
+
+    private void btnAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlayerActionPerformed
+          ArrayList<Player> listOfPlayers = game.getListOfPlayers();
+       //Variables of Player
+        String name;
+        String nickName = "";
+        int age = 0;
+
+        Player auxPlayer = new Player("", "", 0);
+
+        //Variables used in validators
+        boolean ageValidator = false;
+        boolean nickNameValidator = false;
+
+        name = txtName.getText();
+        //Validation of nickname
+        while (!nickNameValidator) {
+            nickName = txtNickName.getText();
+            auxPlayer.setNickName(nickName);
+            nickNameValidator = !(listOfPlayers.contains(auxPlayer));
+
+            if (!nickNameValidator) {
+                System.out.println("ALIAS REPETIDO");
+            }
+
+        }
+        //Validation of age
+       while (!ageValidator) {
+            age = Integer.parseInt(txtAge.getText());
+            ageValidator = utils.validateAttribute(age, 0, 120);
+        }
+
+       //return the new object Player
+//    return new Player(name, nickName, age);
+    }//GEN-LAST:event_btnAddPlayerActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

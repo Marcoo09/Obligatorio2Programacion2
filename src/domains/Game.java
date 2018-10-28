@@ -13,6 +13,7 @@ public class Game  extends Observable implements Serializable{
     private ArrayList<Match> listOfMatches;
     private ArrayList<Player> listOfPlayers;
     private boolean stateMusic;
+    
     public Game(){
         listOfMatches = new ArrayList<>();      
         listOfPlayers = new ArrayList<>();

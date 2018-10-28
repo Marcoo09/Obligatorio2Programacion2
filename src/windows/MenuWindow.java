@@ -10,13 +10,8 @@ import domains.Game;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.applet.AudioClip;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -31,11 +26,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     private WindowRanking windowRanking;
     private WindowMatch windowMatch;
     private WindowReplayMatch windowReplayMatch;
-    private serializeUtils serializate;
-
     static AudioClip sound;
     
-    public MenuWindow(Game aGame) {
+        
+    public MenuWindow(Game aGame) throws IOException {
         initComponents();
         game = aGame;
         game.addObserver(this);
@@ -43,8 +37,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         windowRanking =  new WindowRanking(aGame, this);
         windowMatch =  new WindowMatch(aGame,this);
         windowReplayMatch = new WindowReplayMatch(aGame, this);
-        serializate = new serializeUtils();
-
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
@@ -226,9 +218,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        serializate. serialize(game);
+        serializeUtils. serialize(game);
         try {
-            serializate.serializeListOfPlayersToJson(game);
+            serializeUtils.serializeListOfPlayersToJson(game);
         } catch (IOException ex) {
             Logger.getLogger(MenuWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -266,9 +258,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnReplayMatchActionPerformed
 
     private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
-        serializate. serialize(game);
+        serializeUtils. serialize(game);
         try {
-            serializate.serializeListOfPlayersToJson(game);
+            serializeUtils.serializeListOfPlayersToJson(game);
         } catch (IOException ex) {
             Logger.getLogger(MenuWindow.class.getName()).log(Level.SEVERE, null, ex);
         }

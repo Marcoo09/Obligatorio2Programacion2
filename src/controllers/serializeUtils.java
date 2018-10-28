@@ -25,7 +25,7 @@ import windows.MenuWindow;
  */
 public class serializeUtils {
   
-     public void serialize(Game game){
+     public static void serialize(Game game){
              FileOutputStream fileOutput = null;
         try {
             fileOutput = new FileOutputStream("Data");
@@ -50,7 +50,7 @@ public class serializeUtils {
         }  
     }
         
-    public void serializeListOfPlayersToJson(Game game) throws IOException{
+    public static void serializeListOfPlayersToJson(Game game) throws IOException{
         ArrayList<Player> listOfPlayers = game.getListOfPlayers();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File("ListOfPlayers.json"),listOfPlayers);

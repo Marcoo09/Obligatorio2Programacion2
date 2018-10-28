@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import static windows.MenuWindow.sound;
 
 /**
@@ -48,12 +49,24 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
 
     public void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
+        ArrayList jRadioButtons = new ArrayList<>();
         jbuttons.add(btnSound);
+        
+        jRadioButtons.add(jrdMovements);
+        jRadioButtons.add(jrdOneToken);
+        jRadioButtons.add(jrdAllTokens);
         for (int i = 0; i < jbuttons.size(); i++) {
             JButton buttonAux = (JButton) jbuttons.get(i);
             buttonAux.setOpaque(false);
             buttonAux.setContentAreaFilled(false);
             buttonAux.setBorderPainted(false);
+        }
+        
+        for (int i = 0; i < jRadioButtons.size(); i++) {
+            JRadioButton radioButtonAux = (JRadioButton) jRadioButtons.get(i);
+            radioButtonAux.setOpaque(false);
+            radioButtonAux.setContentAreaFilled(false);
+            radioButtonAux.setBorderPainted(false);
         }
     }
     /**
@@ -65,16 +78,22 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         lblWayToFinish = new javax.swing.JLabel();
         lblRedPlayer = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListWayToFinish = new javax.swing.JList<>();
-        txtRedPlayer = new javax.swing.JTextField();
         lblBluePlayer = new javax.swing.JLabel();
-        txtBluePlyaer = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnSound = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jrdMovements = new javax.swing.JRadioButton();
+        jrdOneToken = new javax.swing.JRadioButton();
+        jrdAllTokens = new javax.swing.JRadioButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -84,47 +103,25 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblWayToFinish.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblWayToFinish.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblWayToFinish.setForeground(new java.awt.Color(255, 255, 255));
         lblWayToFinish.setText("Forma de finalizar el juego:");
-        getContentPane().add(lblWayToFinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, -1, -1));
+        getContentPane().add(lblWayToFinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 520, -1, -1));
 
-        lblRedPlayer.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblRedPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblRedPlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblRedPlayer.setText("Jugador Rojo:");
         getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, -1));
 
-        jListWayToFinish.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jListWayToFinish);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 450, 230, 90));
-
-        txtRedPlayer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtRedPlayer.setOpaque(false);
-        txtRedPlayer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRedPlayerActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 240, 160, 30));
-
-        lblBluePlayer.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblBluePlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblBluePlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblBluePlayer.setText("Jugador Azul:");
-        getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, -1));
+        getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, -1, -1));
 
-        txtBluePlyaer.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        txtBluePlyaer.setOpaque(false);
-        getContentPane().add(txtBluePlyaer, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 350, 160, 30));
-
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Datos de la partida");
-        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 110, -1, -1));
 
         jButton1.setText("Comenzar Partida");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +129,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 670, 150, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 630, 150, 50));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
         btnSound.addActionListener(new java.awt.event.ActionListener() {
@@ -142,12 +139,42 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 700, -1, -1));
 
+        jScrollPane2.setViewportView(jList1);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 380, 390, 110));
+
+        jScrollPane3.setViewportView(jList2);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, 390, 110));
+
+        buttonGroup1.add(jrdMovements);
+        jrdMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
+        jrdMovements.setForeground(new java.awt.Color(255, 255, 255));
+        jrdMovements.setText("Movimientos");
+        getContentPane().add(jrdMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 530, -1, -1));
+
+        buttonGroup1.add(jrdOneToken);
+        jrdOneToken.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
+        jrdOneToken.setForeground(new java.awt.Color(255, 255, 255));
+        jrdOneToken.setText("Llevar una pieza");
+        getContentPane().add(jrdOneToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 530, -1, -1));
+
+        buttonGroup1.add(jrdAllTokens);
+        jrdAllTokens.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
+        jrdAllTokens.setForeground(new java.awt.Color(255, 255, 255));
+        jrdAllTokens.setText("LLevar todas las piezas");
+        getContentPane().add(jrdAllTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 530, -1, -1));
+
+        jTextField1.setEnabled(false);
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 50, 30));
+
+        jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cantidad de Movimientos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtRedPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRedPlayerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRedPlayerActionPerformed
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
         if(game.isStateMusic()){
@@ -170,15 +197,21 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSound;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JList<String> jListWayToFinish;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton jrdAllTokens;
+    private javax.swing.JRadioButton jrdMovements;
+    private javax.swing.JRadioButton jrdOneToken;
     private javax.swing.JLabel lblBluePlayer;
     private javax.swing.JLabel lblRedPlayer;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWayToFinish;
-    private javax.swing.JTextField txtBluePlyaer;
-    private javax.swing.JTextField txtRedPlayer;
     // End of variables declaration//GEN-END:variables
 
     @Override

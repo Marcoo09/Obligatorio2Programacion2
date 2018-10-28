@@ -17,7 +17,7 @@ import windows.MenuWindow;
 
 /**
  *
- * @author Usuario
+ * @author Marco Fiorito and Felipe Najson
  */
 public class Controller {
 
