@@ -106,17 +106,17 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
         lblWayToFinish.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblWayToFinish.setForeground(new java.awt.Color(255, 255, 255));
         lblWayToFinish.setText("Forma de finalizar el juego:");
-        getContentPane().add(lblWayToFinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 520, -1, -1));
+        getContentPane().add(lblWayToFinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, -1, -1));
 
         lblRedPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblRedPlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblRedPlayer.setText("Jugador Rojo:");
-        getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, -1));
+        getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, -1, -1));
 
         lblBluePlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblBluePlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblBluePlayer.setText("Jugador Azul:");
-        getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, -1, -1));
+        getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, -1, -1));
 
         lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,12 +166,12 @@ public class WindowMatch extends javax.swing.JFrame implements Observer{
         getContentPane().add(jrdAllTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 530, -1, -1));
 
         jTextField1.setEnabled(false);
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 50, 30));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 580, 50, 30));
 
         jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cantidad de Movimientos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 580, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

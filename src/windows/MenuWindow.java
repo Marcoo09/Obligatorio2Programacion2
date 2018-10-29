@@ -10,6 +10,8 @@ import domains.Game;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.applet.AudioClip;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -37,23 +39,44 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         windowRanking =  new WindowRanking(aGame, this);
         windowMatch =  new WindowMatch(aGame,this);
         windowReplayMatch = new WindowReplayMatch(aGame, this);
+        
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
+            panel.setLayout(null);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //btnSound.setLocation((int)(screenSize.getHeight() - 100) , (int)(screenSize.getWidth() - 100));
         this.setTransparent();
-        this.setLocationRelativeTo(null);
+        this.alignItems();
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
-        sound.play();
+        sound.loop();
 
+    }
+    
+    public void alignItems(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+        
+        lblLogo.setLocation((int) (screenWidth / 100) * 38, (int) (screenHeight / 100) *1);
+        lblLegtToTheLogo.setLocation((int) (screenWidth / 100) * 32, (int) (screenHeight / 100) * 26 );
+        lblRightToTheLogo.setLocation((int) (screenWidth / 100) * 62, (int) (screenHeight / 100) * 24);
+        lblNameOfThePlay.setLocation((int) (screenWidth / 100) * 28, (int) (screenHeight / 100) * 35);
+        
+        lblLeftToTheMenu.setLocation((int) (screenWidth / 100) * 15 ,(int) (screenHeight / 100) * 75);
+        lblRightToTheMenu.setLocation((int) (screenWidth / 100) * 70 ,(int) (screenHeight / 100) * 65);
+        
+        btnAddPlayer.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 47);
+        btnPlay.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 56);
+        btnReplayMatch.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 64);
+        btnRanking.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 74);
+        btnExit.setLocation((int) (screenWidth / 100) * 43 ,(int) (screenHeight / 100) * 84);
+        
+        btnSound.setLocation((int) (screenWidth / 100) * 95 ,(int) (screenHeight / 100) * 90);
     }
     
     public void setTransparent(){
@@ -75,7 +98,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     public void playMusic(){
         AudioClip sound;
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
-        sound.play();
+        sound.loop();
     }
     
     public void stopMusic(){
@@ -88,17 +111,17 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
+        lblNameOfThePlay = new javax.swing.JLabel();
         btnAddPlayer = new javax.swing.JButton();
         btnPlay = new javax.swing.JButton();
         btnRanking = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         btnSound = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblRightToTheMenu = new javax.swing.JLabel();
+        lblLeftToTheMenu = new javax.swing.JLabel();
+        lblLegtToTheLogo = new javax.swing.JLabel();
+        lblRightToTheLogo = new javax.swing.JLabel();
         btnReplayMatch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,19 +133,19 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sumIcon-img.png"))); // NOI18N
-        jLabel1.setToolTipText("");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sumIcon-img.png"))); // NOI18N
+        lblLogo.setToolTipText("");
+        lblLogo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                lblLogoMouseClicked(evt);
             }
         });
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 320, 240));
+        getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 320, 240));
 
-        jLabel3.setFont(new java.awt.Font("Snubnose DEMO", 0, 70)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Juego de las Sumas");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, -1, -1));
+        lblNameOfThePlay.setFont(new java.awt.Font("Snubnose DEMO", 0, 70)); // NOI18N
+        lblNameOfThePlay.setForeground(new java.awt.Color(255, 255, 255));
+        lblNameOfThePlay.setText("Juego de las Sumas");
+        getContentPane().add(lblNameOfThePlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, -1, -1));
 
         btnAddPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnAddPlayer.setForeground(new java.awt.Color(255, 255, 255));
@@ -177,25 +200,25 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 750, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("ChalkDust", 0, 70)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("1+1=2");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 530, -1, -1));
+        lblRightToTheMenu.setFont(new java.awt.Font("ChalkDust", 0, 70)); // NOI18N
+        lblRightToTheMenu.setForeground(new java.awt.Color(255, 255, 255));
+        lblRightToTheMenu.setText("1+1=2");
+        getContentPane().add(lblRightToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 530, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("23+7=30");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, -1, -1));
+        lblLeftToTheMenu.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
+        lblLeftToTheMenu.setForeground(new java.awt.Color(255, 255, 255));
+        lblLeftToTheMenu.setText("23+7=30");
+        getContentPane().add(lblLeftToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("ChalkDust", 0, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("X+Y=Z");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+        lblLegtToTheLogo.setFont(new java.awt.Font("ChalkDust", 0, 36)); // NOI18N
+        lblLegtToTheLogo.setForeground(new java.awt.Color(255, 255, 255));
+        lblLegtToTheLogo.setText("X+Y=Z");
+        getContentPane().add(lblLegtToTheLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("10/2");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 210, -1, -1));
+        lblRightToTheLogo.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
+        lblRightToTheLogo.setForeground(new java.awt.Color(255, 255, 255));
+        lblRightToTheLogo.setText("10/2");
+        getContentPane().add(lblRightToTheLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 210, -1, -1));
 
         btnReplayMatch.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnReplayMatch.setForeground(new java.awt.Color(255, 255, 255));
@@ -248,9 +271,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         
     }//GEN-LAST:event_btnSoundActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
        
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lblLogoMouseClicked
 
     private void btnReplayMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplayMatchActionPerformed
         windowReplayMatch.setVisible(true);
@@ -274,12 +297,12 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     private javax.swing.JButton btnRanking;
     private javax.swing.JButton btnReplayMatch;
     private javax.swing.JButton btnSound;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblLeftToTheMenu;
+    private javax.swing.JLabel lblLegtToTheLogo;
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblNameOfThePlay;
+    private javax.swing.JLabel lblRightToTheLogo;
+    private javax.swing.JLabel lblRightToTheMenu;
     // End of variables declaration//GEN-END:variables
 
     @Override

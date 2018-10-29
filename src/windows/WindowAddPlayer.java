@@ -8,6 +8,8 @@ package windows;
 import controllers.utils;
 import domains.Game;
 import domains.Player;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,8 +31,8 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
 
     private Game game;
     private MenuWindow menuWindow;
-    
-    public WindowAddPlayer(Game aGame,MenuWindow mainWindow) {
+
+    public WindowAddPlayer(Game aGame, MenuWindow mainWindow) {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
@@ -39,11 +41,31 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
+            panel.setLayout(null);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
+        this.alignItems();
+    }
+
+    public void alignItems() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        lblTitle.setLocation((int) (screenWidth / 100) * 25, (int) (screenHeight / 100) * 1);
+        lblName.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 20);
+        lblNickname.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 40);
+        lblAge.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 60);
+
+        txtName.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 22);
+        txtNickName.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 42);
+        txtAge.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 62);
+        
+        btnAddPlayer.setLocation((int) (screenWidth / 100) * 80, (int) (screenHeight / 100) * 70);
+        btnSound.setLocation((int) (screenWidth / 100) * 95, (int) (screenHeight / 100) * 90);
     }
 
     public void setTransparent() {
@@ -56,7 +78,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
             buttonAux.setBorderPainted(false);
         }
     }
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -131,11 +153,11 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        if(game.isStateMusic()){
-           game.setStateMusic(false);
-       }else{
-           game.setStateMusic(true);
-       }
+        if (game.isStateMusic()) {
+            game.setStateMusic(false);
+        } else {
+            game.setStateMusic(true);
+        }
     }//GEN-LAST:event_btnSoundActionPerformed
 
     private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
@@ -143,8 +165,8 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_manageWindowClosing
 
     private void btnAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlayerActionPerformed
-          ArrayList<Player> listOfPlayers = game.getListOfPlayers();
-       //Variables of Player
+        ArrayList<Player> listOfPlayers = game.getListOfPlayers();
+        //Variables of Player
         String name;
         String nickName = "";
         int age = 0;
@@ -168,15 +190,15 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
 
         }
         //Validation of age
-       while (!ageValidator) {
+        while (!ageValidator) {
             age = Integer.parseInt(txtAge.getText());
             ageValidator = utils.validateAttribute(age, 0, 120);
         }
 
-       //return the new object Player
+        //return the new object Player
 //    return new Player(name, nickName, age);
     }//GEN-LAST:event_btnAddPlayerActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPlayer;
@@ -194,10 +216,10 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
     public void update(Observable o, Object arg) {
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
+        if (game.isStateMusic()) {
             btnSound.setIcon(iconOn);
             sound.play();
-        }else{
+        } else {
             btnSound.setIcon(iconOff);
             sound.stop();
         }
