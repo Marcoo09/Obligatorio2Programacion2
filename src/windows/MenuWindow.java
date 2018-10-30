@@ -62,10 +62,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
         
-        lblLogo.setLocation((int) (screenWidth / 100) * 38, (int) (screenHeight / 100) *1);
+        lblLogo.setLocation((int) (screenWidth / 100) * 50 - 150, (int) (screenHeight / 100) *1);
         lblLegtToTheLogo.setLocation((int) (screenWidth / 100) * 32, (int) (screenHeight / 100) * 26 );
         lblRightToTheLogo.setLocation((int) (screenWidth / 100) * 62, (int) (screenHeight / 100) * 24);
-        lblNameOfThePlay.setLocation((int) (screenWidth / 100) * 28, (int) (screenHeight / 100) * 35);
+        lblNameOfThePlay.setLocation((int) (screenWidth / 100) * 50 - 270, (int) (screenHeight / 100) * 35);
         
         lblLeftToTheMenu.setLocation((int) (screenWidth / 100) * 15 ,(int) (screenHeight / 100) * 75);
         lblRightToTheMenu.setLocation((int) (screenWidth / 100) * 70 ,(int) (screenHeight / 100) * 65);
@@ -76,7 +76,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnRanking.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 74);
         btnExit.setLocation((int) (screenWidth / 100) * 43 ,(int) (screenHeight / 100) * 84);
         
-        btnSound.setLocation((int) (screenWidth / 100) * 95 ,(int) (screenHeight / 100) * 90);
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }
     
     public void setTransparent(){

@@ -170,29 +170,44 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         String name;
         String nickName = "";
         int age = 0;
+        
+        String errorMessage =  "Ingreses valores correctos en el/los campo/s: ";
 
         Player auxPlayer = new Player("", "", 0);
-
+        Player returnedPlayer;
         //Variables used in validators
         boolean ageValidator = false;
         boolean nickNameValidator = false;
 
         name = txtName.getText();
         //Validation of nickname
-        while (!nickNameValidator) {
-            nickName = txtNickName.getText();
-            auxPlayer.setNickName(nickName);
-            nickNameValidator = !(listOfPlayers.contains(auxPlayer));
+         nickName = txtNickName.getText();
+         auxPlayer.setNickName(nickName);
+         nickNameValidator = !(listOfPlayers.contains(auxPlayer));
 
-            if (!nickNameValidator) {
-                System.out.println("ALIAS REPETIDO");
+         if (!nickNameValidator) {
+//                System.out.println("ALIAS REPETIDO");x
+                errorMessage += " ALIAS";
             }
 
-        }
         //Validation of age
-        while (!ageValidator) {
+        try{
             age = Integer.parseInt(txtAge.getText());
             ageValidator = utils.validateAttribute(age, 0, 120);
+
+        }catch(NumberFormatException e){
+             ageValidator = false;
+        }
+        
+        if(!ageValidator){
+                errorMessage += " EDAD";
+          }
+        
+        if(!ageValidator || !nickNameValidator){
+             JOptionPane.showMessageDialog(this, errorMessage ,"Inputs problems",  JOptionPane.ERROR_MESSAGE);
+        }else{
+            returnedPlayer = new Player(name, nickName, age);
+            game.addPlayer(returnedPlayer);
         }
 
         //return the new object Player

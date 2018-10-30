@@ -1,9 +1,11 @@
 package domains;
 
+import java.io.Serializable;
+
 /*
  * @author Felipe Najson and Marco Fiorito
  */
-public class Player implements Comparable{
+public class Player implements Comparable,Serializable{
     private String name;
     private String nickName;
     private int age;

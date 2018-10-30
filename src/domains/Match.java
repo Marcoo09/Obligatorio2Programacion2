@@ -1,5 +1,6 @@
 package domains;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 /**
  * @author Felipe Najson and Marco Fiorito
  */
-public class Match implements Comparable {
+public class Match implements Comparable, Serializable{
 
     private ArrayList<Player> listOfPlayers;
     private ArrayList<GameBoard> listOfGameBoards;
