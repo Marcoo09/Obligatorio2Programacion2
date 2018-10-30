@@ -79,6 +79,11 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         }
     }
 
+    public void cleanInputs(){
+        txtName.setText("");
+        txtNickName.setText("");
+        txtAge.setText("");
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -186,7 +191,6 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
          nickNameValidator = !(listOfPlayers.contains(auxPlayer));
 
          if (!nickNameValidator) {
-//                System.out.println("ALIAS REPETIDO");x
                 errorMessage += " ALIAS";
             }
 
@@ -208,10 +212,10 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         }else{
             returnedPlayer = new Player(name, nickName, age);
             game.addPlayer(returnedPlayer);
+            cleanInputs();
+            this.dispose();
+            menuWindow.setVisible(true);
         }
-
-        //return the new object Player
-//    return new Player(name, nickName, age);
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
 
