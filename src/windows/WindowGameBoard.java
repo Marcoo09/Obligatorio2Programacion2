@@ -113,32 +113,32 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         panelJuego.setLayout(panelJuegoLayout);
         panelJuegoLayout.setHorizontalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
         panelJuegoLayout.setVerticalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 880, 650));
+        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 580, 440));
 
         jLabel2.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Jugador rojo");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Jugador azul");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1520, 180, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 150, -1, -1));
 
         txtPossibleMovementsRed.setEnabled(false);
-        getContentPane().add(txtPossibleMovementsRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 280, 30));
+        getContentPane().add(txtPossibleMovementsRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 280, 30));
 
         jLabel3.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Posibles movimientos:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         txtNicknamePlayerRed.setEnabled(false);
         txtNicknamePlayerRed.addActionListener(new java.awt.event.ActionListener() {
@@ -146,41 +146,41 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
                 txtNicknamePlayerRedActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNicknamePlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 280, 30));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 300, 10));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 230, 300, 10));
+        getContentPane().add(txtNicknamePlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 280, 30));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 300, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 220, 300, 10));
 
         jLabel4.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Alias:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         btnExitPlayerRed.setBackground(new java.awt.Color(237, 83, 83));
         btnExitPlayerRed.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnExitPlayerRed.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerRed.setText("  Abandonar");
-        getContentPane().add(btnExitPlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, -1));
+        getContentPane().add(btnExitPlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Posibles movimientos:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1500, 330, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, -1, -1));
 
         txtPossibleMovementsBlue.setEnabled(false);
-        getContentPane().add(txtPossibleMovementsBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1500, 370, 280, 30));
+        getContentPane().add(txtPossibleMovementsBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 390, 280, 30));
 
         btnExitPlayerBlue.setBackground(new java.awt.Color(237, 83, 83));
         btnExitPlayerBlue.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnExitPlayerBlue.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerBlue.setText("  Abandonar");
-        getContentPane().add(btnExitPlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 450, -1, -1));
+        getContentPane().add(btnExitPlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Alias:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1500, 250, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 250, -1, -1));
 
         txtNicknamePlayerBlue.setEnabled(false);
         txtNicknamePlayerBlue.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
                 txtNicknamePlayerBlueActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNicknamePlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1500, 280, 280, 30));
+        getContentPane().add(txtNicknamePlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, 280, 30));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
         btnSound.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +196,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
                 btnSoundActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1710, 830, -1, -1));
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 600, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

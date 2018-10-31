@@ -38,7 +38,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
     public WindowMatch(Game aGame, MenuWindow mainWindow) {
         initComponents();
         game = aGame;
-        menuWindow = mainWindow;      
+        menuWindow = mainWindow;
         windowGameBoard = new WindowGameBoard(aGame, menuWindow);
         game.addObserver(this);
         try {
@@ -50,14 +50,13 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-      //  this.alignItems();
+        //  this.alignItems();
         this.loadList();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
     }
-    
-    
-      /*   public void alignItems() {
+
+    /*   public void alignItems() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
@@ -74,11 +73,10 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jButton1.setLocation((int) (screenWidth / 100) * 60, (int) (screenHeight / 100) * 70);
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }*/
-         
-             public void clearInputs(){
+    public void clearInputs() {
         txtQtyMovements.setText("");
-       lstPlayerBlue.clearSelection();
-       lstPlayerRed.clearSelection();
+        lstPlayerBlue.clearSelection();
+        lstPlayerRed.clearSelection();
     }
 
     public void setTransparent() {
@@ -103,7 +101,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             radioButtonAux.setBorderPainted(false);
         }
     }
-    
+
     public void loadList() {
         lstPlayerRed.setListData(game.getListOfPlayers().toArray());
         lstPlayerBlue.setListData(game.getListOfPlayers().toArray());
@@ -240,39 +238,39 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnSoundActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-          String error = ("Ingrese valores correctos en el/los campo/s:");
+
+        String error = ("Ingrese valores correctos en el/los campo/s:");
         int qtyMovements = 0;
         Match match;
-         boolean samePlayers = false;
-         boolean wrongMovments = false; 
-         Player playerRed = (Player) lstPlayerRed.getSelectedValue();
-         Player playerBlue = (Player) lstPlayerBlue.getSelectedValue();
-         String wayToFinish ="";
-         
-         if (playerBlue.equals(playerRed)) {
-                samePlayers = true;
-                JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores diferentes", "Error", JOptionPane.ERROR_MESSAGE);
-          }
-         
+        boolean samePlayers = false;
+        boolean wrongMovments = false;
+        Player playerRed = (Player) lstPlayerRed.getSelectedValue();
+        Player playerBlue = (Player) lstPlayerBlue.getSelectedValue();
+        String wayToFinish = "";
+
+        if (playerBlue.equals(playerRed)) {
+            samePlayers = true;
+            JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores diferentes", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
         try {
-            
+
             if (jrdMovements.isSelected()) {
                 qtyMovements = Integer.parseInt(txtQtyMovements.getText());
                 wayToFinish = "movimientos";
                 if (qtyMovements <= 0) {
-                    wrongMovments=true;
+                    wrongMovments = true;
                     JOptionPane.showMessageDialog(this, "Cantidad de movimientos invalida", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }else if(jrdAllTokens.isSelected()){
-                    wayToFinish = "fichas";
-            }else if(jrdOneToken.isSelected()){
-                    wayToFinish = "ficha";
-            }else{
-                    JOptionPane.showMessageDialog(this, "Debes seleccionar una forma de finalización", "Error", JOptionPane.ERROR_MESSAGE);
-                    wrongMovments=true;
+            } else if (jrdAllTokens.isSelected()) {
+                wayToFinish = "fichas";
+            } else if (jrdOneToken.isSelected()) {
+                wayToFinish = "ficha";
+            } else {
+                JOptionPane.showMessageDialog(this, "Debes seleccionar una forma de finalización", "Error", JOptionPane.ERROR_MESSAGE);
+                wrongMovments = true;
             }
-            
+
             if (!samePlayers && !wrongMovments) {
                 match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
                 clearInputs();
@@ -280,8 +278,8 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 this.setVisible(false);
             }
         } catch (Exception NumberFormException) {
-             JOptionPane.showMessageDialog(this, "Cantidad de movimientos inválida", "Error", JOptionPane.ERROR_MESSAGE);
-            
+            JOptionPane.showMessageDialog(this, "Cantidad de movimientos inválida", "Error", JOptionPane.ERROR_MESSAGE);
+
         }
 
 
@@ -341,4 +339,3 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         }
     }
 }
-
