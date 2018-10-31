@@ -130,7 +130,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Jugador azul");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 150, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, -1, -1));
 
         txtPossibleMovementsRed.setEnabled(false);
         getContentPane().add(txtPossibleMovementsRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 280, 30));
@@ -148,7 +148,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         });
         getContentPane().add(txtNicknamePlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 280, 30));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 300, 10));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 220, 300, 10));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 240, 300, 10));
 
         jLabel4.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,7 +175,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         btnExitPlayerBlue.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerBlue.setText("  Abandonar");
-        getContentPane().add(btnExitPlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 440, -1, -1));
+        getContentPane().add(btnExitPlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 460, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));

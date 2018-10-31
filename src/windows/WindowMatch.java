@@ -244,14 +244,24 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         Match match;
         boolean samePlayers = false;
         boolean wrongMovments = false;
-        Player playerRed = (Player) lstPlayerRed.getSelectedValue();
-        Player playerBlue = (Player) lstPlayerBlue.getSelectedValue();
+        
         String wayToFinish = "";
 
-        if (playerBlue.equals(playerRed)) {
-            samePlayers = true;
-            JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores diferentes", "Error", JOptionPane.ERROR_MESSAGE);
+        if(!lstPlayerRed.isSelectionEmpty() && !lstPlayerBlue.isSelectionEmpty()){
+             Player playerRed = (Player) lstPlayerRed.getSelectedValue();
+            Player playerBlue = (Player) lstPlayerBlue.getSelectedValue();
+            if (playerBlue.equals(playerRed)) {
+                samePlayers = true;
+                JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores diferentes", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+                 samePlayers = true;
+                JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        
+
+
 
         try {
 
@@ -272,7 +282,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             }
 
             if (!samePlayers && !wrongMovments) {
-                match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
+              //  match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
                 clearInputs();
                 windowGameBoard.setVisible(true);
                 this.setVisible(false);
