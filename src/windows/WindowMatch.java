@@ -20,11 +20,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import windows.FondoSwing;
+import windows.MenuWindow;
+import windows.WindowGameBoard;
 import static windows.MenuWindow.sound;
 
 /**
  *
- * @author felip
+ * @author Felipe Najson and Marco Fiorito
  */
 public class WindowMatch extends javax.swing.JFrame implements Observer {
 
@@ -42,16 +45,19 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
+            panel.setLayout(null);
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        this.alignItems();
+      //  this.alignItems();
         this.loadList();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
     }
     
-      public void alignItems() {
+    
+      /*   public void alignItems() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
@@ -67,13 +73,14 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         
         jButton1.setLocation((int) (screenWidth / 100) * 60, (int) (screenHeight / 100) * 70);
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
-    }
-
-    public void clearInputs(){
+    }*/
+         
+             public void clearInputs(){
         txtQtyMovements.setText("");
        lstPlayerBlue.clearSelection();
        lstPlayerRed.clearSelection();
     }
+
     public void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
         ArrayList jRadioButtons = new ArrayList<>();
@@ -96,14 +103,19 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             radioButtonAux.setBorderPainted(false);
         }
     }
-
+    
     public void loadList() {
         lstPlayerRed.setListData(game.getListOfPlayers().toArray());
         lstPlayerBlue.setListData(game.getListOfPlayers().toArray());
     }
 
+    public void updateList() {
+        lstPlayerRed.setListData(game.getListOfPlayers().toArray());
+        lstPlayerBlue.setListData(game.getListOfPlayers().toArray());
+    }
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -139,7 +151,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblRedPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblRedPlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblRedPlayer.setText("Jugador Rojo:");
-        getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 230, -1, -1));
+        getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, -1, -1));
 
         lblBluePlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblBluePlayer.setForeground(new java.awt.Color(255, 255, 255));
@@ -217,19 +229,19 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
         if (game.isStateMusic()) {
             game.setStateMusic(false);
         } else {
             game.setStateMusic(true);
         }
-    }                                        
+    }//GEN-LAST:event_btnSoundActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String error = ("Ingrese valores correctos en el/los campo/s:");
+          String error = ("Ingrese valores correctos en el/los campo/s:");
         int qtyMovements = 0;
         Match match;
          boolean samePlayers = false;
@@ -273,29 +285,29 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         }
 
 
-    }                                        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void manageClosingWindow(java.awt.event.WindowEvent evt) {                                     
+    private void manageClosingWindow(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageClosingWindow
         menuWindow.setVisible(true);
 
-    }                                    
+    }//GEN-LAST:event_manageClosingWindow
 
-    private void jrdMovementsMouseClicked(java.awt.event.MouseEvent evt) {                                          
+    private void jrdMovementsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrdMovementsMouseClicked
         txtQtyMovements.enable(true);
-    }                                         
+    }//GEN-LAST:event_jrdMovementsMouseClicked
 
-    private void jrdOneTokenMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    private void jrdOneTokenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrdOneTokenMouseClicked
         txtQtyMovements.disable();
         txtQtyMovements.setText("");
-    }                                        
+    }//GEN-LAST:event_jrdOneTokenMouseClicked
 
-    private void jrdAllTokensActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void jrdAllTokensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrdAllTokensActionPerformed
         txtQtyMovements.disable();
         txtQtyMovements.setText("");
-    }                                            
+    }//GEN-LAST:event_jrdAllTokensActionPerformed
 
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSound;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -312,7 +324,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
     private javax.swing.JList lstPlayerBlue;
     private javax.swing.JList lstPlayerRed;
     private javax.swing.JTextField txtQtyMovements;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 
     @Override
     public void update(Observable o, Object arg) {
@@ -329,3 +341,4 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         }
     }
 }
+

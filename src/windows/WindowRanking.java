@@ -6,6 +6,8 @@
 package windows;
 
 import domains.Game;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,22 +29,36 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
     private Game game;
     private MenuWindow menuWindow;
-    
+
     public WindowRanking(Game aGame, MenuWindow mainWindow) {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
-        
+
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
+            panel.setLayout(null);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        this.alignItems();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
+    }
+
+    public void alignItems() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        lblTitle.setLocation((int) (screenWidth / 100) * 35, (int) (screenHeight / 100) * 15);
+        
+        lstRanking.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 20);
+
+        btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 150));
     }
 
     public void updateList() {
@@ -65,7 +81,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     private void initComponents() {
 
         btnSound = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRanking = new javax.swing.JList();
 
@@ -86,11 +102,11 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 760, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ranking");
-        jLabel1.setToolTipText("");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, -1, -1));
+        lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitle.setText("Ranking");
+        lblTitle.setToolTipText("");
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, -1, -1));
 
         lstRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         lstRanking.setOpaque(false);
@@ -102,11 +118,11 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-       if(game.isStateMusic()){
-           game.setStateMusic(false);
-       }else{
-           game.setStateMusic(true);
-       }
+        if (game.isStateMusic()) {
+            game.setStateMusic(false);
+        } else {
+            game.setStateMusic(true);
+        }
 
     }//GEN-LAST:event_btnSoundActionPerformed
 
@@ -116,22 +132,22 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSound;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JList lstRanking;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void update(Observable o, Object arg) {
         this.updateList();
-        
+
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-      
-        if(game.isStateMusic()){
+
+        if (game.isStateMusic()) {
             btnSound.setIcon(iconOn);
             sound.play();
-        }else{
+        } else {
             btnSound.setIcon(iconOff);
             sound.stop();
         }
