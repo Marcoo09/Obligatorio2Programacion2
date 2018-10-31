@@ -65,7 +65,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         txtAge.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 62);
         
         btnAddPlayer.setLocation((int) (screenWidth / 100) * 80, (int) (screenHeight / 100) * 70);
-        btnSound.setLocation((int) (screenWidth / 100) * 95, (int) (screenHeight / 100) * 90);
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }
 
     public void setTransparent() {

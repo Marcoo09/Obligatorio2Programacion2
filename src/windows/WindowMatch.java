@@ -6,6 +6,8 @@
 package windows;
 
 import domains.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,9 +45,28 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        this.alignItems();
         this.loadList();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
+    }
+    
+      public void alignItems() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        lblTitle.setLocation((int) (screenWidth / 100) * 25, (int) (screenHeight / 100) * 1);
+        lblRedPlayer.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 20);
+        lblBluePlayer.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 40);
+        lblWayToFinish.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 60);
+
+         lstPlayerRed.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 22);
+        lstPlayerBlue.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 42);
+        txtQtyMovements.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 62);
+        
+        jButton1.setLocation((int) (screenWidth / 100) * 60, (int) (screenHeight / 100) * 70);
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }
 
     public void clearInputs(){
@@ -241,7 +262,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             }
             
             if (!samePlayers && !wrongMovments) {
-                //JOptionPane.showMessageDialog(this, "Se ha creado la partida");
                 match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
                 clearInputs();
                 windowGameBoard.setVisible(true);
