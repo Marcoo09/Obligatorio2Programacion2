@@ -6,6 +6,8 @@
 package controllers;
 
 import domains.Game;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,10 +24,13 @@ import windows.MenuWindow;
 public class Controller {
 
    
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException {
+        
+        //File font_file = new File("Fonts/ChalkDust.ttf");
+        //Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
+        
         
         Game game = new Game();
-        
         File f1 = new File("Data");
         
         if(f1.exists()){

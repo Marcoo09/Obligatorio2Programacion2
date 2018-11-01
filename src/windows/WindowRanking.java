@@ -34,7 +34,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
-
+        this.loadList();
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -49,6 +49,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         this.setTransparent();
     }
 
+    
     public void alignItems() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
@@ -61,7 +62,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 150));
     }
 
-    public void updateList() {
+    public void loadList() {
         lstRanking.setListData(game.getListOfPlayers().toArray());
     }
 
@@ -109,10 +110,9 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, -1, -1));
 
         lstRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        lstRanking.setOpaque(false);
         jScrollPane1.setViewportView(lstRanking);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 740, 520));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 740, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -139,7 +139,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        this.updateList();
+        this.loadList();
 
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));

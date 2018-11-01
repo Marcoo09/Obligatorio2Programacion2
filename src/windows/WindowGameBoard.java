@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -23,16 +24,29 @@ import static windows.MenuWindow.sound;
  */
 public class WindowGameBoard extends javax.swing.JFrame implements Observer{
 
-    private JButton[][] botones;
+    private static JButton[][] botones;
     private Game game;
     private MenuWindow windowMenu;
+    private GameBoard gameBoard;
+    private Match currentMatch;
+    private static boolean currentPlayer;
+    private static boolean flag;
+    private static int currentX;
+    private static int currentY;
+    private static int newX;
+    private static int newY;
     
     public WindowGameBoard(Game aGame,MenuWindow mainWindow) {
         initComponents();
+        flag = true;
         game = aGame;
         windowMenu = mainWindow;
         game.addObserver(this);
+        if (!game.getListOfPlayers().isEmpty()&&!game.getListOfMatches().isEmpty()) {
+                    fillTexts();
+        }
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
          try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
@@ -69,6 +83,23 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         }
     }
     
+    public void fillTexts(){
+        currentMatch = game.getListOfMatches().get(game.getListOfMatches().size()-1);
+        
+        Player playerBlue = currentMatch.getListOfPlayers().get(0);
+        Player playerRed = currentMatch.getListOfPlayers().get(1);
+       ArrayList<Integer> posibleTokenMovementsBlue = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+       ArrayList<Integer> posibleTokenMovementsRed = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+        
+        txtNicknamePlayerBlue.setText(playerBlue.getNickName());
+        txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
+        
+        txtNicknamePlayerRed.setText(playerRed.getNickName());
+        txtPossibleMovementsRed.setText(posibleTokenMovementsBlue.toString());
+        
+    }
+
+    
     public void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
         jbuttons.add(btnSound);
@@ -100,6 +131,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         jLabel6 = new javax.swing.JLabel();
         txtNicknamePlayerBlue = new javax.swing.JTextField();
         btnSound = new javax.swing.JButton();
+        btnTurn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -132,6 +164,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         jLabel1.setText("Jugador azul");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, -1, -1));
 
+        txtPossibleMovementsRed.setBackground(new java.awt.Color(240, 240, 240));
+        txtPossibleMovementsRed.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPossibleMovementsRed.setForeground(new java.awt.Color(240, 240, 240));
+        txtPossibleMovementsRed.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtPossibleMovementsRed.setEnabled(false);
         getContentPane().add(txtPossibleMovementsRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 280, 30));
 
@@ -140,6 +176,9 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         jLabel3.setText("Posibles movimientos:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
+        txtNicknamePlayerRed.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtNicknamePlayerRed.setForeground(new java.awt.Color(255, 255, 255));
+        txtNicknamePlayerRed.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNicknamePlayerRed.setEnabled(false);
         txtNicknamePlayerRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +206,9 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         jLabel5.setText("Posibles movimientos:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, -1, -1));
 
+        txtPossibleMovementsBlue.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPossibleMovementsBlue.setForeground(new java.awt.Color(255, 255, 255));
+        txtPossibleMovementsBlue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtPossibleMovementsBlue.setEnabled(false);
         getContentPane().add(txtPossibleMovementsBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 390, 280, 30));
 
@@ -182,6 +224,9 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         jLabel6.setText("Alias:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 250, -1, -1));
 
+        txtNicknamePlayerBlue.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtNicknamePlayerBlue.setToolTipText("");
+        txtNicknamePlayerBlue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNicknamePlayerBlue.setEnabled(false);
         txtNicknamePlayerBlue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,6 +242,15 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
             }
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 600, -1, -1));
+
+        btnTurn.setText("Pasar turno");
+        btnTurn.setActionCommand("");
+        btnTurn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTurnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 660, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -222,11 +276,16 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
 
     }//GEN-LAST:event_btnSoundActionPerformed
 
+    private void btnTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTurnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExitPlayerBlue;
     private javax.swing.JButton btnExitPlayerRed;
     private javax.swing.JButton btnSound;
+    private javax.swing.JButton btnTurn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -258,12 +317,27 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         }
     }
 
-    private void clickBoton(int fila, int columna) {
-
+    private static void clickBoton(int fila, int columna) {
+        
+        if(flag){
+           currentX = columna;
+           currentY = fila;
+           //System.out.println("Columna: "+currentX+"Fila: "+ currentY);
+           flag = false;
+           
+        }else{
+            newX = columna;
+            newY = fila;
+            //System.out.println("Columna: "+newX+"Fila: "+ newY);
+            flag = true;
+        }
+        
 // Método a completar!.
 // En fila y columna se reciben las coordenas donde presionó el usuario, relativas al comienzo de la grilla
 // fila 1 y columna 1 corresponden a la posición de arriba a la izquierda.
 // Debe indicarse cómo responder al click de ese botón.
+
+    
     }
      @Override
     public void update(Observable o, Object arg) {

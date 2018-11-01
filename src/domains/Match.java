@@ -86,6 +86,7 @@ public class Match implements Comparable, Serializable{
 
     public void setGameBoard(GameBoard gameboard) {
         this.getListOfGameBoard().add(gameboard);
+
     }
 
     public boolean isFinished() {

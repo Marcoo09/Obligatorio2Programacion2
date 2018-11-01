@@ -39,7 +39,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
-        windowGameBoard = new WindowGameBoard(aGame, menuWindow);
         game.addObserver(this);
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -244,12 +243,13 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         Match match;
         boolean samePlayers = false;
         boolean wrongMovments = false;
-        
+        Player playerRed = null;
+            Player playerBlue = null;
         String wayToFinish = "";
 
         if(!lstPlayerRed.isSelectionEmpty() && !lstPlayerBlue.isSelectionEmpty()){
-             Player playerRed = (Player) lstPlayerRed.getSelectedValue();
-            Player playerBlue = (Player) lstPlayerBlue.getSelectedValue();
+             playerRed = (Player) lstPlayerRed.getSelectedValue();
+             playerBlue = (Player) lstPlayerBlue.getSelectedValue();
             if (playerBlue.equals(playerRed)) {
                 samePlayers = true;
                 JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores diferentes", "Error", JOptionPane.ERROR_MESSAGE);
@@ -258,10 +258,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                  samePlayers = true;
                 JOptionPane.showMessageDialog(this, "Debe elegir dos jugadores", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        
-
-
 
         try {
 
@@ -282,8 +278,10 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             }
 
             if (!samePlayers && !wrongMovments) {
-              //  match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
+                match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
+                game.addMatch(match);
                 clearInputs();
+                windowGameBoard = new WindowGameBoard(game, menuWindow);
                 windowGameBoard.setVisible(true);
                 this.setVisible(false);
             }

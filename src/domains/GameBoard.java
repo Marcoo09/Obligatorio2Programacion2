@@ -1,11 +1,12 @@
 package domains;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import views.Interface;
 /**
  * @author Felipe Najson and Marco Fiorito
  */
-public class GameBoard{
+public class GameBoard {
 
     private Token[][] tokenMatrix;
     private ArrayList<Player> listOfPlayers;

@@ -57,7 +57,7 @@ public class Player implements Comparable,Serializable{
 
     @Override
     public String toString() {
-        return "\n•Nombre: " + this.getName() + "\n•Alias: " + this.getNickName() + "\n•Edad: " + this.getAge()+ "\n•Partidas ganadas: " + this.getWonGames() + "\n";
+        return "Nombre: " + this.getName() + ", Alias: " + this.getNickName() + ", Edad: " + this.getAge()+ ", Partidas ganadas: " + this.getWonGames() + "\n";
     }
 
     @Override

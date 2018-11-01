@@ -147,8 +147,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         lblNameOfThePlay.setText("Juego de las Sumas");
         getContentPane().add(lblNameOfThePlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, -1, -1));
 
+        btnAddPlayer.setBackground(new java.awt.Color(153, 153, 153));
         btnAddPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        btnAddPlayer.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddPlayer.setForeground(new java.awt.Color(240, 240, 240));
         btnAddPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user-img.png"))); // NOI18N
         btnAddPlayer.setText(" Agregar Jugador");
         btnAddPlayer.setActionCommand("Agregar Jugador");
@@ -168,7 +169,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnPlayActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, -1, -1));
+        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, 250, -1));
 
         btnRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnRanking.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,18 +180,19 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnRankingActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 620, 220, -1));
+        getContentPane().add(btnRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 620, 250, -1));
 
         btnExit.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit-img.png"))); // NOI18N
         btnExit.setText("  Salir");
+        btnExit.setActionCommand("      Salir");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 700, -1, -1));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 700, 240, -1));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
         btnSound.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +231,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnReplayMatchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, -1, -1));
+        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 250, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,13 +254,23 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
-        windowMatch.setVisible(true);
+        if (game.getListOfPlayers().size()>1) {
+            windowMatch.setVisible(true);
         this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debes registrar por lo menos dos jugadores", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingActionPerformed
-        windowRanking.setVisible(true);
+        if (!game.getListOfPlayers().isEmpty() || !game.getListOfMatches().isEmpty()) {
+                     windowRanking.setVisible(true);
         this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debes jugar una partida previamente", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+       
 
     }//GEN-LAST:event_btnRankingActionPerformed
 
@@ -276,8 +288,13 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_lblLogoMouseClicked
 
     private void btnReplayMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplayMatchActionPerformed
-        windowReplayMatch.setVisible(true);
-        this.setVisible(false);
+        if (!game.getListOfMatches().isEmpty()) {
+            windowReplayMatch.setVisible(true);
+            this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debes jugar al menos una partida previemente", "Error", JOptionPane.ERROR_MESSAGE); 
+        }
+         
     }//GEN-LAST:event_btnReplayMatchActionPerformed
 
     private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
