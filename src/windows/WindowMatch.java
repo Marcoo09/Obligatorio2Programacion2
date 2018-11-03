@@ -76,6 +76,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jButton1.setLocation((int) (screenWidth / 100) * 75, (int) (screenHeight / 100) * 80);
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }
+    
     public void clearInputs() {
         txtQtyMovements.setText("");
         lstPlayerBlue.clearSelection();
