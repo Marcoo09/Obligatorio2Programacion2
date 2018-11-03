@@ -49,29 +49,33 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        //  this.alignItems();
+        this.alignItems();
         this.loadList();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
     }
 
-    /*   public void alignItems() {
+    public void alignItems() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        lblTitle.setLocation((int) (screenWidth / 100) * 25, (int) (screenHeight / 100) * 1);
-        lblRedPlayer.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 20);
-        lblBluePlayer.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 40);
-        lblWayToFinish.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 60);
-
-         lstPlayerRed.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 22);
-        lstPlayerBlue.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 42);
-        txtQtyMovements.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 62);
+        lblTitle.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 1);
+        lblRedPlayer.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 20);
+        lblBluePlayer.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 40);
+        lblWayToFinish.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 60);
+        lblQtyOfMovements.setLocation((int) (screenWidth / 100) * 15, (int) (screenHeight / 100) * 70);
         
-        jButton1.setLocation((int) (screenWidth / 100) * 60, (int) (screenHeight / 100) * 70);
+        JSContainterRedPlayer.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 22);
+        JSContainerBluePlayer.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 42);
+        jrdMovements.setLocation((int) (screenWidth / 100) * 35, (int) (screenHeight / 100) * 62);
+        jrdOneToken.setLocation((int) (screenWidth / 100) * 50, (int) (screenHeight / 100) * 62);
+        jrdAllTokens.setLocation((int) (screenWidth / 100) * 65, (int) (screenHeight / 100) * 62);
+
+        txtQtyMovements.setLocation((int) (screenWidth / 100) * 35, (int) (screenHeight / 100) * 70);
+        jButton1.setLocation((int) (screenWidth / 100) * 75, (int) (screenHeight / 100) * 80);
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
-    }*/
+    }
     public void clearInputs() {
         txtQtyMovements.setText("");
         lstPlayerBlue.clearSelection();
@@ -122,15 +126,15 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblTitle = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnSound = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        JSContainerBluePlayer = new javax.swing.JScrollPane();
         lstPlayerBlue = new javax.swing.JList();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        JSContainterRedPlayer = new javax.swing.JScrollPane();
         lstPlayerRed = new javax.swing.JList();
         jrdMovements = new javax.swing.JRadioButton();
         jrdOneToken = new javax.swing.JRadioButton();
         jrdAllTokens = new javax.swing.JRadioButton();
         txtQtyMovements = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblQtyOfMovements = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -143,17 +147,17 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblWayToFinish.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblWayToFinish.setForeground(new java.awt.Color(255, 255, 255));
         lblWayToFinish.setText("Forma de finalizar el juego:");
-        getContentPane().add(lblWayToFinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 520, -1, -1));
+        getContentPane().add(lblWayToFinish, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 520, -1, -1));
 
         lblRedPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblRedPlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblRedPlayer.setText("Jugador Rojo:");
-        getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, -1, -1));
+        getContentPane().add(lblRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
 
         lblBluePlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblBluePlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblBluePlayer.setText("Jugador Azul:");
-        getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, -1, -1));
+        getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, -1));
 
         lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,7 +170,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 630, 150, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 660, 150, 50));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
         btnSound.addActionListener(new java.awt.event.ActionListener() {
@@ -176,13 +180,13 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 700, -1, -1));
 
-        jScrollPane2.setViewportView(lstPlayerBlue);
+        JSContainerBluePlayer.setViewportView(lstPlayerBlue);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 380, 390, 110));
+        getContentPane().add(JSContainerBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 390, 110));
 
-        jScrollPane3.setViewportView(lstPlayerRed);
+        JSContainterRedPlayer.setViewportView(lstPlayerRed);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, 390, 110));
+        getContentPane().add(JSContainterRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 390, 110));
 
         buttonGroup1.add(jrdMovements);
         jrdMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
@@ -193,7 +197,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 jrdMovementsMouseClicked(evt);
             }
         });
-        getContentPane().add(jrdMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 530, -1, -1));
+        getContentPane().add(jrdMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 530, -1, -1));
 
         buttonGroup1.add(jrdOneToken);
         jrdOneToken.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
@@ -204,7 +208,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 jrdOneTokenMouseClicked(evt);
             }
         });
-        getContentPane().add(jrdOneToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 530, -1, -1));
+        getContentPane().add(jrdOneToken, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, -1, -1));
 
         buttonGroup1.add(jrdAllTokens);
         jrdAllTokens.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
@@ -215,15 +219,15 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 jrdAllTokensActionPerformed(evt);
             }
         });
-        getContentPane().add(jrdAllTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 530, -1, -1));
+        getContentPane().add(jrdAllTokens, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 530, -1, -1));
 
         txtQtyMovements.setEnabled(false);
-        getContentPane().add(txtQtyMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 570, 50, 30));
+        getContentPane().add(txtQtyMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 570, 50, 30));
 
-        jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cantidad de Movimientos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 580, -1, -1));
+        lblQtyOfMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
+        lblQtyOfMovements.setForeground(new java.awt.Color(255, 255, 255));
+        lblQtyOfMovements.setText("Cantidad de Movimientos");
+        getContentPane().add(lblQtyOfMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -314,16 +318,16 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JSContainerBluePlayer;
+    private javax.swing.JScrollPane JSContainterRedPlayer;
     private javax.swing.JButton btnSound;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JRadioButton jrdAllTokens;
     private javax.swing.JRadioButton jrdMovements;
     private javax.swing.JRadioButton jrdOneToken;
     private javax.swing.JLabel lblBluePlayer;
+    private javax.swing.JLabel lblQtyOfMovements;
     private javax.swing.JLabel lblRedPlayer;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblWayToFinish;
