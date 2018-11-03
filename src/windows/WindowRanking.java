@@ -55,10 +55,8 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        lblTitle.setLocation((int) (screenWidth / 100) * 35, (int) (screenHeight / 100) * 15);
-        
-        lstRanking.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 20);
-
+        lblTitle.setLocation((int) (screenWidth / 100) * 40, (int) (screenHeight / 100) * 15);
+        JSContainterRanking.setLocation((int) (screenWidth / 100) * 20, (int) (screenHeight / 100) * 30);
         btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 150));
     }
 
@@ -83,7 +81,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
         btnSound = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        JSContainterRanking = new javax.swing.JScrollPane();
         lstRanking = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,9 +108,9 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, -1, -1));
 
         lstRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        jScrollPane1.setViewportView(lstRanking);
+        JSContainterRanking.setViewportView(lstRanking);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 740, 580));
+        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 740, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,8 +129,8 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_manageWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JSContainterRanking;
     private javax.swing.JButton btnSound;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JList lstRanking;
     // End of variables declaration//GEN-END:variables

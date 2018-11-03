@@ -7,7 +7,9 @@ package windows;
 
 import domains.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,14 +33,14 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private MenuWindow menuWindow;
     private WindowGameBoard windowGameBoard;
     private JButton[][] botones;
-           
+
     public WindowReplayMatch(Game aGame, MenuWindow mainWindow) {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
         windowGameBoard = new WindowGameBoard(aGame, mainWindow);
         game.addObserver(this);
-        
+
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
@@ -48,8 +50,9 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         }
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
-        
-         //Create GamebBoard
+        this.alignItems();
+
+        //Create GamebBoard
         panelJuego.setLayout(new GridLayout(8, 9));
         botones = new JButton[9][10];
         for (int i = 1; i <= 8; i++) {
@@ -59,21 +62,31 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 botones[i][j] = jButton;
                 if (i == 1) {
                     botones[i][j].setBackground(Color.BLUE);
-                    if(j!=1){
-                       botones[i][j].setText(""+(j-1));
+                    if (j != 1) {
+                        botones[i][j].setText("" + (j - 1));
                     }
                 } else if (i == 8) {
                     botones[i][j].setBackground(Color.RED);
-                    if(j!=1){
-                       botones[i][j].setText(""+ (10- j));
+                    if (j != 1) {
+                        botones[i][j].setText("" + (10 - j));
                     }
                 } else {
                     botones[i][j].setBackground(Color.WHITE);
                 }
             }
         }
+
     }
-    
+
+    public void alignItems() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        // panelJuego.setLocation((int) (screenWidth / 100) *1 ,(int) (screenHeight  / 100) * 1);
+        btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 150));
+    }
+
     public void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
         jbuttons.add(btnSound);
@@ -85,8 +98,6 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         }
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,28 +119,28 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 btnSoundActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 860, -1, -1));
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 580, -1, -1));
 
         javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
         panelJuego.setLayout(panelJuegoLayout);
         panelJuegoLayout.setHorizontalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1060, Short.MAX_VALUE)
+            .addGap(0, 730, Short.MAX_VALUE)
         );
         panelJuegoLayout.setVerticalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 1060, 670));
+        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 730, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        if(game.isStateMusic()){
+        if (game.isStateMusic()) {
             game.setStateMusic(false);
-        }else{
+        } else {
             game.setStateMusic(true);
         }
     }//GEN-LAST:event_btnSoundActionPerformed
@@ -142,10 +153,10 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     public void update(Observable o, Object arg) {
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
+        if (game.isStateMusic()) {
             btnSound.setIcon(iconOn);
             sound.play();
-        }else{
+        } else {
             btnSound.setIcon(iconOff);
             sound.stop();
         }

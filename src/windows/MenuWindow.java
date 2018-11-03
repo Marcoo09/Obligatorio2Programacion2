@@ -74,7 +74,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnPlay.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 56);
         btnReplayMatch.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 64);
         btnRanking.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 74);
-        btnExit.setLocation((int) (screenWidth / 100) * 43 ,(int) (screenHeight / 100) * 84);
+        btnExit.setLocation((int) (screenWidth / 100) * 41 ,(int) (screenHeight / 100) * 84);
         
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }
@@ -169,7 +169,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnPlayActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, 250, -1));
+        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, 290, -1));
 
         btnRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnRanking.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,7 +231,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnReplayMatchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 250, -1));
+        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 290, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
