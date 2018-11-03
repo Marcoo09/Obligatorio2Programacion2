@@ -1,18 +1,18 @@
 package domains;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import views.Interface;
 /**
  * @author Felipe Najson and Marco Fiorito
  */
-public class GameBoard {
+public class GameBoard implements Serializable{
 
     private Token[][] tokenMatrix;
     private ArrayList<Player> listOfPlayers;
     private int tokenPositionX;
     private int tokenPositionY;
-    private String mode = "VERN";
 
     public static String[] posibleDirectionsMovements = {"I", "A", "D"};
 
@@ -43,14 +43,6 @@ public class GameBoard {
 
     public void setTokenMatrix(Token[][] tokenMatrix) {
         this.tokenMatrix = tokenMatrix;
-    }
-
-    public String getMode() {
-        return mode;
-    }
-
-    public void setMode(String mode) {
-        this.mode = mode;
     }
 
     public Player getPlayerRed() {

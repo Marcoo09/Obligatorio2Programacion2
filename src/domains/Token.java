@@ -1,9 +1,11 @@
 package domains;
 
+import java.io.Serializable;
+
 /**
  * @author Marco Fiorito and Felipe Najson
  */
-public class Token implements Cloneable {
+public class Token implements Cloneable, Serializable {
 
     private String color;
     private int tokenNumber;

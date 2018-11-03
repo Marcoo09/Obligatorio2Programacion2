@@ -282,19 +282,19 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 wrongMovments = true;
             }
 
-            if (!samePlayers && !wrongMovments) {
-                match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
-                game.addMatch(match);
-                clearInputs();
-                windowGameBoard = new WindowGameBoard(game, menuWindow);
-                windowGameBoard.setVisible(true);
-                this.setVisible(false);
-            }
         } catch (Exception NumberFormException) {
             JOptionPane.showMessageDialog(this, "Cantidad de movimientos inválida", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
+            if (!samePlayers && !wrongMovments) {
+                match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);
+                game.addMatch(match);
+                windowGameBoard = new WindowGameBoard(game, menuWindow,match);
 
+                clearInputs();
+                windowGameBoard.setVisible(true);
+                this.setVisible(false);
+            }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

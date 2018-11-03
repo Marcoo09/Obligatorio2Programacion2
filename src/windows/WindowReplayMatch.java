@@ -38,7 +38,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
-        windowGameBoard = new WindowGameBoard(aGame, mainWindow);
+      //  windowGameBoard = new WindowGameBoard(aGame, mainWindow);
         game.addObserver(this);
 
         try {

@@ -36,15 +36,12 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
     private static int newX;
     private static int newY;
     
-    public WindowGameBoard(Game aGame,MenuWindow mainWindow) {
+    public WindowGameBoard(Game aGame,MenuWindow mainWindow,Match match) {
         initComponents();
         flag = true;
         game = aGame;
         windowMenu = mainWindow;
         game.addObserver(this);
-        if (!game.getListOfPlayers().isEmpty()&&!game.getListOfMatches().isEmpty()) {
-                    fillTexts();
-        }
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
          try {
@@ -55,37 +52,24 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
          this.setTransparent();
-        //Set players in textfields
+         
+         //  if (!game.getListOfPlayers().isEmpty()&&!game.getListOfMatches().isEmpty()) {
+         this.fillTexts(match);
+        if(match.getListOfGameBoard().isEmpty()){
+            GameBoard initGameboard = new GameBoard(match.getListOfPlayers());
+            initGameboard.fillInitialMatrix(new int[]{0,1,2,3,4,5,6,7,8});
+            match.setGameBoard(initGameboard);
+         }
+        //}
+        
         
         //Create GamebBoard
-        panelJuego.setLayout(new GridLayout(8, 9));
-        botones = new JButton[9][10];
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 9; j++) {
-                JButton jButton = new JButton();
-                jButton.addActionListener(new ListenerBoton(i, j));
-                panelJuego.add(jButton);
-                botones[i][j] = jButton;
-                if (i == 1) {
-                    botones[i][j].setBackground(Color.BLUE);
-                    if(j!=1){
-                       botones[i][j].setText(""+(j-1));
-                    }
-                } else if (i == 8) {
-                    botones[i][j].setBackground(Color.RED);
-                    if(j!=1){
-                       botones[i][j].setText(""+ (10- j));
-                    }
-                } else {
-                    botones[i][j].setBackground(Color.WHITE);
-                }
-            }
-        }
+       this.fillButtonMatrix(match);
+
+        
     }
     
-    public void fillTexts(){
-        currentMatch = game.getListOfMatches().get(game.getListOfMatches().size()-1);
-        
+    public void fillTexts(Match currentMatch){
         Player playerBlue = currentMatch.getListOfPlayers().get(0);
         Player playerRed = currentMatch.getListOfPlayers().get(1);
        ArrayList<Integer> posibleTokenMovementsBlue = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
@@ -99,6 +83,40 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
         
     }
 
+        public void fillButtonMatrix(Match currentMatch){
+       GameBoard firstGameBoard = currentMatch.getListOfGameBoard().get(0);
+        Token[][] tokenMatrix = firstGameBoard.getTokenMatrix();
+        int col = tokenMatrix.length;
+        int row = tokenMatrix[0].length;
+        
+        panelJuego.setLayout(new GridLayout(8, 9));
+        botones = new JButton[9][10];
+        
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                JButton jButton = new JButton();
+                jButton.addActionListener(new ListenerBoton(i, j));
+                panelJuego.add(jButton);
+                botones[i][j] = jButton;
+                
+                if(tokenMatrix[i][j] != null){
+                    if(tokenMatrix[i][j].getPlayer().equals(firstGameBoard.getPlayerRed())){
+                        botones[i][j].setBackground(Color.RED);
+                        botones[i][j].setText(""+ tokenMatrix[i][j].getTokenNumber());
+
+                    }else{
+                       botones[i][j].setBackground(Color.BLUE);
+                        botones[i][j].setText(""+ tokenMatrix[i][j].getTokenNumber());
+                    }
+                }
+                else {
+                    botones[i][j].setBackground(Color.WHITE);
+                }
+            }
+        }
+        
+        }
+    
     
     public void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
