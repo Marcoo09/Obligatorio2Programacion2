@@ -50,7 +50,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     }
 
     
-    public void alignItems() {
+    private void alignItems() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
@@ -60,11 +60,11 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 150));
     }
 
-    public void loadList() {
+    private void loadList() {
         lstRanking.setListData(game.getListOfPlayers().toArray());
     }
 
-    public void setTransparent() {
+    private void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
         jbuttons.add(btnSound);
         for (int i = 0; i < jbuttons.size(); i++) {
@@ -144,7 +144,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
         if (game.isStateMusic()) {
             btnSound.setIcon(iconOn);
-            sound.play();
+            sound.loop();
         } else {
             btnSound.setIcon(iconOff);
             sound.stop();

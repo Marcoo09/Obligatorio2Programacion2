@@ -7,7 +7,7 @@ import views.Interface;
 /**
  * @author Felipe Najson and Marco Fiorito
  */
-public class GameBoard implements Serializable{
+public class GameBoard extends Observable implements Serializable{
 
     private Token[][] tokenMatrix;
     private ArrayList<Player> listOfPlayers;
@@ -43,6 +43,8 @@ public class GameBoard implements Serializable{
 
     public void setTokenMatrix(Token[][] tokenMatrix) {
         this.tokenMatrix = tokenMatrix;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Player getPlayerRed() {
@@ -53,9 +55,11 @@ public class GameBoard implements Serializable{
         return this.listOfPlayers.get(0);
     }
 
-    public ArrayList<Integer> getPossibleMovements(int parmNumber, int positionOfTokenX, int positionOfTokenY) {
-
-        return this.sumOfDiagonalsAndEdges(parmNumber, positionOfTokenX, positionOfTokenY);
+    public ArrayList<Integer> getPossibleMovements(Player currentPlayer, int parmNumber, int positionOfTokenX, int positionOfTokenY) {
+        ArrayList<Integer> posibleMovements =  this.sumOfDiagonalsAndEdges(parmNumber, positionOfTokenX, positionOfTokenY);
+        posibleMovements = this.removeTokensWithAnyPosibleMovement(posibleMovements, currentPlayer);
+        
+        return posibleMovements;
     }
 
     //Intial matrix of the game
@@ -152,7 +156,7 @@ public class GameBoard implements Serializable{
         positionX = positionOfTokenX;
         positionY = positionOfTokenY;
 
-        //Second Diagonala
+        //Second Diagonal
         while (positionY != 0 && positionX != tokenMatrix[0].length - 1) {
             positionY--;
             positionX++;
@@ -200,143 +204,90 @@ public class GameBoard implements Serializable{
             sum.add(verticalSum);
         }
 
-        
         return sum;
     }
     
-       public static GameBoard movePiece(Player auxPlayer, GameBoard actualGameBoard, int positionOfTokenX, int positionOfTokenY, String movementDirection) {
-        Token[][] matrix = actualGameBoard.getTokenMatrix();
+     public void movePiece(int currentPositionX, int currentPositionY, int newPositionX, int newPositionY) {
+        Token[][] matrix = this.getTokenMatrix();
 
-        //Player Red
-        if (auxPlayer.equals(actualGameBoard.getPlayerRed())) {
-            if (movementDirection.equalsIgnoreCase("D")) {
-                matrix[positionOfTokenY - 1][positionOfTokenX + 1] = matrix[positionOfTokenY][positionOfTokenX];
-                matrix[positionOfTokenY][positionOfTokenX] = null;
-            }
-            if (movementDirection.equalsIgnoreCase("I")) {
-                matrix[positionOfTokenY - 1][positionOfTokenX - 1] = matrix[positionOfTokenY][positionOfTokenX];
-                matrix[positionOfTokenY][positionOfTokenX] = null;
+       matrix[newPositionY][newPositionX] = matrix[currentPositionY][currentPositionX];
+       matrix[currentPositionY][currentPositionX] = null;
 
-            }
-            if (movementDirection.equalsIgnoreCase("A")) {
-                matrix[positionOfTokenY - 1][positionOfTokenX] = matrix[positionOfTokenY][positionOfTokenX];
-                matrix[positionOfTokenY][positionOfTokenX] = null;
-
-            }
-        } //Player Blue
-        else if (auxPlayer.equals(actualGameBoard.getPlayerBlue())) {
-            if (movementDirection.equalsIgnoreCase("D")) {
-                matrix[positionOfTokenY + 1][positionOfTokenX - 1] = matrix[positionOfTokenY][positionOfTokenX];
-                matrix[positionOfTokenY][positionOfTokenX] = null;
-            }
-            if (movementDirection.equalsIgnoreCase("I")) {
-                matrix[positionOfTokenY + 1][positionOfTokenX + 1] = matrix[positionOfTokenY][positionOfTokenX];
-                matrix[positionOfTokenY][positionOfTokenX] = null;
-
-            }
-            if (movementDirection.equalsIgnoreCase("A")) {
-                matrix[positionOfTokenY + 1][positionOfTokenX] = matrix[positionOfTokenY][positionOfTokenX];
-                matrix[positionOfTokenY][positionOfTokenX] = null;
-
-            }
-        }
-
-        actualGameBoard.setTokenMatrix(matrix);
-        return actualGameBoard;
+        this.setTokenMatrix(matrix);
     }
-       
-      /*public static boolean validatePositionMovement(Player auxPlayer, GameBoard actualGameBoard, int positionOfTokenX, int positionOfTokenY, String movementDirection) {
-        Token[][] matrix = actualGameBoard.getTokenMatrix();
-        Token auxTokenToCompare = null;
-
-        boolean isValidPositionMovement = false;
-        boolean isOutOfRangeY;
-        boolean isOutOfRangeX;
-
-        //Player Red
-        if (auxPlayer.equals(actualGameBoard.getPlayerRed())) {
-            isOutOfRangeY = Interface.validateRange(positionOfTokenY - 1, 0, 7);
-
-            if (movementDirection.equalsIgnoreCase("D")) {
-                isOutOfRangeX = Interface.validateRange(positionOfTokenX + 1, 0, 8);
-
-                if (isOutOfRangeX && isOutOfRangeY) {
-                    auxTokenToCompare = matrix[positionOfTokenY - 1][positionOfTokenX + 1];
-
-                    if (auxTokenToCompare == null) {
-                        isValidPositionMovement = true;
-                    }
+     
+     public  boolean validatePositionMovement(Player parmPlayer, int currentPositionY,int currentPositionX,int newPositionY, int newPositionX){
+        Player playerRed = this.getPlayerRed();
+        boolean returnedValue = true;
+        
+         if(parmPlayer.equals(playerRed)){
+             if(newPositionY == currentPositionY - 1){
+                 if(!(newPositionX == currentPositionX + 1 || newPositionX == currentPositionX || newPositionX == currentPositionX - 1)){
+                     returnedValue = false;
+                 }
+             }else{
+                 returnedValue = false;
+             }
+         }else{
+            if(newPositionY == currentPositionY + 1){
+                 if(!(newPositionX == currentPositionX + 1 || newPositionX == currentPositionX || newPositionX == currentPositionX - 1)){
+                     returnedValue = false;
+                 }
+             }else{
+                 returnedValue = false;
+             }
+         }
+         
+         return returnedValue;
+     }
+     
+    public ArrayList<Integer> removeTokensWithAnyPosibleMovement(ArrayList<Integer> posibleTokenMovements, Player currentPlayer) {
+        int size = posibleTokenMovements.size();
+        int currentTokenValue;
+        ArrayList<Integer> returnedArrayList = new ArrayList<>();
+        
+        boolean hasMovementsToA = true;
+        boolean hasMovementsToD = true;
+        boolean hasMovementsToI = true;
+        
+        int positionOfTokenX;
+        int positionOfTokenY;
+        
+        if (currentPlayer.equals(this.getPlayerRed())) {
+            for (int i = 0; i < size; i++) {
+                currentTokenValue = posibleTokenMovements.get(i);
+                this.searchPositionOfToken(currentTokenValue, currentPlayer);
+               
+                positionOfTokenX = this.getTokenPositionX();
+                positionOfTokenY = this.getTokenPositionY();
+                
+                hasMovementsToA = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY - 1, tokenPositionX);
+                hasMovementsToD = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY - 1, tokenPositionX + 1);
+                hasMovementsToI = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY - 1, tokenPositionX - 1);
+                
+               if(hasMovementsToA || hasMovementsToD || hasMovementsToI){
+                    returnedArrayList.add(currentTokenValue);
                 }
-
-            } else if (movementDirection.equalsIgnoreCase("I")) {
-                isOutOfRangeX = Interface.validateRange(positionOfTokenX - 1, 0, 8);
-
-                if (isOutOfRangeX && isOutOfRangeY) {
-                    auxTokenToCompare = matrix[positionOfTokenY - 1][positionOfTokenX - 1];
-
-                    if (auxTokenToCompare == null) {
-                        isValidPositionMovement = true;
-                    }
-                }
-
-            } else if (movementDirection.equalsIgnoreCase("A")) {
-                isOutOfRangeX = Interface.validateRange(positionOfTokenX, 0, 8);
-
-                if (isOutOfRangeX && isOutOfRangeY) {
-                    auxTokenToCompare = matrix[positionOfTokenY - 1][positionOfTokenX];
-
-                    if (auxTokenToCompare == null) {
-                        isValidPositionMovement = true;
-                    }
-
-                }
-
             }
-        } //Player blue
-        else if (auxPlayer.equals(actualGameBoard.getPlayerBlue())) {
-
-            isOutOfRangeY = Interface.validateRange(positionOfTokenY + 1, 0, 7);
-
-            if (movementDirection.equalsIgnoreCase("D")) {
-                isOutOfRangeX = Interface.validateRange(positionOfTokenX - 1, 0, 8);
-
-                if (isOutOfRangeX && isOutOfRangeY) {
-                    auxTokenToCompare = matrix[positionOfTokenY + 1][positionOfTokenX - 1];
-
-                    if (auxTokenToCompare == null) {
-                        isValidPositionMovement = true;
-                    }
-
+       } else{
+            for (int i = 0; i < size; i++) {
+                currentTokenValue = posibleTokenMovements.get(i);
+                this.searchPositionOfToken(currentTokenValue, currentPlayer);
+                
+                positionOfTokenX = this.getTokenPositionX();
+                positionOfTokenY = this.getTokenPositionY();
+                
+                hasMovementsToA = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY +1, tokenPositionX);
+                hasMovementsToD = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY + 1, tokenPositionX - 1);
+                hasMovementsToI = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY + 1, tokenPositionX + 1);
+                
+                if(hasMovementsToA || hasMovementsToD || hasMovementsToI){
+                    returnedArrayList.add(currentTokenValue);
                 }
-
-            } else if (movementDirection.equalsIgnoreCase("I")) {
-                isOutOfRangeX = Interface.validateRange(positionOfTokenX + 1, 0, 8);
-
-                if (isOutOfRangeX && isOutOfRangeY) {
-                    auxTokenToCompare = matrix[positionOfTokenY + 1][positionOfTokenX + 1];
-
-                    if (auxTokenToCompare == null) {
-                        isValidPositionMovement = true;
-                    }
-
-                }
-
-            } else if (movementDirection.equalsIgnoreCase("A")) {
-                isOutOfRangeX = Interface.validateRange(positionOfTokenX, 0, 8);
-
-                if (isOutOfRangeX && isOutOfRangeY) {
-                    auxTokenToCompare = matrix[positionOfTokenY + 1][positionOfTokenX];
-
-                    if (auxTokenToCompare == null) {
-                        isValidPositionMovement = true;
-                    }
-
-                }
-
             }
         }
-
-        return isValidPositionMovement;
-    }*/
-
+        
+        return returnedArrayList;
+   }
+   
 }

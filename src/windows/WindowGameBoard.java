@@ -20,105 +20,178 @@ import static windows.MenuWindow.sound;
 
 /**
  *
- * @author felip
+ * @author Felipe Najson and Marco Fiorito
  */
-public class WindowGameBoard extends javax.swing.JFrame implements Observer{
+public class WindowGameBoard extends javax.swing.JFrame implements Observer {
 
     private static JButton[][] botones;
     private Game game;
     private MenuWindow windowMenu;
-    private GameBoard gameBoard;
+    private GameBoard currentGameBoard;
     private Match currentMatch;
-    private static boolean currentPlayer;
-    private static boolean flag;
+    private static Player currentPlayer;
+    private static boolean clickFlag;
+    
     private static int currentX;
     private static int currentY;
     private static int newX;
     private static int newY;
-    
-    public WindowGameBoard(Game aGame,MenuWindow mainWindow,Match match) {
+    private static int lastNumberMoved;
+
+    private ArrayList<Integer> posibleTokenMovementsBlue = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+    private ArrayList<Integer> posibleTokenMovementsRed = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+
+    private Player playerBlue;
+    private Player playerRed;
+
+    private boolean stateOfTheGameboardChange = false;
+
+    public WindowGameBoard(Game aGame, MenuWindow mainWindow, Match match) {
         initComponents();
-        flag = true;
+        
+        //Flags
+        clickFlag = true;
+        
+        //Receive parameters
         game = aGame;
         windowMenu = mainWindow;
-        game.addObserver(this);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-         try {
+        currentMatch = match;
+
+
+        //Look and feel
+        try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-         this.setTransparent();
-         
-         //  if (!game.getListOfPlayers().isEmpty()&&!game.getListOfMatches().isEmpty()) {
-         this.fillTexts(match);
-        if(match.getListOfGameBoard().isEmpty()){
-            GameBoard initGameboard = new GameBoard(match.getListOfPlayers());
-            initGameboard.fillInitialMatrix(new int[]{0,1,2,3,4,5,6,7,8});
-            match.setGameBoard(initGameboard);
-         }
-        //}
-        
-        
-        //Create GamebBoard
-       this.fillButtonMatrix(match);
+        this.setTransparent();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+        //Data of the play
+
+        playerBlue = currentMatch.getListOfPlayers().get(0);
+        playerRed = currentMatch.getListOfPlayers().get(1);
+
+        currentPlayer = playerRed;
+
+
+        if (currentMatch.getListOfGameBoard().isEmpty()) {
+            currentGameBoard = new GameBoard(match.getListOfPlayers());
+            currentGameBoard.fillInitialMatrix(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
+            currentMatch.setGameBoard(currentGameBoard);
+        }
+
+        //Subscribe as observers
+        game.addObserver(this);
+        currentGameBoard.addObserver(this);
         
+        //Create GamebBoard and fill text of the screen
+        this.fillTexts(match);
+        this.fillInitialButtonMatrix();
+
+    }
+
+    private void modifyAppearenceOfNotCurrentPlayer(){
+        if(currentPlayer.equals(playerRed)){
+            
+        }else{
+            
+        }
     }
     
-    public void fillTexts(Match currentMatch){
-        Player playerBlue = currentMatch.getListOfPlayers().get(0);
-        Player playerRed = currentMatch.getListOfPlayers().get(1);
-       ArrayList<Integer> posibleTokenMovementsBlue = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
-       ArrayList<Integer> posibleTokenMovementsRed = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
-        
+    private void fillTexts(Match currentMatch) {
+
         txtNicknamePlayerBlue.setText(playerBlue.getNickName());
         txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
-        
+
         txtNicknamePlayerRed.setText(playerRed.getNickName());
         txtPossibleMovementsRed.setText(posibleTokenMovementsBlue.toString());
-        
+
     }
 
-        public void fillButtonMatrix(Match currentMatch){
-       GameBoard firstGameBoard = currentMatch.getListOfGameBoard().get(0);
-        Token[][] tokenMatrix = firstGameBoard.getTokenMatrix();
+    private void fillInitialButtonMatrix() {
+        Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
         int col = tokenMatrix.length;
         int row = tokenMatrix[0].length;
         
         panelJuego.setLayout(new GridLayout(8, 9));
         botones = new JButton[9][10];
-        
+
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
                 JButton jButton = new JButton();
                 jButton.addActionListener(new ListenerBoton(i, j));
                 panelJuego.add(jButton);
                 botones[i][j] = jButton;
-                
-                if(tokenMatrix[i][j] != null){
-                    if(tokenMatrix[i][j].getPlayer().equals(firstGameBoard.getPlayerRed())){
-                        botones[i][j].setBackground(Color.RED);
-                        botones[i][j].setText(""+ tokenMatrix[i][j].getTokenNumber());
 
-                    }else{
-                       botones[i][j].setBackground(Color.BLUE);
-                        botones[i][j].setText(""+ tokenMatrix[i][j].getTokenNumber());
+                if (tokenMatrix[i][j] != null) {
+                    if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
+                        botones[i][j].setBackground(Color.RED);
+                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+
+                    } else {
+                        botones[i][j].setBackground(Color.BLUE);
+                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
                     }
-                }
-                else {
+                } else {
                     botones[i][j].setBackground(Color.WHITE);
                 }
             }
         }
-        
+
+    }
+    
+        private void fillButtonMatrix() {
+            Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
+            int col = tokenMatrix.length;
+            int row = tokenMatrix[0].length;
+
+            for (int i = 0; i < col; i++) {
+                for (int j = 0; j < row; j++) {
+                    if (tokenMatrix[i][j] != null) {
+                        if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
+                            botones[i][j].setBackground(Color.RED);
+                            botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+
+                        } else {
+                            botones[i][j].setBackground(Color.BLUE);
+                            botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+                        }
+                    } else {
+                        botones[i][j].setBackground(Color.WHITE);
+                        botones[i][j].setText("");
+
+                    }
+                }
+            }
+
         }
-    
-    
-    public void setTransparent() {
+        
+        private void updateCurrentPlayerData(){
+             if(currentPlayer.equals(playerRed)){
+                posibleTokenMovementsRed = currentGameBoard.getPossibleMovements(currentPlayer,lastNumberMoved,newX,newY);
+                txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
+                if(posibleTokenMovementsRed.isEmpty()){
+                    currentPlayer = playerBlue;
+                    changeTurn();
+                }
+             }else{
+               posibleTokenMovementsBlue = currentGameBoard.getPossibleMovements(currentPlayer,lastNumberMoved,newX,newY);
+               txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
+               if(posibleTokenMovementsBlue.isEmpty()){
+                   currentPlayer = playerRed;
+                   changeTurn();
+               }
+             }
+        }
+        
+        private void changeTurn(){
+            
+        }
+
+    private void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
         jbuttons.add(btnSound);
         for (int i = 0; i < jbuttons.size(); i++) {
@@ -268,7 +341,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
                 btnTurnActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 660, 150, 40));
+        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -286,9 +359,9 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_txtNicknamePlayerBlueActionPerformed
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        if(game.isStateMusic()){
+        if (game.isStateMusic()) {
             game.setStateMusic(false);
-        }else{
+        } else {
             game.setStateMusic(true);
         }
 
@@ -318,56 +391,109 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer{
     private javax.swing.JTextField txtPossibleMovementsBlue;
     private javax.swing.JTextField txtPossibleMovementsRed;
     // End of variables declaration//GEN-END:variables
+
     private class ListenerBoton implements ActionListener {
 
         private int x;
         private int y;
 
         public ListenerBoton(int i, int j) {
-// en el constructor se almacena la fila y columna que se presionó
             x = i;
             y = j;
         }
 
         public void actionPerformed(ActionEvent e) {
-// cuando se presiona un botón, se ejecutará este método
             clickBoton(x, y);
         }
     }
 
-    private static void clickBoton(int fila, int columna) {
-        
-        if(flag){
-           currentX = columna;
-           currentY = fila;
-           //System.out.println("Columna: "+currentX+"Fila: "+ currentY);
-           flag = false;
-           
-        }else{
+    private void clickBoton(int fila, int columna) {
+
+        if (clickFlag) {
+            currentX = columna;
+            currentY = fila;
+            Token selectedToken = currentGameBoard.getTokenMatrix()[currentY][currentX];
+
+            if (selectedToken != null) {
+                Player tokenPlayer = selectedToken.getPlayer();
+
+                if (tokenPlayer.equals(currentPlayer)) {
+                    if (currentPlayer.equals(playerBlue)) {
+                        if (!posibleTokenMovementsBlue.contains(selectedToken.getTokenNumber())) {
+                            JOptionPane.showMessageDialog(this, "No tienes la posibilidad de mover este token", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            clickFlag = false;
+                        }
+                    } else if (currentPlayer.equals(playerRed)) {
+                        if (!posibleTokenMovementsRed.contains(selectedToken.getTokenNumber())) {
+                            JOptionPane.showMessageDialog(this, "No tienes la posibilidad de mover este token", "Error", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            clickFlag = false;
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Elegiste una ficha del otro jugador", "Error jugador", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No elegite ficha alguna", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            //currentGameBoard.getTokenMatrix()[cu]           
+        } else {
             newX = columna;
             newY = fila;
-            //System.out.println("Columna: "+newX+"Fila: "+ newY);
-            flag = true;
-        }
-        
-// Método a completar!.
-// En fila y columna se reciben las coordenas donde presionó el usuario, relativas al comienzo de la grilla
-// fila 1 y columna 1 corresponden a la posición de arriba a la izquierda.
-// Debe indicarse cómo responder al click de ese botón.
 
-    
-    }
-     @Override
-    public void update(Observable o, Object arg) {
+            if (!currentGameBoard.validatePositionMovement(currentPlayer, currentY, currentX, newY, newX)) {
+                JOptionPane.showMessageDialog(this, "Movimiento invalido", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                clickFlag = true;
+                stateOfTheGameboardChange = true;
+                if(currentGameBoard.getTokenMatrix()[newY][newX] == null){
+                        lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
+                        currentGameBoard.movePiece(currentX, currentY, newX, newY);
+                                                
+                        GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
+                        Token[][] auxMatrix = auxGameboard.getTokenMatrix();
+                        //Clone each token to save another gameboard and not modify all the gameboards
+                        for (int i = 0; i < auxMatrix.length; i++) {
+                            for (int j = 0; j < auxMatrix[0].length; j++) {
+                                if (currentGameBoard.getTokenMatrix()[i][j] != null) {
+                                    auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
+                                }
+                            }
+                        }
+                        currentMatch.setGameBoard(auxGameboard);
+
+                    }else{
+                            JOptionPane.showMessageDialog(this, "Se encuentra una ficha en esa posición", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 
+                }
+
+
+        }
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        //Change music of the play      
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
+        if (game.isStateMusic()) {
             btnSound.setIcon(iconOn);
-            sound.play();
-        }else{
+            sound.loop();
+        } else {
             btnSound.setIcon(iconOff);
             sound.stop();
         }
+        //Draw the gameboard again
+
+        if (stateOfTheGameboardChange) {
+            this.fillButtonMatrix();
+            this.updateCurrentPlayerData();
+            stateOfTheGameboardChange = false;
+        }
     }
+
 }

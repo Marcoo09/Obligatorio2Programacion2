@@ -52,7 +52,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
         this.alignItems();
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
+       sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
         sound.loop();
 
     }
@@ -95,18 +95,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
            }
     }
 
-    public void playMusic(){
-        AudioClip sound;
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
-        sound.loop();
-    }
-    
-    public void stopMusic(){
-        AudioClip sound;
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
-        sound.stop();
-        
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -329,7 +317,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
         if(game.isStateMusic()){
             btnSound.setIcon(iconOn);
-            sound.play();
+            sound.loop();
         }else{
             btnSound.setIcon(iconOff);
             sound.stop();

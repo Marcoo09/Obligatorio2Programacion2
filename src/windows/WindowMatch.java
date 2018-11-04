@@ -55,7 +55,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         this.setTransparent();
     }
 
-    public void alignItems() {
+    private void alignItems() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
@@ -77,13 +77,13 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
     }
     
-    public void clearInputs() {
+    private void clearInputs() {
         txtQtyMovements.setText("");
         lstPlayerBlue.clearSelection();
         lstPlayerRed.clearSelection();
     }
 
-    public void setTransparent() {
+    private void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
         ArrayList jRadioButtons = new ArrayList<>();
         jbuttons.add(btnSound);
@@ -345,7 +345,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
         if (game.isStateMusic()) {
             btnSound.setIcon(iconOn);
-            sound.play();
+            sound.loop();
         } else {
             btnSound.setIcon(iconOff);
             sound.stop();
