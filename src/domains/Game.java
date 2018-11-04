@@ -17,6 +17,7 @@ public class Game  extends Observable implements Serializable{
     public Game(){
         listOfMatches = new ArrayList<>();      
         listOfPlayers = new ArrayList<>();
+        this.stateMusic = true;
     }
     
     public ArrayList<Match> getListOfMatches() {
