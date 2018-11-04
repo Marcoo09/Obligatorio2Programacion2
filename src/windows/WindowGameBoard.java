@@ -90,14 +90,39 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         //Create GamebBoard and fill text of the screen
         this.fillTexts(match);
         this.fillInitialButtonMatrix();
+        this.modifyAppearenceOfNotCurrentPlayer();
 
     }
 
     private void modifyAppearenceOfNotCurrentPlayer(){
         if(currentPlayer.equals(playerRed)){
-            
+          lblBluePlayerTitle.setEnabled(false);
+          lblBluePlayerNickName.setEnabled(false);
+          lblBluePlayerPosibleMovements.setEnabled(false);
+          txtNicknamePlayerBlue.setBackground(Color.GRAY);
+          txtPossibleMovementsBlue.setBackground(Color.GRAY);
+          btnExitPlayerBlue.setEnabled(false);
+          
+          lblRedPlayerTitle.setEnabled(true);
+          lblRedPlayerPosibleMovements.setEnabled(true);
+          lblRedPlayerNickName.setEnabled(true);
+          txtNicknamePlayerRed.setBackground(Color.WHITE);
+          txtPossibleMovementsRed.setBackground(Color.WHITE);
+          btnExitPlayerRed.setEnabled(true);
         }else{
+          lblBluePlayerTitle.setEnabled(true);
+          lblBluePlayerNickName.setEnabled(true);
+          lblBluePlayerPosibleMovements.setEnabled(true);
+          txtNicknamePlayerBlue.setBackground(Color.WHITE);
+          txtPossibleMovementsBlue.setBackground(Color.WHITE);
+          btnExitPlayerBlue.setEnabled(true);
             
+          lblRedPlayerTitle.setEnabled(false);
+          lblRedPlayerPosibleMovements.setEnabled(false);
+          lblRedPlayerNickName.setEnabled(false);
+          txtNicknamePlayerRed.setBackground(Color.GRAY);
+          txtPossibleMovementsRed.setBackground(Color.GRAY);
+          btnExitPlayerRed.setEnabled(false);
         }
     }
     
@@ -188,7 +213,17 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         }
         
         private void changeTurn(){
+            ArrayList<Integer> movements = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
+            movements = currentGameBoard.removeTokensWithAnyPosibleMovement(movements, currentPlayer);
+            modifyAppearenceOfNotCurrentPlayer();
             
+            if(currentPlayer.equals(playerRed)){
+                posibleTokenMovementsRed = movements;
+                txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
+            }else{
+                posibleTokenMovementsBlue = movements;
+                txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
+            }
         }
 
     private void setTransparent() {
@@ -207,19 +242,19 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
     private void initComponents() {
 
         panelJuego = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblRedPlayerTitle = new javax.swing.JLabel();
+        lblBluePlayerTitle = new javax.swing.JLabel();
         txtPossibleMovementsRed = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblRedPlayerPosibleMovements = new javax.swing.JLabel();
         txtNicknamePlayerRed = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
+        lblRedPlayerNickName = new javax.swing.JLabel();
         btnExitPlayerRed = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        lblBluePlayerPosibleMovements = new javax.swing.JLabel();
         txtPossibleMovementsBlue = new javax.swing.JTextField();
         btnExitPlayerBlue = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        lblBluePlayerNickName = new javax.swing.JLabel();
         txtNicknamePlayerBlue = new javax.swing.JTextField();
         btnSound = new javax.swing.JButton();
         btnTurn = new javax.swing.JButton();
@@ -245,15 +280,15 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
 
         getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 580, 440));
 
-        jLabel2.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Jugador rojo");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
+        lblRedPlayerTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
+        lblRedPlayerTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblRedPlayerTitle.setText("Jugador rojo");
+        getContentPane().add(lblRedPlayerTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Jugador azul");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, -1, -1));
+        lblBluePlayerTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
+        lblBluePlayerTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblBluePlayerTitle.setText("Jugador azul");
+        getContentPane().add(lblBluePlayerTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, -1, -1));
 
         txtPossibleMovementsRed.setBackground(new java.awt.Color(240, 240, 240));
         txtPossibleMovementsRed.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -262,10 +297,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         txtPossibleMovementsRed.setEnabled(false);
         getContentPane().add(txtPossibleMovementsRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 280, 30));
 
-        jLabel3.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Posibles movimientos:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
+        lblRedPlayerPosibleMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
+        lblRedPlayerPosibleMovements.setForeground(new java.awt.Color(255, 255, 255));
+        lblRedPlayerPosibleMovements.setText("Posibles movimientos:");
+        getContentPane().add(lblRedPlayerPosibleMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         txtNicknamePlayerRed.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNicknamePlayerRed.setForeground(new java.awt.Color(255, 255, 255));
@@ -280,10 +315,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 300, 10));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 240, 300, 10));
 
-        jLabel4.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Alias:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        lblRedPlayerNickName.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
+        lblRedPlayerNickName.setForeground(new java.awt.Color(255, 255, 255));
+        lblRedPlayerNickName.setText("Alias:");
+        getContentPane().add(lblRedPlayerNickName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         btnExitPlayerRed.setBackground(new java.awt.Color(237, 83, 83));
         btnExitPlayerRed.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
@@ -292,10 +327,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         btnExitPlayerRed.setText("  Abandonar");
         getContentPane().add(btnExitPlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Posibles movimientos:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, -1, -1));
+        lblBluePlayerPosibleMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
+        lblBluePlayerPosibleMovements.setForeground(new java.awt.Color(255, 255, 255));
+        lblBluePlayerPosibleMovements.setText("Posibles movimientos:");
+        getContentPane().add(lblBluePlayerPosibleMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 350, -1, -1));
 
         txtPossibleMovementsBlue.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPossibleMovementsBlue.setForeground(new java.awt.Color(255, 255, 255));
@@ -310,10 +345,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         btnExitPlayerBlue.setText("  Abandonar");
         getContentPane().add(btnExitPlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 460, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Alias:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 250, -1, -1));
+        lblBluePlayerNickName.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
+        lblBluePlayerNickName.setForeground(new java.awt.Color(255, 255, 255));
+        lblBluePlayerNickName.setText("Alias:");
+        getContentPane().add(lblBluePlayerNickName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 250, -1, -1));
 
         txtNicknamePlayerBlue.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNicknamePlayerBlue.setToolTipText("");
@@ -377,14 +412,14 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton btnExitPlayerRed;
     private javax.swing.JButton btnSound;
     private javax.swing.JButton btnTurn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblBluePlayerNickName;
+    private javax.swing.JLabel lblBluePlayerPosibleMovements;
+    private javax.swing.JLabel lblBluePlayerTitle;
+    private javax.swing.JLabel lblRedPlayerNickName;
+    private javax.swing.JLabel lblRedPlayerPosibleMovements;
+    private javax.swing.JLabel lblRedPlayerTitle;
     private javax.swing.JPanel panelJuego;
     private javax.swing.JTextField txtNicknamePlayerBlue;
     private javax.swing.JTextField txtNicknamePlayerRed;
