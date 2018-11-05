@@ -216,6 +216,7 @@ public class GameBoard extends Observable implements Serializable{
         this.setTokenMatrix(matrix);
     }
      
+     
      public  boolean validatePositionMovement(Player parmPlayer, int currentPositionY,int currentPositionX,int newPositionY, int newPositionX){
         Player playerRed = this.getPlayerRed();
         boolean returnedValue = true;
