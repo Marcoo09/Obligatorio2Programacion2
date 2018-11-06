@@ -48,15 +48,14 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
 
     public WindowGameBoard(Game aGame, MenuWindow mainWindow, Match match) {
         initComponents();
-        
+
         //Flags
         clickFlag = true;
-        
+
         //Receive parameters
         game = aGame;
         windowMenu = mainWindow;
         currentMatch = match;
-
 
         //Look and feel
         try {
@@ -70,12 +69,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         //Data of the play
-
         playerBlue = currentMatch.getListOfPlayers().get(0);
         playerRed = currentMatch.getListOfPlayers().get(1);
 
         currentPlayer = playerRed;
-
 
         if (currentMatch.getListOfGameBoard().isEmpty()) {
             currentGameBoard = new GameBoard(match.getListOfPlayers());
@@ -86,7 +83,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         //Subscribe as observers
         game.addObserver(this);
         currentGameBoard.addObserver(this);
-        
+
         //Create GamebBoard and fill text of the screen
         this.fillTexts(match);
         this.fillInitialButtonMatrix();
@@ -94,38 +91,53 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
 
     }
 
-    private void modifyAppearenceOfNotCurrentPlayer(){
-        if(currentPlayer.equals(playerRed)){
-          lblBluePlayerTitle.setEnabled(false);
-          lblBluePlayerNickName.setEnabled(false);
-          lblBluePlayerPosibleMovements.setEnabled(false);
-          txtNicknamePlayerBlue.setBackground(Color.GRAY);
-          txtPossibleMovementsBlue.setBackground(Color.GRAY);
-          btnExitPlayerBlue.setEnabled(false);
-          
-          lblRedPlayerTitle.setEnabled(true);
-          lblRedPlayerPosibleMovements.setEnabled(true);
-          lblRedPlayerNickName.setEnabled(true);
-          txtNicknamePlayerRed.setBackground(Color.WHITE);
-          txtPossibleMovementsRed.setBackground(Color.WHITE);
-          btnExitPlayerRed.setEnabled(true);
-        }else{
-          lblBluePlayerTitle.setEnabled(true);
-          lblBluePlayerNickName.setEnabled(true);
-          lblBluePlayerPosibleMovements.setEnabled(true);
-          txtNicknamePlayerBlue.setBackground(Color.WHITE);
-          txtPossibleMovementsBlue.setBackground(Color.WHITE);
-          btnExitPlayerBlue.setEnabled(true);
-            
-          lblRedPlayerTitle.setEnabled(false);
-          lblRedPlayerPosibleMovements.setEnabled(false);
-          lblRedPlayerNickName.setEnabled(false);
-          txtNicknamePlayerRed.setBackground(Color.GRAY);
-          txtPossibleMovementsRed.setBackground(Color.GRAY);
-          btnExitPlayerRed.setEnabled(false);
+    private void announceWinner() {
+        Player playerWinner = currentMatch.getWinner();
+
+        if (playerWinner != null) {
+            if (currentMatch.getWinner().equals(playerBlue)) {
+                playerBlue.setWonGames(playerBlue.getWonGames() + 1);
+            } else {
+                playerRed.setWonGames(playerRed.getWonGames() + 1);
+            }
+        }
+        WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch);
+        windowAnnounceWinner.setVisible(true);
+        this.dispose();
+    }
+
+    private void modifyAppearenceOfNotCurrentPlayer() {
+        if (currentPlayer.equals(playerRed)) {
+            lblBluePlayerTitle.setEnabled(false);
+            lblBluePlayerNickName.setEnabled(false);
+            lblBluePlayerPosibleMovements.setEnabled(false);
+            txtNicknamePlayerBlue.setBackground(Color.GRAY);
+            txtPossibleMovementsBlue.setBackground(Color.GRAY);
+            btnExitPlayerBlue.setEnabled(false);
+
+            lblRedPlayerTitle.setEnabled(true);
+            lblRedPlayerPosibleMovements.setEnabled(true);
+            lblRedPlayerNickName.setEnabled(true);
+            txtNicknamePlayerRed.setBackground(Color.WHITE);
+            txtPossibleMovementsRed.setBackground(Color.WHITE);
+            btnExitPlayerRed.setEnabled(true);
+        } else {
+            lblBluePlayerTitle.setEnabled(true);
+            lblBluePlayerNickName.setEnabled(true);
+            lblBluePlayerPosibleMovements.setEnabled(true);
+            txtNicknamePlayerBlue.setBackground(Color.WHITE);
+            txtPossibleMovementsBlue.setBackground(Color.WHITE);
+            btnExitPlayerBlue.setEnabled(true);
+
+            lblRedPlayerTitle.setEnabled(false);
+            lblRedPlayerPosibleMovements.setEnabled(false);
+            lblRedPlayerNickName.setEnabled(false);
+            txtNicknamePlayerRed.setBackground(Color.GRAY);
+            txtPossibleMovementsRed.setBackground(Color.GRAY);
+            btnExitPlayerRed.setEnabled(false);
         }
     }
-    
+
     private void fillTexts(Match currentMatch) {
 
         txtNicknamePlayerBlue.setText(playerBlue.getNickName());
@@ -140,7 +152,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
         int col = tokenMatrix.length;
         int row = tokenMatrix[0].length;
-        
+
         panelJuego.setLayout(new GridLayout(8, 9));
         botones = new JButton[9][10];
 
@@ -167,64 +179,64 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         }
 
     }
-    
-        private void fillButtonMatrix() {
-            Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
-            int col = tokenMatrix.length;
-            int row = tokenMatrix[0].length;
 
-            for (int i = 0; i < col; i++) {
-                for (int j = 0; j < row; j++) {
-                    if (tokenMatrix[i][j] != null) {
-                        if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
-                            botones[i][j].setBackground(Color.RED);
-                            botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+    private void fillButtonMatrix() {
+        Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
+        int col = tokenMatrix.length;
+        int row = tokenMatrix[0].length;
 
-                        } else {
-                            botones[i][j].setBackground(Color.BLUE);
-                            botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
-                        }
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                if (tokenMatrix[i][j] != null) {
+                    if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
+                        botones[i][j].setBackground(Color.RED);
+                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+
                     } else {
-                        botones[i][j].setBackground(Color.WHITE);
-                        botones[i][j].setText("");
-
+                        botones[i][j].setBackground(Color.BLUE);
+                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
                     }
-                }
-            }
+                } else {
+                    botones[i][j].setBackground(Color.WHITE);
+                    botones[i][j].setText("");
 
-        }
-        
-        private void updateCurrentPlayerData(){
-             if(currentPlayer.equals(playerRed)){
-                posibleTokenMovementsRed = currentGameBoard.getPossibleMovements(currentPlayer,lastNumberMoved,newX,newY);
-                txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
-                if(posibleTokenMovementsRed.isEmpty()  ){
-                    currentPlayer = playerBlue;
-                    changeTurn();
                 }
-             }else{
-               posibleTokenMovementsBlue = currentGameBoard.getPossibleMovements(currentPlayer,lastNumberMoved,newX,newY);
-               txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
-               if(posibleTokenMovementsBlue.isEmpty()){
-                   currentPlayer = playerRed;
-                   changeTurn();
-               }
-             }
-        }
-        
-        private void changeTurn(){
-            ArrayList<Integer> movements = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8));
-            movements = currentGameBoard.removeTokensWithAnyPosibleMovement(movements, currentPlayer);
-            modifyAppearenceOfNotCurrentPlayer();
-            
-            if(currentPlayer.equals(playerRed)){
-                posibleTokenMovementsRed = movements;
-                txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
-            }else{
-                posibleTokenMovementsBlue = movements;
-                txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
             }
         }
+
+    }
+
+    private void updateCurrentPlayerData() {
+        if (currentPlayer.equals(playerRed)) {
+            posibleTokenMovementsRed = currentGameBoard.getPossibleMovements(currentPlayer, lastNumberMoved, newX, newY);
+            txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
+            if (posibleTokenMovementsRed.isEmpty()) {
+                currentPlayer = playerBlue;
+                changeTurn();
+            }
+        } else {
+            posibleTokenMovementsBlue = currentGameBoard.getPossibleMovements(currentPlayer, lastNumberMoved, newX, newY);
+            txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
+            if (posibleTokenMovementsBlue.isEmpty()) {
+                currentPlayer = playerRed;
+                changeTurn();
+            }
+        }
+    }
+
+    private void changeTurn() {
+        ArrayList<Integer> movements = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+        movements = currentGameBoard.removeTokensWithAnyPosibleMovement(movements, currentPlayer);
+        modifyAppearenceOfNotCurrentPlayer();
+
+        if (currentPlayer.equals(playerRed)) {
+            posibleTokenMovementsRed = movements;
+            txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
+        } else {
+            posibleTokenMovementsBlue = movements;
+            txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
+        }
+    }
 
     private void setTransparent() {
         ArrayList jbuttons = new ArrayList<>();
@@ -403,9 +415,9 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnSoundActionPerformed
 
     private void btnTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnActionPerformed
-        if(currentPlayer.equals(playerRed)){
+        if (currentPlayer.equals(playerRed)) {
             currentPlayer = playerBlue;
-        }else{
+        } else {
             currentPlayer = playerRed;
         }
         this.changeTurn();
@@ -488,32 +500,32 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
             } else {
                 clickFlag = true;
                 stateOfTheGameboardChange = true;
-                if(currentGameBoard.getTokenMatrix()[newY][newX] == null){
-                        lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
-                        currentGameBoard.movePiece(currentX, currentY, newX, newY);
-                                                
-                        GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
-                        Token[][] auxMatrix = auxGameboard.getTokenMatrix();
-                        //Clone each token to save another gameboard and not modify all the gameboards
-                        for (int i = 0; i < auxMatrix.length; i++) {
-                            for (int j = 0; j < auxMatrix[0].length; j++) {
-                                if (currentGameBoard.getTokenMatrix()[i][j] != null) {
-                                    auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
-                                }
+                if (currentGameBoard.getTokenMatrix()[newY][newX] == null) {
+                    lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
+                    currentGameBoard.movePiece(currentX, currentY, newX, newY);
+
+                    GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
+                    Token[][] auxMatrix = auxGameboard.getTokenMatrix();
+                    //Clone each token to save another gameboard and not modify all the gameboards
+                    for (int i = 0; i < auxMatrix.length; i++) {
+                        for (int j = 0; j < auxMatrix[0].length; j++) {
+                            if (currentGameBoard.getTokenMatrix()[i][j] != null) {
+                                auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
                             }
                         }
-                        currentMatch.setGameBoard(auxGameboard);
-                       
-                        if(currentMatch.isFinished()){
-                            JOptionPane.showMessageDialog(this, "Terminó el juego", "Terminó", JOptionPane.ERROR_MESSAGE);
-                        }
-                        
-                    }else{
-                            JOptionPane.showMessageDialog(this, "Se encuentra una ficha en esa posición", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                
+                    currentMatch.setGameBoard(auxGameboard);
+
+                    if (currentMatch.isFinished()) {
+                        JOptionPane.showMessageDialog(this, "Terminó el juego", "Terminó", JOptionPane.ERROR_MESSAGE);
+                        this.announceWinner();
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Se encuentra una ficha en esa posición", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
+            }
 
         }
 
@@ -524,13 +536,12 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         //Change music of the play      
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        
-            
-        if (game.isStateMusic()&& btnSound.getIcon().equals(iconOff)) {
+
+        if (game.isStateMusic() && btnSound.getIcon().equals(iconOff)) {
             sound.loop();
             System.out.println("entro");
             btnSound.setIcon(iconOn);
-        } else if(!game.isStateMusic()){
+        } else if (!game.isStateMusic()) {
             btnSound.setIcon(iconOff);
             sound.stop();
         }
