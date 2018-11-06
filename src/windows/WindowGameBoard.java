@@ -101,7 +101,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
                 playerRed.setWonGames(playerRed.getWonGames() + 1);
             }
         }
-        WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch);
+        WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch, windowMenu);
         windowAnnounceWinner.setVisible(true);
         this.dispose();
     }
@@ -249,6 +249,19 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         }
     }
 
+    private void giveUp(){
+       currentMatch.setFinished(true);
+       if(currentPlayer.equals(playerRed)){
+           currentMatch.setWinner(playerBlue);
+       }else{
+           currentMatch.setWinner(playerRed);
+       }
+       
+       WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch, windowMenu);
+       windowAnnounceWinner.setVisible(true);
+       this.dispose();
+   }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -270,13 +283,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         txtNicknamePlayerBlue = new javax.swing.JTextField();
         btnSound = new javax.swing.JButton();
         btnTurn = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                manageWindowClosing(evt);
-            }
-        });
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
@@ -337,6 +347,11 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         btnExitPlayerRed.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerRed.setText("  Abandonar");
+        btnExitPlayerRed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitPlayerRedActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnExitPlayerRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
 
         lblBluePlayerPosibleMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
@@ -355,6 +370,11 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         btnExitPlayerBlue.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerBlue.setText("  Abandonar");
+        btnExitPlayerBlue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitPlayerBlueActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnExitPlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 460, -1, -1));
 
         lblBluePlayerNickName.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
@@ -390,12 +410,18 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 150, 40));
 
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
-        windowMenu.setVisible(true);
-    }//GEN-LAST:event_manageWindowClosing
 
     private void txtNicknamePlayerRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNicknamePlayerRedActionPerformed
         // TODO add your handling code here:
@@ -423,10 +449,24 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
         this.changeTurn();
     }//GEN-LAST:event_btnTurnActionPerformed
 
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        this.dispose();
+        windowMenu.setVisible(true);
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void btnExitPlayerRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitPlayerRedActionPerformed
+        this.giveUp();
+    }//GEN-LAST:event_btnExitPlayerRedActionPerformed
+
+    private void btnExitPlayerBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitPlayerBlueActionPerformed
+        this.giveUp();
+    }//GEN-LAST:event_btnExitPlayerBlueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExitPlayerBlue;
     private javax.swing.JButton btnExitPlayerRed;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
     private javax.swing.JButton btnTurn;
     private javax.swing.JSeparator jSeparator1;

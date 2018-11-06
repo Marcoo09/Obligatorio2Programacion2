@@ -83,14 +83,12 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         lblTitle = new javax.swing.JLabel();
         JSContainterRanking = new javax.swing.JScrollPane();
         lstRanking = new javax.swing.JList();
+        btnHome = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 700));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                manageWindowClosing(evt);
-            }
-        });
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
@@ -105,12 +103,23 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Ranking");
         lblTitle.setToolTipText("");
-        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 150, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, -1, -1));
 
         lstRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         JSContainterRanking.setViewportView(lstRanking);
 
-        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 740, 340));
+        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 740, 400));
+
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,13 +133,16 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
     }//GEN-LAST:event_btnSoundActionPerformed
 
-    private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        this.dispose();
         menuWindow.setVisible(true);
-    }//GEN-LAST:event_manageWindowClosing
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JSContainterRanking;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JList lstRanking;
     // End of variables declaration//GEN-END:variables

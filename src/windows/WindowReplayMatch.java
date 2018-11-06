@@ -51,31 +51,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
         this.alignItems();
-
-        //Create GamebBoard
-        panelJuego.setLayout(new GridLayout(8, 9));
-        botones = new JButton[9][10];
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 9; j++) {
-                JButton jButton = new JButton();
-                panelJuego.add(jButton);
-                botones[i][j] = jButton;
-                if (i == 1) {
-                    botones[i][j].setBackground(Color.BLUE);
-                    if (j != 1) {
-                        botones[i][j].setText("" + (j - 1));
-                    }
-                } else if (i == 8) {
-                    botones[i][j].setBackground(Color.RED);
-                    if (j != 1) {
-                        botones[i][j].setText("" + (10 - j));
-                    }
-                } else {
-                    botones[i][j].setBackground(Color.WHITE);
-                }
-            }
-        }
-
+        
+        this.createButtonMatrix();
     }
 
     private void alignItems() {
@@ -97,6 +74,31 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             buttonAux.setBorderPainted(false);
         }
     }
+    
+    private void createButtonMatrix(){
+       panelJuego.setLayout(new GridLayout(8, 9));
+       botones = new JButton[9][10];
+       for (int i = 1; i <= 8; i++) {
+           for (int j = 1; j <= 9; j++) {
+               JButton jButton = new JButton();
+               panelJuego.add(jButton);
+               botones[i][j] = jButton;
+               if (i == 1) {
+                 //  botones[i][j].setBackground(Color.BLUE);
+                   if (j != 1) {
+                    //   botones[i][j].setText("" + (j - 1));
+                   }
+               } else if (i == 8) {
+                  // botones[i][j].setBackground(Color.RED);
+                   if (j != 1) {
+                     //  botones[i][j].setText("" + (10 - j));
+                   }
+               } else {
+                   botones[i][j].setBackground(Color.WHITE);
+               }
+           }
+       }        
+   }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -104,13 +106,10 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
         btnSound = new javax.swing.JButton();
         panelJuego = new javax.swing.JPanel();
+        btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
@@ -134,6 +133,16 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
         getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 730, 470));
 
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -145,9 +154,10 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         }
     }//GEN-LAST:event_btnSoundActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        this.dispose();
         menuWindow.setVisible(true);
-    }//GEN-LAST:event_formWindowClosing
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     @Override
     public void update(Observable o, Object arg) {
@@ -164,6 +174,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
     private javax.swing.JPanel panelJuego;
     // End of variables declaration//GEN-END:variables

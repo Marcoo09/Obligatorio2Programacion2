@@ -136,8 +136,10 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdAllTokens = new javax.swing.JRadioButton();
         txtQtyMovements = new javax.swing.JTextField();
         lblQtyOfMovements = new javax.swing.JLabel();
+        btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 manageClosingWindow(evt);
@@ -230,6 +232,17 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblQtyOfMovements.setText("Cantidad de Movimientos");
         getContentPane().add(lblQtyOfMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, -1, -1));
 
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.setOpaque(false);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -300,7 +313,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
 
     private void manageClosingWindow(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageClosingWindow
         menuWindow.setVisible(true);
-
     }//GEN-LAST:event_manageClosingWindow
 
     private void jrdMovementsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrdMovementsMouseClicked
@@ -317,10 +329,17 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         txtQtyMovements.setText("");
     }//GEN-LAST:event_jrdAllTokensActionPerformed
 
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+                menuWindow.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JSContainerBluePlayer;
     private javax.swing.JScrollPane JSContainterRedPlayer;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;

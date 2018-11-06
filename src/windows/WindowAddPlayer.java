@@ -97,13 +97,10 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         txtNickName = new javax.swing.JTextField();
         txtAge = new javax.swing.JTextField();
         btnSound = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                manageWindowClosing(evt);
-            }
-        });
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAddPlayer.setText("Ingresar Jugador");
@@ -152,7 +149,17 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
                 btnSoundActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 700, -1, -1));
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 730, -1, -1));
+
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,10 +171,6 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
             game.setStateMusic(true);
         }
     }//GEN-LAST:event_btnSoundActionPerformed
-
-    private void manageWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_manageWindowClosing
-        menuWindow.setVisible(true);
-    }//GEN-LAST:event_manageWindowClosing
 
     private void btnAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlayerActionPerformed
         ArrayList<Player> listOfPlayers = game.getListOfPlayers();
@@ -218,9 +221,15 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         }
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        this.dispose();
+        menuWindow.setVisible(true);
+    }//GEN-LAST:event_btnHomeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddPlayer;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblName;
