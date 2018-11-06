@@ -249,7 +249,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         boolean samePlayers = false;
         boolean wrongMovments = false;
         Player playerRed = null;
-            Player playerBlue = null;
+        Player playerBlue = null;
         String wayToFinish = "";
 
         if(!lstPlayerRed.isSelectionEmpty() && !lstPlayerBlue.isSelectionEmpty()){
@@ -269,7 +269,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             if (jrdMovements.isSelected()) {
                 qtyMovements = Integer.parseInt(txtQtyMovements.getText());
                 wayToFinish = "movimientos";
-                if (qtyMovements <= 0) {
+                if (qtyMovements <= 0 ) {
                     wrongMovments = true;
                     JOptionPane.showMessageDialog(this, "Cantidad de movimientos invalida", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -283,8 +283,8 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
             }
 
         } catch (Exception NumberFormException) {
+            wrongMovments = true;
             JOptionPane.showMessageDialog(this, "Cantidad de movimientos inválida", "Error", JOptionPane.ERROR_MESSAGE);
-
         }
             if (!samePlayers && !wrongMovments) {
                 match = new Match(playerBlue, playerRed, wayToFinish, qtyMovements);

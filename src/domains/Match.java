@@ -128,7 +128,7 @@ public class Match implements Comparable, Serializable{
                 }
             }
             //Case 2    
-        } else if (wayToFinalize.equals("pieza")) {
+        } else if (wayToFinalize.equals("ficha")) {
             //Verify if one token at the opposite side
             for (int i = 0; i < 9 && !returnedValue; i++) {
                 if (lastMatrix[0][i] != null && lastMatrix[0][i].getPlayer().equals(lastGameBoard.getPlayerRed())) {

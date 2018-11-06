@@ -198,14 +198,14 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
              if(currentPlayer.equals(playerRed)){
                 posibleTokenMovementsRed = currentGameBoard.getPossibleMovements(currentPlayer,lastNumberMoved,newX,newY);
                 txtPossibleMovementsRed.setText(posibleTokenMovementsRed.toString());
-                if(posibleTokenMovementsRed.isEmpty() || passedTurn ){
+                if(posibleTokenMovementsRed.isEmpty()  ){
                     currentPlayer = playerBlue;
                     changeTurn();
                 }
              }else{
                posibleTokenMovementsBlue = currentGameBoard.getPossibleMovements(currentPlayer,lastNumberMoved,newX,newY);
                txtPossibleMovementsBlue.setText(posibleTokenMovementsBlue.toString());
-               if(posibleTokenMovementsBlue.isEmpty()|| passedTurn){
+               if(posibleTokenMovementsBlue.isEmpty()){
                    currentPlayer = playerRed;
                    changeTurn();
                }
@@ -403,10 +403,12 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnSoundActionPerformed
 
     private void btnTurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurnActionPerformed
-        passedTurn = true;
-        stateOfTheGameboardChange=true;
-        //Only to notify Observers
-        currentGameBoard.setTokenMatrix(currentGameBoard.getTokenMatrix());
+        if(currentPlayer.equals(playerRed)){
+            currentPlayer = playerBlue;
+        }else{
+            currentPlayer = playerRed;
+        }
+        this.changeTurn();
     }//GEN-LAST:event_btnTurnActionPerformed
 
 
@@ -501,7 +503,11 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer {
                             }
                         }
                         currentMatch.setGameBoard(auxGameboard);
-
+                       
+                        if(currentMatch.isFinished()){
+                            JOptionPane.showMessageDialog(this, "Terminó el juego", "Terminó", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
                     }else{
                             JOptionPane.showMessageDialog(this, "Se encuentra una ficha en esa posición", "Error", JOptionPane.ERROR_MESSAGE);
                     }
