@@ -38,7 +38,6 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         initComponents();
         game = aGame;
         menuWindow = mainWindow;
-      //  windowGameBoard = new WindowGameBoard(aGame, mainWindow);
         game.addObserver(this);
 
         try {
@@ -58,6 +57,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         btnFollowGameBoard.setVisible(false);
         panelJuego.setVisible(false);
         lstMatches.setListData(game.getListOfMatches().toArray());
+        this.playMusic();
     }
 
     private void alignItems() {
@@ -105,6 +105,18 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
            }
        }        
    }
+    
+    private void playMusic(){
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        if(game.isStateMusic()){
+            btnSound.setIcon(iconOn);
+            sound.loop();
+        }else{
+            btnSound.setIcon(iconOff);
+            sound.stop();
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -35,9 +35,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         initComponents();
         game = aGame;
         game.addObserver(this);
-        windowAddPlayer = new WindowAddPlayer(aGame, this);
-        windowRanking =  new WindowRanking(aGame, this);
-        windowMatch =  new WindowMatch(aGame,this);
         
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -221,6 +218,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlayerActionPerformed
+        windowAddPlayer = new WindowAddPlayer(game, this);
         windowAddPlayer.setVisible(true);
         this.setVisible(false);
 
@@ -238,6 +236,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+        windowMatch =  new WindowMatch(game,this);
         if (game.getListOfPlayers().size()>1) {
             windowMatch.setVisible(true);
         this.setVisible(false);
@@ -248,6 +247,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRankingActionPerformed
+        windowRanking =  new WindowRanking(game, this);
         if (!game.getListOfPlayers().isEmpty() || !game.getListOfMatches().isEmpty()) {
                      windowRanking.setVisible(true);
         this.setVisible(false);
@@ -300,11 +300,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void update(Observable o, Object arg) {
-                
+    public void update(Observable o, Object arg) {     
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(!game.isStateMusic()){
+        if(game.isStateMusic()){
             btnSound.setIcon(iconOn);
             sound.loop();
         }else{

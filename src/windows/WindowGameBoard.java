@@ -89,6 +89,8 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         this.fillTexts(match);
         this.fillInitialButtonMatrix();
         this.modifyAppearenceOfNotCurrentPlayer();
+        
+        this.playMusic();
 
     }
 
@@ -103,7 +105,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 playerRed.setWonGames(playerRed.getWonGames() + 1);
             }
         }
-        WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch, windowMenu);
+        WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch, windowMenu,game);
         windowAnnounceWinner.setVisible(true);
         this.dispose();
     }
@@ -119,11 +121,23 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
           playerRed.setWonGames(playerRed.getWonGames() + 1);
        }
        
-       WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch, windowMenu);
+       WindowAnnounceWinner windowAnnounceWinner = new WindowAnnounceWinner(currentMatch, windowMenu,game);
        windowAnnounceWinner.setVisible(true);
        this.dispose();
    }
-
+        
+        private void playMusic(){
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        if(game.isStateMusic()){
+            btnSound.setIcon(iconOn);
+            sound.loop();
+        }else{
+            btnSound.setIcon(iconOff);
+            sound.stop();
+        }
+    }
+            
     private void modifyAppearenceOfNotCurrentPlayer() {
         if (currentPlayer.equals(playerRed)) {
             lblBluePlayerTitle.setEnabled(false);

@@ -5,8 +5,11 @@
  */
 package windows;
 
+import domains.Game;
 import domains.Match;
 import domains.Player;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -26,11 +29,13 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
     private Match currentMatch;
     private Player playerBlue;
     private Player playerRed;
+   private Game game;
    
-    public WindowAnnounceWinner(Match aMatch, MenuWindow mainWindow) {
+    public WindowAnnounceWinner(Match aMatch, MenuWindow mainWindow, Game aGame) {
         initComponents();
         menuWindow = mainWindow;
         currentMatch = aMatch;
+        game = aGame;
         playerBlue = currentMatch.getListOfPlayers().get(0);
         playerRed = currentMatch.getListOfPlayers().get(1);
           try {
@@ -44,8 +49,17 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         }
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.showWinner();
+        this.alignItems();
     }
     
+        private void alignItems() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        btnHome.setLocation((int) (screenWidth - 100) ,(int) (30));
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
+    }
         public void showWinner(){
         Player playerWinner = currentMatch.getWinner();
         String [] data = playerWinner.toString().split(",");
@@ -66,9 +80,11 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
 
         btnHome = new javax.swing.JButton();
         txtWinner = new javax.swing.JTextField();
+        btnSound = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
@@ -78,29 +94,16 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
                 btnHomeActionPerformed(evt);
             }
         });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1307, 36, -1, -1));
+        getContentPane().add(txtWinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 264, 497, 305));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnHome)
-                .addGap(64, 64, 64))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(401, 401, 401)
-                .addComponent(txtWinner, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(566, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(btnHome)
-                .addGap(159, 159, 159)
-                .addComponent(txtWinner, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
-        );
+        btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSoundActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 730, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -110,9 +113,18 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         menuWindow.setVisible(true);
     }//GEN-LAST:event_btnHomeActionPerformed
 
+    private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
+        if (game.isStateMusic()) {
+            game.setStateMusic(false);
+        } else {
+            game.setStateMusic(true);
+        }
+    }//GEN-LAST:event_btnSoundActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnSound;
     private javax.swing.JTextField txtWinner;
     // End of variables declaration//GEN-END:variables
 }
