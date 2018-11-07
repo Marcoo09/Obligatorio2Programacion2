@@ -65,7 +65,8 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         txtAge.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 62);
         
         btnAddPlayer.setLocation((int) (screenWidth / 100) * 80, (int) (screenHeight / 100) * 70);
-        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
+        btnHome.setLocation((int) (screenWidth - 100) ,(int) (30));
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
 
     private void setTransparent() {
@@ -159,7 +160,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
                 btnHomeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 30, -1, -1));
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

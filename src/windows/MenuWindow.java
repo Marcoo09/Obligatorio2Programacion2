@@ -38,7 +38,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         windowAddPlayer = new WindowAddPlayer(aGame, this);
         windowRanking =  new WindowRanking(aGame, this);
         windowMatch =  new WindowMatch(aGame,this);
-        windowReplayMatch = new WindowReplayMatch(aGame, this);
         
         try {
             FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
@@ -77,7 +76,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnRanking.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 74);
         btnExit.setLocation((int) (screenWidth / 100) * 41 ,(int) (screenHeight / 100) * 84);
         
-        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
     
     public void setTransparent(){
@@ -143,7 +142,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnAddPlayerActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 260, -1));
+        getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 370, 290, -1));
 
         btnPlay.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnPlay.setForeground(new java.awt.Color(255, 255, 255));
@@ -154,7 +153,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnPlayActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, 260, -1));
+        getContentPane().add(btnPlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, 270, -1));
 
         btnRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnRanking.setForeground(new java.awt.Color(255, 255, 255));
@@ -216,7 +215,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 btnReplayMatchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 250, -1));
+        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 280, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -273,6 +272,8 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_lblLogoMouseClicked
 
     private void btnReplayMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplayMatchActionPerformed
+        windowReplayMatch = new WindowReplayMatch(game, this);
+     
         if (!game.getListOfMatches().isEmpty()) {
             windowReplayMatch.setVisible(true);
             this.setVisible(false);
@@ -303,7 +304,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
+        if(!game.isStateMusic()){
             btnSound.setIcon(iconOn);
             sound.loop();
         }else{

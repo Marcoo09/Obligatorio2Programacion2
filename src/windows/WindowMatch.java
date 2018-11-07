@@ -74,7 +74,8 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
 
         txtQtyMovements.setLocation((int) (screenWidth / 100) * 35, (int) (screenHeight / 100) * 70);
         jButton1.setLocation((int) (screenWidth / 100) * 75, (int) (screenHeight / 100) * 80);
-        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 150));
+        btnHome.setLocation((int) (screenWidth - 100) ,(int) ( 30));
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
     
     private void clearInputs() {
@@ -124,6 +125,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblWayToFinish = new javax.swing.JLabel();
         lblRedPlayer = new javax.swing.JLabel();
         lblBluePlayer = new javax.swing.JLabel();
+        btnHome = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnSound = new javax.swing.JButton();
@@ -136,7 +138,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdAllTokens = new javax.swing.JRadioButton();
         txtQtyMovements = new javax.swing.JTextField();
         lblQtyOfMovements = new javax.swing.JLabel();
-        btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -161,6 +162,16 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblBluePlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblBluePlayer.setText("Jugador Azul:");
         getContentPane().add(lblBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, -1, -1));
+
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 50, -1, -1));
 
         lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,17 +242,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblQtyOfMovements.setForeground(new java.awt.Color(255, 255, 255));
         lblQtyOfMovements.setText("Cantidad de Movimientos");
         getContentPane().add(lblQtyOfMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, -1, -1));
-
-        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
-        btnHome.setBorderPainted(false);
-        btnHome.setContentAreaFilled(false);
-        btnHome.setOpaque(false);
-        btnHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHomeActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -330,9 +330,8 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_jrdAllTokensActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-                menuWindow.setVisible(true);
-
         this.dispose();
+        menuWindow.setVisible(true);
     }//GEN-LAST:event_btnHomeActionPerformed
 
 
