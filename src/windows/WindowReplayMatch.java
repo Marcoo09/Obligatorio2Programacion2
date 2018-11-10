@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -96,7 +97,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                panelJuego.add(jButton);
                botones[i][j] = jButton;
                botones[i][j].setBackground(Color.WHITE);
-               
+               botones[i][j].setForeground(Color.WHITE);
+               botones[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
            }
        }        
    }
@@ -170,14 +172,14 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         panelJuego.setLayout(panelJuegoLayout);
         panelJuegoLayout.setHorizontalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 730, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
         panelJuegoLayout.setVerticalGroup(
             panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 730, 470));
+        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 710, 470));
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
@@ -189,21 +191,21 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, -1, -1));
 
-        btnFollowGameBoard.setText("Next");
+        btnFollowGameBoard.setText("Siguiente");
         btnFollowGameBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFollowGameBoardActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFollowGameBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 710, -1, -1));
+        getContentPane().add(btnFollowGameBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 710, -1, -1));
 
-        btnBeginAnotherMatch.setText("Begin Another Match");
+        btnBeginAnotherMatch.setText("Comenzar otra partida");
         btnBeginAnotherMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBeginAnotherMatchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBeginAnotherMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 710, -1, -1));
+        getContentPane().add(btnBeginAnotherMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 710, -1, -1));
 
         lstMatches.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -256,10 +258,11 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             selectedMatch = (Match)lstMatches.getSelectedValue();
             this.fillButtonMatrix();
             
+            JSContainerLstMatches.setVisible(false);
             panelJuego.setVisible(true);
+            btnConfirm.setVisible(false);
             btnBeginAnotherMatch.setVisible(true);
             btnFollowGameBoard.setVisible(true);
-            
         }else{
         }
     }//GEN-LAST:event_btnConfirmActionPerformed

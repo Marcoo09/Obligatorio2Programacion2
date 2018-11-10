@@ -91,7 +91,6 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         JSContainterRanking = new javax.swing.JScrollPane();
         lstRanking = new javax.swing.JList();
         btnHome = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 700));
@@ -126,7 +125,6 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
             }
         });
         getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, -1, -1));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 560, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,7 +147,6 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane JSContainterRanking;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JList lstRanking;
     // End of variables declaration//GEN-END:variables

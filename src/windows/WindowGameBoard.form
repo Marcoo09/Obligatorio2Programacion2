@@ -306,18 +306,22 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnTurn">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resources/arrows -img.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="   Pasar turno"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
+        <Property name="borderPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTurnActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="610" y="100" width="210" height="60"/>
+          <AbsoluteConstraints x="570" y="90" width="270" height="80"/>
         </Constraint>
       </Constraints>
     </Component>

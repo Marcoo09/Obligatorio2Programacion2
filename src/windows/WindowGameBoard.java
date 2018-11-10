@@ -205,54 +205,6 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
 
     }
 
-    private void fillInitialButtonMatrix() {
-        Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
-        int col = tokenMatrix.length;
-        int row = tokenMatrix[0].length;
-
-        panelJuego.setLayout(new GridLayout(8, 9));
-        botones = new JButton[9][10];
-
-        for (int i = 0; i < col; i++) {
-            for (int j = 0; j < row; j++) {
-                JButton jButton = new JButton();
-                jButton.addActionListener(new ListenerBoton(i, j));
-                panelJuego.add(jButton);
-                botones[i][j] = jButton;
-
-                if (tokenMatrix[i][j] != null) {
-                    if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
-                        botones[i][j].setBackground(Color.RED);
-                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
-
-                    } else {
-                        botones[i][j].setBackground(Color.BLUE);
-                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
-                    }
-                } else {
-                    botones[i][j].setBackground(Color.WHITE);
-                }
-                botones[i][j].setBorder(new LineBorder(Color.BLACK));    
-                botones[i][j].setForeground(Color.BLUE);
-
-            }
-        }
-       
-         GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
-         Token[][] auxMatrix = auxGameboard.getTokenMatrix();
-          //Clone each token to save another gameboard and not modify all the gameboards
-          for (int i = 0; i < auxMatrix.length; i++) {
-                for (int j = 0; j < auxMatrix[0].length; j++) {
-                     if (currentGameBoard.getTokenMatrix()[i][j] != null) {
-                    auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
-                 }
-             }
-         }
-                    
-        currentMatch.setGameBoard(auxGameboard);
-
-    }
-
     private void fillButtonMatrix() {
         Token[][] tokenMatrix = currentGameBoard.getTokenMatrix();
         int col = tokenMatrix.length;
@@ -473,15 +425,17 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 600, -1, -1));
 
+        btnTurn.setBackground(new java.awt.Color(255, 255, 255));
         btnTurn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/arrows -img.png"))); // NOI18N
         btnTurn.setText("   Pasar turno");
         btnTurn.setActionCommand("");
+        btnTurn.setBorderPainted(false);
         btnTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTurnActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 210, 60));
+        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 270, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
