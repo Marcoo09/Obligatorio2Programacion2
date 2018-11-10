@@ -31,7 +31,6 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
     private Game game;
     private MenuWindow menuWindow;
-    private WindowGameBoard windowGameBoard;
     private JButton[][] botones;
     private Match selectedMatch;
     private int i = 0;
@@ -260,21 +259,16 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void btnBeginAnotherMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginAnotherMatchActionPerformed
-        i=0;
-        panelJuego.setVisible(false);
-        for (int i = 0; i <= 8; i++) {
-           for (int j = 0; j <= 9; j++) {
-               JButton jButton = new JButton();
-               panelJuego.add(jButton);
-               botones[i][j] = jButton;
-               botones[i][j].setBackground(Color.WHITE);
-               
-           }
-       }    
-        btnFollowGameBoard.setVisible(false);
-        btnBeginAnotherMatch.setVisible(false);
-        btnConfirm.setVisible(true);
-        lstMatches.setVisible(true);
+            ArrayList<Player> listOfPlayers = selectedMatch.getListOfPlayers();
+            String wayToFinish = selectedMatch.getWayToFinish();
+            int qtyOfMovements = selectedMatch.getQtyOfMovements();
+            
+            Match newMatch = new Match(listOfPlayers.get(0), listOfPlayers.get(1), wayToFinish, qtyOfMovements);
+            
+            WindowGameBoard windowGameBoard = new WindowGameBoard(game, menuWindow, newMatch);
+            windowGameBoard.setVisible(true);
+            this.dispose();
+                    
     }//GEN-LAST:event_btnBeginAnotherMatchActionPerformed
 
     @Override
