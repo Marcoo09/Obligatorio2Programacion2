@@ -173,6 +173,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
         btnHome.setContentAreaFilled(false);
+        btnHome.setFocusPainted(false);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -183,17 +184,22 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Datos de la partida");
-        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 110, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
 
-        jButton1.setText("Comenzar Partida");
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tick-img.png"))); // NOI18N
+        jButton1.setText("  Comenzar Partida");
+        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 660, 150, 50));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 660, 280, 70));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -213,6 +219,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
         jrdMovements.setForeground(new java.awt.Color(255, 255, 255));
         jrdMovements.setText("Movimientos");
+        jrdMovements.setFocusPainted(false);
         jrdMovements.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jrdMovementsMouseClicked(evt);
@@ -224,6 +231,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdOneToken.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
         jrdOneToken.setForeground(new java.awt.Color(255, 255, 255));
         jrdOneToken.setText("Llevar una pieza");
+        jrdOneToken.setFocusPainted(false);
         jrdOneToken.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jrdOneTokenMouseClicked(evt);
@@ -235,6 +243,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdAllTokens.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
         jrdAllTokens.setForeground(new java.awt.Color(255, 255, 255));
         jrdAllTokens.setText("LLevar todas las piezas");
+        jrdAllTokens.setFocusPainted(false);
         jrdAllTokens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrdAllTokensActionPerformed(evt);

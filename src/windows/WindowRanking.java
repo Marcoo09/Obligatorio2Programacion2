@@ -119,6 +119,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
         btnHome.setContentAreaFilled(false);
+        btnHome.setFocusPainted(false);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);

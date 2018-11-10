@@ -183,6 +183,7 @@
           <Image iconType="3" name="/resources/error (1).png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Abandonar"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitPlayerRedActionPerformed"/>
@@ -243,6 +244,7 @@
           <Image iconType="3" name="/resources/error (1).png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Abandonar"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitPlayerBlueActionPerformed"/>
@@ -294,6 +296,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resources/speakerOn-img.png"/>
         </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSoundActionPerformed"/>
@@ -315,6 +318,7 @@
         <Property name="text" type="java.lang.String" value="   Pasar turno"/>
         <Property name="actionCommand" type="java.lang.String" value=""/>
         <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTurnActionPerformed"/>

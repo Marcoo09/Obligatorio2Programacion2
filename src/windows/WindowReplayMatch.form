@@ -31,6 +31,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resources/speakerOn-img.png"/>
         </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSoundActionPerformed"/>
@@ -68,6 +69,7 @@
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
@@ -81,6 +83,7 @@
     <Component class="javax.swing.JButton" name="btnFollowGameBoard">
       <Properties>
         <Property name="text" type="java.lang.String" value="Siguiente"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFollowGameBoardActionPerformed"/>
@@ -94,6 +97,7 @@
     <Component class="javax.swing.JButton" name="btnBeginAnotherMatch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Comenzar otra partida"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBeginAnotherMatchActionPerformed"/>
@@ -134,6 +138,7 @@
     <Component class="javax.swing.JButton" name="btnConfirm">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmActionPerformed"/>

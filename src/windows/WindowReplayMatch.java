@@ -161,6 +161,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -184,6 +185,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
         btnHome.setContentAreaFilled(false);
+        btnHome.setFocusPainted(false);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -192,6 +194,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, -1, -1));
 
         btnFollowGameBoard.setText("Siguiente");
+        btnFollowGameBoard.setFocusPainted(false);
         btnFollowGameBoard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFollowGameBoardActionPerformed(evt);
@@ -200,6 +203,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         getContentPane().add(btnFollowGameBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 710, -1, -1));
 
         btnBeginAnotherMatch.setText("Comenzar otra partida");
+        btnBeginAnotherMatch.setFocusPainted(false);
         btnBeginAnotherMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBeginAnotherMatchActionPerformed(evt);
@@ -217,6 +221,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         getContentPane().add(JSContainerLstMatches, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 480, 366));
 
         btnConfirm.setText("Confirmar");
+        btnConfirm.setFocusPainted(false);
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmActionPerformed(evt);

@@ -112,13 +112,18 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnAddPlayer.setBackground(new java.awt.Color(255, 255, 255));
+        btnAddPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
+        btnAddPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tick-img.png"))); // NOI18N
         btnAddPlayer.setText("Ingresar Jugador");
+        btnAddPlayer.setActionCommand("   Ingresar Jugador");
+        btnAddPlayer.setFocusPainted(false);
         btnAddPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddPlayerActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 600, 150, 50));
+        getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 590, 290, 80));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,6 +158,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 520, 160, 30));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -163,6 +169,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
         btnHome.setContentAreaFilled(false);
+        btnHome.setFocusPainted(false);
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);

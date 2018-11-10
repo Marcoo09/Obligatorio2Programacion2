@@ -139,6 +139,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                jButton.addActionListener(new ListenerBoton(i, j));
                panelJuego.add(jButton);
                botones[i][j] = jButton;
+               botones[i][j].setFocusPainted(false);
                botones[i][j].setBackground(Color.WHITE);
                botones[i][j].setForeground(Color.WHITE);
            }
@@ -371,6 +372,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         btnExitPlayerRed.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerRed.setText("  Abandonar");
+        btnExitPlayerRed.setFocusPainted(false);
         btnExitPlayerRed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitPlayerRedActionPerformed(evt);
@@ -394,6 +396,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         btnExitPlayerBlue.setForeground(new java.awt.Color(255, 255, 255));
         btnExitPlayerBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
         btnExitPlayerBlue.setText("  Abandonar");
+        btnExitPlayerBlue.setFocusPainted(false);
         btnExitPlayerBlue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitPlayerBlueActionPerformed(evt);
@@ -418,6 +421,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         getContentPane().add(txtNicknamePlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, 280, 30));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -430,6 +434,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         btnTurn.setText("   Pasar turno");
         btnTurn.setActionCommand("");
         btnTurn.setBorderPainted(false);
+        btnTurn.setFocusPainted(false);
         btnTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTurnActionPerformed(evt);
@@ -545,7 +550,6 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
             } else {
                 JOptionPane.showMessageDialog(this, "No elegiste ficha alguna", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            //currentGameBoard.getTokenMatrix()[cu]           
         } else {
             newX = columna;
             newY = fila;

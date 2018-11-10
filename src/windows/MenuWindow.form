@@ -41,7 +41,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="750" y="30" width="320" height="240"/>
+          <AbsoluteConstraints x="770" y="30" width="320" height="240"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -77,6 +77,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value=" Agregar Jugador"/>
         <Property name="actionCommand" type="java.lang.String" value="Agregar Jugador"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPlayerActionPerformed"/>
@@ -99,6 +100,7 @@
           <Image iconType="3" name="/resources/controller-img.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Jugar Partida"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlayActionPerformed"/>
@@ -121,6 +123,7 @@
           <Image iconType="3" name="/resources/ranking-img.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Ranking"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRankingActionPerformed"/>
@@ -144,6 +147,7 @@
         </Property>
         <Property name="text" type="java.lang.String" value="  Salir"/>
         <Property name="actionCommand" type="java.lang.String" value="      Salir"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
@@ -159,6 +163,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resources/speakerOn-img.png"/>
         </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSoundActionPerformed"/>
@@ -197,7 +202,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="510" y="520" width="-1" height="-1"/>
+          <AbsoluteConstraints x="490" y="500" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -213,7 +218,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="560" y="190" width="-1" height="-1"/>
+          <AbsoluteConstraints x="520" y="190" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -245,6 +250,7 @@
           <Image iconType="3" name="/resources/loop-img.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Replicar Partida"/>
+        <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReplayMatchActionPerformed"/>

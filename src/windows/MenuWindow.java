@@ -44,7 +44,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
@@ -123,7 +123,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
                 lblLogoMouseClicked(evt);
             }
         });
-        getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 320, 240));
+        getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 320, 240));
 
         lblNameOfThePlay.setFont(new java.awt.Font("Snubnose DEMO", 0, 70)); // NOI18N
         lblNameOfThePlay.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,6 +136,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnAddPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user-img.png"))); // NOI18N
         btnAddPlayer.setText(" Agregar Jugador");
         btnAddPlayer.setActionCommand("Agregar Jugador");
+        btnAddPlayer.setFocusPainted(false);
         btnAddPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddPlayerActionPerformed(evt);
@@ -147,6 +148,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnPlay.setForeground(new java.awt.Color(255, 255, 255));
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/controller-img.png"))); // NOI18N
         btnPlay.setText("  Jugar Partida");
+        btnPlay.setFocusPainted(false);
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
@@ -158,6 +160,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnRanking.setForeground(new java.awt.Color(255, 255, 255));
         btnRanking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ranking-img.png"))); // NOI18N
         btnRanking.setText("  Ranking");
+        btnRanking.setFocusPainted(false);
         btnRanking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRankingActionPerformed(evt);
@@ -170,6 +173,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit-img.png"))); // NOI18N
         btnExit.setText("  Salir");
         btnExit.setActionCommand("      Salir");
+        btnExit.setFocusPainted(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -178,6 +182,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 700, 240, -1));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -193,12 +198,12 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         lblLeftToTheMenu.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
         lblLeftToTheMenu.setForeground(new java.awt.Color(255, 255, 255));
         lblLeftToTheMenu.setText("23+7=30");
-        getContentPane().add(lblLeftToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 520, -1, -1));
+        getContentPane().add(lblLeftToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
 
         lblLegtToTheLogo.setFont(new java.awt.Font("ChalkDust", 0, 36)); // NOI18N
         lblLegtToTheLogo.setForeground(new java.awt.Color(255, 255, 255));
         lblLegtToTheLogo.setText("X+Y=Z");
-        getContentPane().add(lblLegtToTheLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+        getContentPane().add(lblLegtToTheLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, -1));
 
         lblRightToTheLogo.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
         lblRightToTheLogo.setForeground(new java.awt.Color(255, 255, 255));
@@ -209,6 +214,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnReplayMatch.setForeground(new java.awt.Color(255, 255, 255));
         btnReplayMatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/loop-img.png"))); // NOI18N
         btnReplayMatch.setText("Replicar Partida");
+        btnReplayMatch.setFocusPainted(false);
         btnReplayMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReplayMatchActionPerformed(evt);
@@ -269,10 +275,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         
     }//GEN-LAST:event_btnSoundActionPerformed
 
-    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
-       
-    }//GEN-LAST:event_lblLogoMouseClicked
-
     private void btnReplayMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplayMatchActionPerformed
         windowReplayMatch = new WindowReplayMatch(game, this);
      
@@ -284,6 +286,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         }
          
     }//GEN-LAST:event_btnReplayMatchActionPerformed
+
+    private void lblLogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoMouseClicked
+
+    }//GEN-LAST:event_lblLogoMouseClicked
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
