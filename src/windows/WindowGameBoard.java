@@ -78,7 +78,6 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         if (currentMatch.getListOfGameBoard().isEmpty()) {
             currentGameBoard = new GameBoard(match.getListOfPlayers());
             currentGameBoard.fillInitialMatrix(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
-            currentMatch.setGameBoard(currentGameBoard);
         }
 
         //Subscribe as observers
@@ -207,6 +206,19 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 }
             }
         }
+       
+         GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
+         Token[][] auxMatrix = auxGameboard.getTokenMatrix();
+          //Clone each token to save another gameboard and not modify all the gameboards
+          for (int i = 0; i < auxMatrix.length; i++) {
+                for (int j = 0; j < auxMatrix[0].length; j++) {
+                     if (currentGameBoard.getTokenMatrix()[i][j] != null) {
+                    auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
+                 }
+             }
+         }
+                    
+        currentMatch.setGameBoard(auxGameboard);
 
     }
 
@@ -554,6 +566,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                             }
                         }
                     }
+                   
                     currentMatch.setGameBoard(auxGameboard);
 
                     if (currentMatch.isFinished()) {

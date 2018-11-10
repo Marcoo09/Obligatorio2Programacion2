@@ -53,7 +53,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         this.setTransparent();
         this.alignItems();
         
-        this.createButtonMatrix();
+      this.createButtonMatrix();
         
         btnBeginAnotherMatch.setVisible(false);
         btnFollowGameBoard.setVisible(false);
@@ -85,8 +85,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private void createButtonMatrix(){
        panelJuego.setLayout(new GridLayout(8, 9));
        botones = new JButton[9][10];
-       for (int i = 0; i <= 8; i++) {
-           for (int j = 0; j <= 9; j++) {
+       for (int i = 0; i < 8; i++) {
+           for (int j = 0; j < 9; j++) {
                JButton jButton = new JButton();
                panelJuego.add(jButton);
                botones[i][j] = jButton;
@@ -97,6 +97,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
    }
     
     private void fillButtonMatrix() {
+  
         GameBoard gameboard = selectedMatch.getListOfGameBoard().get(i);
         Token[][] tokenMatrix = gameboard.getTokenMatrix();
         Player playerRed = selectedMatch.getListOfPlayers().get(1);
@@ -235,7 +236,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private void btnFollowGameBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFollowGameBoardActionPerformed
         i++;
         if (i<selectedMatch.getListOfGameBoard().size()) {
-                    fillButtonMatrix();
+                    this.fillButtonMatrix();
         }else{
             JOptionPane.showMessageDialog(this, "No hay mas tableros", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -248,7 +249,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         if (lstMatches.getSelectedValue()!=null) {
             selectedMatch = (Match)lstMatches.getSelectedValue();
-            fillButtonMatrix();
+            this.fillButtonMatrix();
+            
             panelJuego.setVisible(true);
             btnBeginAnotherMatch.setVisible(true);
             btnFollowGameBoard.setVisible(true);
