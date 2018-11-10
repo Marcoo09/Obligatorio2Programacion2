@@ -47,6 +47,13 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         this.alignItems();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
+        
+         //Sound
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        if (!game.musicOn()) {
+            btnSound.setIcon(iconOff);
+        }
     }
 
     
@@ -125,10 +132,10 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        if (game.isStateMusic()) {
-            game.setStateMusic(false);
+        if (game.musicOn()) {
+            game.setMusicState(false);
         } else {
-            game.setStateMusic(true);
+            game.setMusicState(true);
         }
 
     }//GEN-LAST:event_btnSoundActionPerformed
@@ -154,7 +161,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
 
-        if (game.isStateMusic()) {
+        if (game.musicOn()) {
             btnSound.setIcon(iconOn);
             sound.loop();
         } else {

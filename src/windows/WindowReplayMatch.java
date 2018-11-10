@@ -52,7 +52,13 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         this.setTransparent();
         this.alignItems();
         
-      this.createButtonMatrix();
+         //Sound
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        if (!game.musicOn()) {
+            btnSound.setIcon(iconOff);
+        }
+       this.createButtonMatrix();
         
         btnBeginAnotherMatch.setVisible(false);
         btnFollowGameBoard.setVisible(false);
@@ -126,7 +132,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private void playMusic(){
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
+        if(game.musicOn()){
             btnSound.setIcon(iconOn);
             sound.loop();
         }else{
@@ -220,10 +226,10 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        if (game.isStateMusic()) {
-            game.setStateMusic(false);
+        if (game.musicOn()) {
+            game.setMusicState(false);
         } else {
-            game.setStateMusic(true);
+            game.setMusicState(true);
         }
     }//GEN-LAST:event_btnSoundActionPerformed
 
@@ -261,9 +267,25 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private void btnBeginAnotherMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginAnotherMatchActionPerformed
             ArrayList<Player> listOfPlayers = selectedMatch.getListOfPlayers();
             String wayToFinish = selectedMatch.getWayToFinish();
-            int qtyOfMovements = selectedMatch.getQtyOfMovements();
+            int qtyOfMovements = selectedMatch.getInitialQtyOfMovements();
             
-            Match newMatch = new Match(listOfPlayers.get(0), listOfPlayers.get(1), wayToFinish, qtyOfMovements);
+          Match newMatch = new Match(listOfPlayers.get(0), listOfPlayers.get(1), wayToFinish, qtyOfMovements);
+          
+         GameBoard currentGameboard = selectedMatch.getListOfGameBoard().get(i);
+         GameBoard auxGameboard = new GameBoard(listOfPlayers);
+            
+         Token[][] auxMatrix = auxGameboard.getTokenMatrix();
+          //Clone each token to save another gameboard and not modify all the gameboards
+          for (int i = 0; i < auxMatrix.length; i++) {
+                for (int j = 0; j < auxMatrix[0].length; j++) {
+                     if (currentGameboard.getTokenMatrix()[i][j] != null) {
+                    auxMatrix[i][j] = (Token) currentGameboard.getTokenMatrix()[i][j].clone();
+                 }
+             }
+         }
+          
+            newMatch.setGameBoard(auxGameboard);
+            game.addMatch(newMatch);
             
             WindowGameBoard windowGameBoard = new WindowGameBoard(game, menuWindow, newMatch);
             windowGameBoard.setVisible(true);
@@ -275,7 +297,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     public void update(Observable o, Object arg) {
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if (game.isStateMusic()) {
+        if (game.musicOn()) {
             btnSound.setIcon(iconOn);
             sound.loop();
         } else {

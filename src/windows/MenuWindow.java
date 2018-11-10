@@ -49,8 +49,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
         this.alignItems();
+        
+        //Sound
         sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
-        sound.loop();
+        game.setMusicState(true);
 
     }
     
@@ -259,10 +261,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnRankingActionPerformed
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-       if(game.isStateMusic()){
-           game.setStateMusic(false);
+       if(game.musicOn()){
+           game.setMusicState(false);
        }else{
-           game.setStateMusic(true);
+           game.setMusicState(true);
        }
         
     }//GEN-LAST:event_btnSoundActionPerformed
@@ -303,7 +305,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     public void update(Observable o, Object arg) {     
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
+        if(game.musicOn()){
             btnSound.setIcon(iconOn);
             sound.loop();
         }else{

@@ -24,11 +24,11 @@ public class Game  extends Observable implements Serializable{
         return listOfMatches;
     }
 
-    public boolean isStateMusic() {
+    public boolean musicOn() {
         return stateMusic;
     }
 
-    public void setStateMusic(boolean stateMusic) {
+    public void setMusicState(boolean stateMusic) {
         this.stateMusic = stateMusic;
         this.setChanged();
         this.notifyObservers();

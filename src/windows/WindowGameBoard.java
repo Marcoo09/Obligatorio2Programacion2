@@ -17,6 +17,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import static windows.MenuWindow.sound;
 
 /**
@@ -38,6 +39,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
     private static int newX;
     private static int newY;
     private static int lastNumberMoved;
+    private boolean audioChanged;
 
     private ArrayList<Integer> posibleTokenMovementsBlue = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
     private ArrayList<Integer> posibleTokenMovementsRed = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
@@ -68,25 +70,46 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         }
         this.setTransparent();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+        
+         //Sound
+        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
+        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
+        if (!game.musicOn()) {
+            btnSound.setIcon(iconOff);
+        }
+        
         //Data of the play
         playerBlue = currentMatch.getListOfPlayers().get(0);
         playerRed = currentMatch.getListOfPlayers().get(1);
 
         currentPlayer = playerRed;
-
+        
+        this.createButtonMatrix();
+        
         if (currentMatch.getListOfGameBoard().isEmpty()) {
             currentGameBoard = new GameBoard(match.getListOfPlayers());
             currentGameBoard.fillInitialMatrix(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
+        }else{
+         GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
+         Token[][] auxMatrix = auxGameboard.getTokenMatrix();
+          //Clone each token to save another gameboard and not modify all the gameboards
+          for (int i = 0; i < auxMatrix.length; i++) {
+                for (int j = 0; j < auxMatrix[0].length; j++) {
+                     if (currentMatch.getListOfGameBoard().get(0).getTokenMatrix()[i][j] != null) {
+                    auxMatrix[i][j] = (Token) currentMatch.getListOfGameBoard().get(0).getTokenMatrix()[i][j].clone();
+                 }
+             }
+         }
+            currentGameBoard = auxGameboard;
         }
-
+                            
         //Subscribe as observers
         game.addObserver(this);
         currentGameBoard.addObserver(this);
 
         //Create GamebBoard and fill text of the screen
         this.fillTexts(match);
-        this.fillInitialButtonMatrix();
+        this.fillButtonMatrix();
         this.modifyAppearenceOfNotCurrentPlayer();
         
     }
@@ -106,7 +129,22 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         windowAnnounceWinner.setVisible(true);
         this.dispose();
     }
-    
+        
+        private void createButtonMatrix(){
+         panelJuego.setLayout(new GridLayout(8, 9));
+        botones = new JButton[9][10];
+        for (int i = 0; i < 8; i++) {
+           for (int j = 0; j < 9; j++) {
+               JButton jButton = new JButton();
+               jButton.addActionListener(new ListenerBoton(i, j));
+               panelJuego.add(jButton);
+               botones[i][j] = jButton;
+               botones[i][j].setBackground(Color.WHITE);
+               botones[i][j].setForeground(Color.WHITE);
+           }
+       }        
+   }
+        
         private void giveUp(){
        currentMatch.setFinished(true);
        
@@ -123,17 +161,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
        this.dispose();
    }
         
-        private void playMusic(){
-        ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
-        ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
-        if(game.isStateMusic()){
-            btnSound.setIcon(iconOn);
-            sound.loop();
-        }else{
-            btnSound.setIcon(iconOff);
-            sound.stop();
-        }
-    }
+      
             
     private void modifyAppearenceOfNotCurrentPlayer() {
         if (currentPlayer.equals(playerRed)) {
@@ -204,6 +232,9 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 } else {
                     botones[i][j].setBackground(Color.WHITE);
                 }
+                botones[i][j].setBorder(new LineBorder(Color.BLACK));    
+                botones[i][j].setForeground(Color.BLUE);
+
             }
         }
        
@@ -231,6 +262,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
             for (int j = 0; j < row; j++) {
                 if (tokenMatrix[i][j] != null) {
                     if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
+
                         botones[i][j].setBackground(Color.RED);
                         botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
 
@@ -238,14 +270,26 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                         botones[i][j].setBackground(Color.BLUE);
                         botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
                     }
-                } else {
+                } else {              
                     botones[i][j].setBackground(Color.WHITE);
                     botones[i][j].setText("");
-
                 }
+                botones[i][j].setBorder(new LineBorder(Color.BLACK));        
             }
         }
-
+        
+        GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
+        Token[][] auxMatrix = auxGameboard.getTokenMatrix();
+        //Clone each token to save another gameboard and not modify all the gameboards
+        for (int i = 0; i < auxMatrix.length; i++) {
+            for (int j = 0; j < auxMatrix[0].length; j++) {
+                if (currentGameBoard.getTokenMatrix()[i][j] != null) {
+                    auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
+                   }
+            }
+        }
+        
+        currentMatch.setGameBoard(auxGameboard);
     }
 
     private void updateCurrentPlayerData() {
@@ -429,14 +473,15 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 600, -1, -1));
 
-        btnTurn.setText("Pasar turno");
+        btnTurn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/arrows -img.png"))); // NOI18N
+        btnTurn.setText("   Pasar turno");
         btnTurn.setActionCommand("");
         btnTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTurnActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 150, 40));
+        getContentPane().add(btnTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, 210, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -450,10 +495,11 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
     }//GEN-LAST:event_txtNicknamePlayerBlueActionPerformed
 
     private void btnSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoundActionPerformed
-        if (game.isStateMusic()) {
-            game.setStateMusic(false);
+        audioChanged = true;
+        if (game.musicOn()) {
+            game.setMusicState(false);
         } else {
-            game.setStateMusic(true);
+            game.setMusicState(true);
         }
 
     }//GEN-LAST:event_btnSoundActionPerformed
@@ -522,16 +568,19 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 Player tokenPlayer = selectedToken.getPlayer();
 
                 if (tokenPlayer.equals(currentPlayer)) {
+
                     if (currentPlayer.equals(playerBlue)) {
                         if (!posibleTokenMovementsBlue.contains(selectedToken.getTokenNumber())) {
                             JOptionPane.showMessageDialog(this, "No tienes la posibilidad de mover este token", "Error", JOptionPane.ERROR_MESSAGE);
                         } else {
+                            botones[currentY][currentX].setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,3));
                             clickFlag = false;
                         }
                     } else if (currentPlayer.equals(playerRed)) {
                         if (!posibleTokenMovementsRed.contains(selectedToken.getTokenNumber())) {
                             JOptionPane.showMessageDialog(this, "No tienes la posibilidad de mover este token", "Error", JOptionPane.ERROR_MESSAGE);
                         } else {
+                            botones[currentY][currentX].setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY,3));
                             clickFlag = false;
                         }
                     }
@@ -540,7 +589,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "No elegite ficha alguna", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No elegiste ficha alguna", "Error", JOptionPane.ERROR_MESSAGE);
             }
             //currentGameBoard.getTokenMatrix()[cu]           
         } else {
@@ -555,19 +604,6 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 if (currentGameBoard.getTokenMatrix()[newY][newX] == null) {
                     lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
                     currentGameBoard.movePiece(currentX, currentY, newX, newY);
-
-                    GameBoard auxGameboard = new GameBoard(currentMatch.getListOfPlayers());
-                    Token[][] auxMatrix = auxGameboard.getTokenMatrix();
-                    //Clone each token to save another gameboard and not modify all the gameboards
-                    for (int i = 0; i < auxMatrix.length; i++) {
-                        for (int j = 0; j < auxMatrix[0].length; j++) {
-                            if (currentGameBoard.getTokenMatrix()[i][j] != null) {
-                                auxMatrix[i][j] = (Token) currentGameBoard.getTokenMatrix()[i][j].clone();
-                            }
-                        }
-                    }
-                   
-                    currentMatch.setGameBoard(auxGameboard);
 
                     if (currentMatch.isFinished()) {
                         JOptionPane.showMessageDialog(this, "Terminó el juego", "Terminó", JOptionPane.ERROR_MESSAGE);
@@ -586,20 +622,22 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
 
     @Override
     public void update(Observable o, Object arg) {
-        //Change music of the play      
+       //Change music of the play      
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
 
-        if (game.isStateMusic() && btnSound.getIcon().equals(iconOff)) {
-            sound.loop();
-            System.out.println("entro");
-            btnSound.setIcon(iconOn);
-        } else if (!game.isStateMusic()) {
-            btnSound.setIcon(iconOff);
-            sound.stop();
+        if(audioChanged){
+           if (game.musicOn()) {
+                btnSound.setIcon(iconOn);
+                sound.loop();
+            } else {
+                btnSound.setIcon(iconOff);
+                sound.stop();
+            } 
+           audioChanged = false;
         }
+        
         //Draw the gameboard again
-
         if (stateOfTheGameboardChange) {
             this.fillButtonMatrix();
             this.updateCurrentPlayerData();
