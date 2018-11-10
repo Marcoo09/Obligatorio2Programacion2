@@ -33,6 +33,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private MenuWindow menuWindow;
     private WindowGameBoard windowGameBoard;
     private JButton[][] botones;
+    private Match selectedMatch;
+    private int i = 0;
 
     public WindowReplayMatch(Game aGame, MenuWindow mainWindow) {
         initComponents();
@@ -57,7 +59,6 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         btnFollowGameBoard.setVisible(false);
         panelJuego.setVisible(false);
         lstMatches.setListData(game.getListOfMatches().toArray());
-        this.playMusic();
     }
 
     private void alignItems() {
@@ -84,27 +85,43 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private void createButtonMatrix(){
        panelJuego.setLayout(new GridLayout(8, 9));
        botones = new JButton[9][10];
-       for (int i = 1; i <= 8; i++) {
-           for (int j = 1; j <= 9; j++) {
+       for (int i = 0; i <= 8; i++) {
+           for (int j = 0; j <= 9; j++) {
                JButton jButton = new JButton();
                panelJuego.add(jButton);
                botones[i][j] = jButton;
-               if (i == 1) {
-                 //  botones[i][j].setBackground(Color.BLUE);
-                   if (j != 1) {
-                    //   botones[i][j].setText("" + (j - 1));
-                   }
-               } else if (i == 8) {
-                  // botones[i][j].setBackground(Color.RED);
-                   if (j != 1) {
-                     //  botones[i][j].setText("" + (10 - j));
-                   }
-               } else {
-                   botones[i][j].setBackground(Color.WHITE);
-               }
+               botones[i][j].setBackground(Color.WHITE);
+               
            }
        }        
    }
+    
+    private void fillButtonMatrix() {
+        GameBoard gameboard = selectedMatch.getListOfGameBoard().get(i);
+        Token[][] tokenMatrix = gameboard.getTokenMatrix();
+        Player playerRed = selectedMatch.getListOfPlayers().get(1);
+
+        int col = tokenMatrix.length;
+        int row = tokenMatrix[0].length;
+        
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                if (tokenMatrix[i][j] != null) {
+                    if (tokenMatrix[i][j].getPlayer().equals(playerRed)) {
+                        botones[i][j].setBackground(Color.RED);
+                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+
+                    } else {
+                        botones[i][j].setBackground(Color.BLUE);
+                        botones[i][j].setText("" + tokenMatrix[i][j].getTokenNumber());
+                    }
+                } else {
+                    botones[i][j].setBackground(Color.WHITE);
+                    botones[i][j].setText("");
+                }
+            }
+        }
+    }
     
     private void playMusic(){
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
@@ -124,12 +141,12 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
         btnSound = new javax.swing.JButton();
         panelJuego = new javax.swing.JPanel();
-        JSContainerLstMatches = new javax.swing.JScrollPane();
-        lstMatches = new javax.swing.JList();
         btnHome = new javax.swing.JButton();
         btnFollowGameBoard = new javax.swing.JButton();
         btnBeginAnotherMatch = new javax.swing.JButton();
-        btnReplayMatch = new javax.swing.JButton();
+        JSContainerLstMatches = new javax.swing.JScrollPane();
+        lstMatches = new javax.swing.JList();
+        btnConfirm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -141,7 +158,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 btnSoundActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 580, -1, -1));
+        getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 650, -1, -1));
 
         javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
         panelJuego.setLayout(panelJuegoLayout);
@@ -154,16 +171,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 730, 470));
-
-        lstMatches.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        JSContainerLstMatches.setViewportView(lstMatches);
-
-        getContentPane().add(JSContainerLstMatches, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 230));
+        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 730, 470));
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
@@ -173,7 +181,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 btnHomeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 10, -1, -1));
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, -1, -1));
 
         btnFollowGameBoard.setText("Next");
         btnFollowGameBoard.addActionListener(new java.awt.event.ActionListener() {
@@ -184,15 +192,29 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         getContentPane().add(btnFollowGameBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 710, -1, -1));
 
         btnBeginAnotherMatch.setText("Begin Another Match");
-        getContentPane().add(btnBeginAnotherMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 710, -1, -1));
-
-        btnReplayMatch.setText("jButton1");
-        btnReplayMatch.addActionListener(new java.awt.event.ActionListener() {
+        btnBeginAnotherMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReplayMatchActionPerformed(evt);
+                btnBeginAnotherMatchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReplayMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 700, 120, 40));
+        getContentPane().add(btnBeginAnotherMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 710, -1, -1));
+
+        lstMatches.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lstMatchesMouseClicked(evt);
+            }
+        });
+        JSContainerLstMatches.setViewportView(lstMatches);
+
+        getContentPane().add(JSContainerLstMatches, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 480, 366));
+
+        btnConfirm.setText("Confirmar");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,18 +233,47 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnFollowGameBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFollowGameBoardActionPerformed
-        // TODO add your handling code here:
+        i++;
+        if (i<selectedMatch.getListOfGameBoard().size()) {
+                    fillButtonMatrix();
+        }else{
+            JOptionPane.showMessageDialog(this, "No hay mas tableros", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnFollowGameBoardActionPerformed
 
-    private void btnReplayMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReplayMatchActionPerformed
-        btnReplayMatch.setVisible(false);
-        JSContainerLstMatches.setVisible(false);
-        
-        btnFollowGameBoard.setVisible(true);
-        btnBeginAnotherMatch.setVisible(true);
-        
-        panelJuego.setVisible(true);
-    }//GEN-LAST:event_btnReplayMatchActionPerformed
+    private void lstMatchesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstMatchesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lstMatchesMouseClicked
+
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        if (lstMatches.getSelectedValue()!=null) {
+            selectedMatch = (Match)lstMatches.getSelectedValue();
+            fillButtonMatrix();
+            panelJuego.setVisible(true);
+            btnBeginAnotherMatch.setVisible(true);
+            btnFollowGameBoard.setVisible(true);
+            
+        }else{
+        }
+    }//GEN-LAST:event_btnConfirmActionPerformed
+
+    private void btnBeginAnotherMatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeginAnotherMatchActionPerformed
+        i=0;
+        panelJuego.setVisible(false);
+        for (int i = 0; i <= 8; i++) {
+           for (int j = 0; j <= 9; j++) {
+               JButton jButton = new JButton();
+               panelJuego.add(jButton);
+               botones[i][j] = jButton;
+               botones[i][j].setBackground(Color.WHITE);
+               
+           }
+       }    
+        btnFollowGameBoard.setVisible(false);
+        btnBeginAnotherMatch.setVisible(false);
+        btnConfirm.setVisible(true);
+        lstMatches.setVisible(true);
+    }//GEN-LAST:event_btnBeginAnotherMatchActionPerformed
 
     @Override
     public void update(Observable o, Object arg) {
@@ -241,9 +292,9 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane JSContainerLstMatches;
     private javax.swing.JButton btnBeginAnotherMatch;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnFollowGameBoard;
     private javax.swing.JButton btnHome;
-    private javax.swing.JButton btnReplayMatch;
     private javax.swing.JButton btnSound;
     private javax.swing.JList lstMatches;
     private javax.swing.JPanel panelJuego;

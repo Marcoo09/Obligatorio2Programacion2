@@ -90,8 +90,6 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         this.fillInitialButtonMatrix();
         this.modifyAppearenceOfNotCurrentPlayer();
         
-        this.playMusic();
-
     }
 
     private void announceWinner() {
