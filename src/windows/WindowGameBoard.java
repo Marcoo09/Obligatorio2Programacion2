@@ -62,7 +62,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
 
         //Look and feel
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
         } catch (IOException ex) {

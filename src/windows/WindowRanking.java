@@ -37,7 +37,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         this.loadList();
         game.addObserver(this);
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
             panel.setLayout(null);

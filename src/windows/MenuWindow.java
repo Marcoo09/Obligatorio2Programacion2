@@ -12,8 +12,13 @@ import javax.swing.*;
 import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -37,14 +42,15 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         game.addObserver(this);
         
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(new File("src/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
             panel.setLayout(null);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+            
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTransparent();
