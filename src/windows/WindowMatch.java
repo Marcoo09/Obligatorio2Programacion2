@@ -36,7 +36,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         menuWindow = mainWindow;
         game.addObserver(this);
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
             panel.setLayout(null);
@@ -47,7 +47,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         this.alignItems();
         this.loadList();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTransparent();
         
          //Sound
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
@@ -84,29 +83,6 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         txtQtyMovements.setText("");
         lstPlayerBlue.clearSelection();
         lstPlayerRed.clearSelection();
-    }
-
-    private void setTransparent() {
-        ArrayList jbuttons = new ArrayList<>();
-        ArrayList jRadioButtons = new ArrayList<>();
-        jbuttons.add(btnSound);
-
-        jRadioButtons.add(jrdMovements);
-        jRadioButtons.add(jrdOneToken);
-        jRadioButtons.add(jrdAllTokens);
-        for (int i = 0; i < jbuttons.size(); i++) {
-            JButton buttonAux = (JButton) jbuttons.get(i);
-            buttonAux.setOpaque(false);
-            buttonAux.setContentAreaFilled(false);
-            buttonAux.setBorderPainted(false);
-        }
-
-        for (int i = 0; i < jRadioButtons.size(); i++) {
-            JRadioButton radioButtonAux = (JRadioButton) jRadioButtons.get(i);
-            radioButtonAux.setOpaque(false);
-            radioButtonAux.setContentAreaFilled(false);
-            radioButtonAux.setBorderPainted(false);
-        }
     }
 
     public void loadList() {
@@ -174,7 +150,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
                 btnHomeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 50, -1, -1));
+        getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1510, 80, -1, -1));
 
         lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,6 +170,8 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 660, 280, 70));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setBorderPainted(false);
+        btnSound.setContentAreaFilled(false);
         btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +192,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
         jrdMovements.setForeground(new java.awt.Color(255, 255, 255));
         jrdMovements.setText("Movimientos");
+        jrdMovements.setContentAreaFilled(false);
         jrdMovements.setFocusPainted(false);
         jrdMovements.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -226,6 +205,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdOneToken.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
         jrdOneToken.setForeground(new java.awt.Color(255, 255, 255));
         jrdOneToken.setText("Llevar una pieza");
+        jrdOneToken.setContentAreaFilled(false);
         jrdOneToken.setFocusPainted(false);
         jrdOneToken.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -238,6 +218,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         jrdAllTokens.setFont(new java.awt.Font("Snubnose DEMO", 0, 20)); // NOI18N
         jrdAllTokens.setForeground(new java.awt.Color(255, 255, 255));
         jrdAllTokens.setText("LLevar todas las piezas");
+        jrdAllTokens.setContentAreaFilled(false);
         jrdAllTokens.setFocusPainted(false);
         jrdAllTokens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +233,7 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         lblQtyOfMovements.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
         lblQtyOfMovements.setForeground(new java.awt.Color(255, 255, 255));
         lblQtyOfMovements.setText("Cantidad de Movimientos");
-        getContentPane().add(lblQtyOfMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 570, -1, -1));
+        getContentPane().add(lblQtyOfMovements, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

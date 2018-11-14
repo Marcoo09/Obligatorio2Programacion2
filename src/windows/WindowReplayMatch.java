@@ -38,14 +38,13 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         game.addObserver(this);
 
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTransparent();
         this.alignItems();
         
          //Sound
@@ -70,17 +69,6 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         // panelJuego.setLocation((int) (screenWidth / 100) *1 ,(int) (screenHeight  / 100) * 1);
         btnHome.setLocation((int) (screenWidth - 100) ,(int) (30));        
         btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 75));
-    }
-
-    private void setTransparent() {
-        ArrayList jbuttons = new ArrayList<>();
-        jbuttons.add(btnSound);
-        for (int i = 0; i < jbuttons.size(); i++) {
-            JButton buttonAux = (JButton) jbuttons.get(i);
-            buttonAux.setOpaque(false);
-            buttonAux.setContentAreaFilled(false);
-            buttonAux.setBorderPainted(false);
-        }
     }
     
     private void createButtonMatrix(){
@@ -157,6 +145,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setBorderPainted(false);
+        btnSound.setContentAreaFilled(false);
         btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +166,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 710, 470));
+        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 710, 470));
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
@@ -189,6 +179,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, -1, -1));
 
+        btnFollowGameBoard.setBackground(new java.awt.Color(255, 255, 255));
+        btnFollowGameBoard.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
         btnFollowGameBoard.setText("Siguiente");
         btnFollowGameBoard.setFocusPainted(false);
         btnFollowGameBoard.addActionListener(new java.awt.event.ActionListener() {
@@ -196,8 +188,10 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 btnFollowGameBoardActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFollowGameBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 710, -1, -1));
+        getContentPane().add(btnFollowGameBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 710, 100, 40));
 
+        btnBeginAnotherMatch.setBackground(new java.awt.Color(255, 255, 255));
+        btnBeginAnotherMatch.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
         btnBeginAnotherMatch.setText("Comenzar otra partida");
         btnBeginAnotherMatch.setFocusPainted(false);
         btnBeginAnotherMatch.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +199,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 btnBeginAnotherMatchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBeginAnotherMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 710, -1, -1));
+        getContentPane().add(btnBeginAnotherMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 710, 190, 40));
 
         lstMatches.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -216,6 +210,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
         getContentPane().add(JSContainerLstMatches, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 480, 366));
 
+        btnConfirm.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirm.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
         btnConfirm.setText("Confirmar");
         btnConfirm.setFocusPainted(false);
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +219,10 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
                 btnConfirmActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+        getContentPane().add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 120, 40));
+
+        lblTurn.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
+        lblTurn.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(lblTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 320, 50));
 
         pack();

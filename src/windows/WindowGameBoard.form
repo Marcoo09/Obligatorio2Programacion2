@@ -180,7 +180,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources/error (1).png"/>
+          <Image iconType="3" name="/resources/error.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Abandonar"/>
         <Property name="focusPainted" type="boolean" value="false"/>
@@ -241,7 +241,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources/error (1).png"/>
+          <Image iconType="3" name="/resources/error.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="  Abandonar"/>
         <Property name="focusPainted" type="boolean" value="false"/>
@@ -296,6 +296,8 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/resources/speakerOn-img.png"/>
         </Property>
+        <Property name="borderPainted" type="boolean" value="false"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="focusPainted" type="boolean" value="false"/>
       </Properties>
       <Events>

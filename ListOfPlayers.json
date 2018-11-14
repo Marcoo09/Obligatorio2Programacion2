@@ -1,1 +1,11 @@
-[{"name":"Jose","nickName":"Jose","age":22,"wonGames":6},{"name":"Felipe","nickName":"feli","age":23,"wonGames":25}]
+[ {
+  "name" : "1",
+  "nickName" : "1",
+  "age" : 1,
+  "wonGames" : 4
+}, {
+  "name" : "2",
+  "nickName" : "2",
+  "age" : 2,
+  "wonGames" : 2
+} ]

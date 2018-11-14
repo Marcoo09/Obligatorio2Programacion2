@@ -32,7 +32,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         this.loadList();
         game.addObserver(this);
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
             panel.setLayout(null);
@@ -41,7 +41,6 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         }
         this.alignItems();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTransparent();
         
          //Sound
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
@@ -66,17 +65,6 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         lstRanking.setListData(game.getListOfPlayers().toArray());
     }
 
-    private void setTransparent() {
-        ArrayList jbuttons = new ArrayList<>();
-        jbuttons.add(btnSound);
-        for (int i = 0; i < jbuttons.size(); i++) {
-            JButton buttonAux = (JButton) jbuttons.get(i);
-            buttonAux.setOpaque(false);
-            buttonAux.setContentAreaFilled(false);
-            buttonAux.setBorderPainted(false);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +81,9 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setBorderPainted(false);
+        btnSound.setContentAreaFilled(false);
+        btnSound.setOpaque(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -104,12 +95,12 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Ranking");
         lblTitle.setToolTipText("");
-        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 150, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, -1, -1));
 
         lstRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         JSContainterRanking.setViewportView(lstRanking);
 
-        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 740, 400));
+        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 750, 550));
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);

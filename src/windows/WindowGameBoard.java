@@ -57,13 +57,12 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
 
         //Look and feel
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        this.setTransparent();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
          //Sound
@@ -272,17 +271,6 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         }
     }
 
-    private void setTransparent() {
-        ArrayList jbuttons = new ArrayList<>();
-        jbuttons.add(btnSound);
-        for (int i = 0; i < jbuttons.size(); i++) {
-            JButton buttonAux = (JButton) jbuttons.get(i);
-            buttonAux.setOpaque(false);
-            buttonAux.setContentAreaFilled(false);
-            buttonAux.setBorderPainted(false);
-        }
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -365,7 +353,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         btnExitPlayerRed.setBackground(new java.awt.Color(237, 83, 83));
         btnExitPlayerRed.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnExitPlayerRed.setForeground(new java.awt.Color(255, 255, 255));
-        btnExitPlayerRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
+        btnExitPlayerRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error.png"))); // NOI18N
         btnExitPlayerRed.setText("  Abandonar");
         btnExitPlayerRed.setFocusPainted(false);
         btnExitPlayerRed.addActionListener(new java.awt.event.ActionListener() {
@@ -389,7 +377,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         btnExitPlayerBlue.setBackground(new java.awt.Color(237, 83, 83));
         btnExitPlayerBlue.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnExitPlayerBlue.setForeground(new java.awt.Color(255, 255, 255));
-        btnExitPlayerBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error (1).png"))); // NOI18N
+        btnExitPlayerBlue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/error.png"))); // NOI18N
         btnExitPlayerBlue.setText("  Abandonar");
         btnExitPlayerBlue.setFocusPainted(false);
         btnExitPlayerBlue.addActionListener(new java.awt.event.ActionListener() {
@@ -416,6 +404,8 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
         getContentPane().add(txtNicknamePlayerBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, 280, 30));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setBorderPainted(false);
+        btnSound.setContentAreaFilled(false);
         btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

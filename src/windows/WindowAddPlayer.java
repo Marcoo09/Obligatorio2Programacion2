@@ -1,6 +1,6 @@
 package windows;
 
-import controllers.Utils;
+import controllers.utils;
 import domains.Game;
 import domains.Player;
 import java.awt.Dimension;
@@ -33,7 +33,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         menuWindow = mainWindow;
         game.addObserver(this);
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
             panel.setLayout(null);
@@ -49,7 +49,6 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         }
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTransparent();
         this.alignItems();
     }
 
@@ -70,17 +69,6 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         btnAddPlayer.setLocation((int) (screenWidth / 100) * 80, (int) (screenHeight / 100) * 70);
         btnHome.setLocation((int) (screenWidth - 100) ,(int) (30));
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
-    }
-
-    private void setTransparent() {
-        ArrayList jbuttons = new ArrayList<>();
-        jbuttons.add(btnSound);
-        for (int i = 0; i < jbuttons.size(); i++) {
-            JButton buttonAux = (JButton) jbuttons.get(i);
-            buttonAux.setOpaque(false);
-            buttonAux.setContentAreaFilled(false);
-            buttonAux.setBorderPainted(false);
-        }
     }
 
     private void cleanInputs(){
@@ -120,29 +108,29 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnAddPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 590, 290, 80));
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Snubnose DEMO", 0, 55)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setText("Ingreso de jugador");
-        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
+        getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, -1, -1));
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 300, 160, 30));
 
-        lblNickname.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblNickname.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblNickname.setForeground(new java.awt.Color(255, 255, 255));
         lblNickname.setText("Alias:");
-        getContentPane().add(lblNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, -1, -1));
+        getContentPane().add(lblNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 410, -1, -1));
 
-        lblAge.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblAge.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("Edad:");
-        getContentPane().add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, -1, -1));
+        getContentPane().add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 520, -1, -1));
 
-        lblName.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblName.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("Nombre:");
-        getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, -1, -1));
+        getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, -1));
 
         txtNickName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNickName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -153,6 +141,8 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 520, 160, 30));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setBorderPainted(false);
+        btnSound.setContentAreaFilled(false);
         btnSound.setFocusPainted(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +201,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         //Validation of age
         try{
             age = Integer.parseInt(txtAge.getText());
-            ageValidator = Utils.validateAttribute(age, 0, 120);
+            ageValidator = utils.validateAttribute(age, 0, 120);
 
         }catch(NumberFormatException e){
              ageValidator = false;

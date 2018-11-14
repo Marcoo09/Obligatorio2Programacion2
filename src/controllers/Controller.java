@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URISyntaxException;
 import windows.MenuWindow;
+import windows.WindowIntroduction;
 
 
 /**
@@ -26,7 +27,9 @@ public class Controller {
 
         Game game = new Game();
         File f1 = new File("Data");
-        
+        WindowIntroduction win = new WindowIntroduction(game);
+        win.setVisible(true);
+
         if(f1.exists()){
                 FileInputStream file = new FileInputStream("Data");
                 BufferedInputStream buffer = new BufferedInputStream(file);
@@ -35,7 +38,7 @@ public class Controller {
         }
         
          MenuWindow window = new MenuWindow(game);
-         window.setVisible(true);
+         //window.setVisible(true);
     }
     
 }

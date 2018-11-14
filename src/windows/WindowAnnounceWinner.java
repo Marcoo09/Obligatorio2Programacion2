@@ -41,7 +41,7 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         
         //Look and Feel
           try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
             panel.setLayout(null);
@@ -89,7 +89,7 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
                 game.setMusicState(false);
                 
         }else{
-                txtWinner.setText(" Terminó en empate");
+                txtWinner.setText(" Termino en empate");
         }
     }
     
@@ -136,23 +136,23 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         labelWinner.setFont(new java.awt.Font("Snubnose DEMO", 0, 60)); // NOI18N
         labelWinner.setForeground(new java.awt.Color(255, 255, 255));
         labelWinner.setText("El ganador es:");
-        getContentPane().add(labelWinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
+        getContentPane().add(labelWinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 300, 70));
 
         txtWinner.setFont(new java.awt.Font("Snubnose DEMO", 0, 54)); // NOI18N
         txtWinner.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtWinner.setEnabled(false);
-        getContentPane().add(txtWinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 500, -1));
+        getContentPane().add(txtWinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 500, 70));
 
         txtWonGames.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         txtWonGames.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtWonGames.setEnabled(false);
-        getContentPane().add(txtWonGames, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 380, 50));
+        getContentPane().add(txtWonGames, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 380, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/trofeo (1) (1) - Copy.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 240, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/trophy.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 240, 80, 90));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/trofeo (1) (1) - Copy.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, -1, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/trophy.png"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 80, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -1,6 +1,6 @@
 package windows;
 
-import controllers.Utils;
+import controllers.*;
 import domains.Game;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -40,7 +40,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         game.addObserver(this);
         
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
 
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
@@ -51,7 +51,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
             
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTransparent();
         this.alignItems();
         
         //Sound
@@ -82,22 +81,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
     
-    public void setTransparent(){
-        ArrayList jbuttons = new ArrayList<>();
-        jbuttons.add(btnAddPlayer);
-        jbuttons.add(btnPlay);
-        jbuttons.add(btnRanking);
-        jbuttons.add(btnExit);
-        jbuttons.add(btnSound);
-        jbuttons.add(btnReplayMatch);
-         for (int i = 0; i < jbuttons.size(); i++) {
-              JButton buttonAux = (JButton) jbuttons.get(i);
-              buttonAux.setOpaque(false);
-              buttonAux.setContentAreaFilled(false);
-              buttonAux.setBorderPainted(false);
-           }
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -134,12 +117,13 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         lblNameOfThePlay.setText("Juego de las Sumas");
         getContentPane().add(lblNameOfThePlay, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, -1, -1));
 
-        btnAddPlayer.setBackground(new java.awt.Color(153, 153, 153));
         btnAddPlayer.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         btnAddPlayer.setForeground(new java.awt.Color(240, 240, 240));
         btnAddPlayer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/user-img.png"))); // NOI18N
         btnAddPlayer.setText(" Agregar Jugador");
         btnAddPlayer.setActionCommand("Agregar Jugador");
+        btnAddPlayer.setBorderPainted(false);
+        btnAddPlayer.setContentAreaFilled(false);
         btnAddPlayer.setFocusPainted(false);
         btnAddPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +136,8 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnPlay.setForeground(new java.awt.Color(255, 255, 255));
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/controller-img.png"))); // NOI18N
         btnPlay.setText("  Jugar Partida");
+        btnPlay.setBorderPainted(false);
+        btnPlay.setContentAreaFilled(false);
         btnPlay.setFocusPainted(false);
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +150,8 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnRanking.setForeground(new java.awt.Color(255, 255, 255));
         btnRanking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/ranking-img.png"))); // NOI18N
         btnRanking.setText("  Ranking");
+        btnRanking.setBorderPainted(false);
+        btnRanking.setContentAreaFilled(false);
         btnRanking.setFocusPainted(false);
         btnRanking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +165,8 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exit-img.png"))); // NOI18N
         btnExit.setText("  Salir");
         btnExit.setActionCommand("      Salir");
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
         btnExit.setFocusPainted(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +176,10 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 700, 240, -1));
 
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
+        btnSound.setBorderPainted(false);
+        btnSound.setContentAreaFilled(false);
         btnSound.setFocusPainted(false);
+        btnSound.setOpaque(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -199,7 +192,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         lblRightToTheMenu.setText("1+1=2");
         getContentPane().add(lblRightToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 530, -1, -1));
 
-        lblLeftToTheMenu.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        lblLeftToTheMenu.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
         lblLeftToTheMenu.setForeground(new java.awt.Color(255, 255, 255));
         lblLeftToTheMenu.setText("23+7=30");
         getContentPane().add(lblLeftToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
@@ -218,6 +211,8 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnReplayMatch.setForeground(new java.awt.Color(255, 255, 255));
         btnReplayMatch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/loop-img.png"))); // NOI18N
         btnReplayMatch.setText("Replicar Partida");
+        btnReplayMatch.setBorderPainted(false);
+        btnReplayMatch.setContentAreaFilled(false);
         btnReplayMatch.setFocusPainted(false);
         btnReplayMatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,9 +232,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        Utils.serialize(game);
+        utils.serialize(game);
         try {
-            Utils.serializeListOfPlayersToJson(game);
+            utils.serializeListOfPlayersToJson(game);
         } catch (IOException ex) {
             Logger.getLogger(MenuWindow.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
