@@ -248,23 +248,22 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnFollowGameBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFollowGameBoardActionPerformed
+        i++;
         
-        
-        if (i<selectedMatch.getListOfGameBoard().size()-1) {
-            i++;
-            
-            //TURN
+        if (i < selectedMatch.getListOfGameBoard().size()) {
+           //TURN
             Player currentPlayer = selectedMatch.getListOfPlayerTurn().get(i);
             String player;
-            if(currentPlayer.equals(selectedMatch.getListOfPlayers().get(0))){
+            if(currentPlayer.equals(selectedMatch.getListOfGameBoard().get(0).getPlayerRed())){
                 player = "Turno Jugador Rojo";
             }else{
                 player = "Turno Jugador Azul" ;
             }
-            
             lblTurn.setText(player);
+            
             this.fillButtonMatrix();
         }else{
+            i--;
             JOptionPane.showMessageDialog(this, "No hay mas tableros", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnFollowGameBoardActionPerformed
@@ -280,13 +279,12 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             
             Player currentPlayer = selectedMatch.getListOfPlayerTurn().get(i);
             String player;
-            if(currentPlayer.equals(selectedMatch.getListOfPlayers().get(0))){
+            if(currentPlayer.equals(selectedMatch.getListOfGameBoard().get(0).getPlayerRed())){
                 player = "Turno Jugador Rojo";
             }else{
                 player = "Turno Jugador Azul" ;
             }
             lblTurn.setText(player);
-
             
             JSContainerLstMatches.setVisible(false);
             panelJuego.setVisible(true);

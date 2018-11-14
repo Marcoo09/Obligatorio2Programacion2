@@ -102,7 +102,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
          }
             currentGameBoard = auxGameboard;
         }
-                            
+         currentMatch.addPlayerTurn(playerRed);
         //Subscribe as observers
         game.addObserver(this);
         currentGameBoard.addObserver(this);
@@ -145,7 +145,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
            }
        }        
    }
-        
+
         private void giveUp(){
        currentMatch.setFinished(true);
        
@@ -561,10 +561,15 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 stateOfTheGameboardChange = true;
                 if (currentGameBoard.getTokenMatrix()[newY][newX] == null) {
                     lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
-                    currentGameBoard.movePiece(currentX, currentY, newX, newY);
+                                      //Add it to arraylist of the turns
+                     if (currentPlayer.equals(playerRed)) {
+                        currentMatch.addPlayerTurn(playerRed);
+                    } else {
+                         currentMatch.addPlayerTurn(playerBlue);
+                    }
                     
-                    //Add it to arraylist of the turns
-                    currentMatch.addPlayerTurn(currentPlayer);
+                    currentGameBoard.movePiece(currentX, currentY, newX, newY);
+                   
                     
                     if (currentMatch.isFinished()) {
                         JOptionPane.showMessageDialog(this, "Terminó el juego", "Terminó", JOptionPane.ERROR_MESSAGE);
