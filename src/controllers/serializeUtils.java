@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +13,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileSystemView;
 import windows.MenuWindow;
 
@@ -52,16 +49,17 @@ public class serializeUtils {
         }  
     }
         
-    public static void serializeListOfPlayersToJson(Game game) throws IOException{
+    public static void serializeListOfPlayersToJson(Game game) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
         ArrayList<Player> listOfPlayers = game.getListOfPlayers();
         ObjectMapper objectMapper = new ObjectMapper();
         
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Elige donde quieres guardar la lista de jugadores: ");
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = jfc.showSaveDialog(null);
-		
+	
         objectMapper.writeValue(new File(jfc.getSelectedFile()+"/"+"ListOfPlayers.json"),listOfPlayers);
         
     }
