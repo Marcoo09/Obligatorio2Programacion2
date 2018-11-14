@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package windows;
 
-import controllers.utils;
+import controllers.Utils;
 import domains.Game;
 import domains.Player;
 import java.awt.Dimension;
@@ -25,7 +20,7 @@ import static windows.MenuWindow.sound;
 
 /**
  *
- * @author felip
+ * @author Felipe Najson and Marco Fiorito
  */
 public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
 
@@ -216,7 +211,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         //Validation of age
         try{
             age = Integer.parseInt(txtAge.getText());
-            ageValidator = utils.validateAttribute(age, 0, 120);
+            ageValidator = Utils.validateAttribute(age, 0, 120);
 
         }catch(NumberFormatException e){
              ageValidator = false;

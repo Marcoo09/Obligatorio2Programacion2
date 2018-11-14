@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package windows;
 
 import domains.*;
@@ -561,7 +556,8 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 stateOfTheGameboardChange = true;
                 if (currentGameBoard.getTokenMatrix()[newY][newX] == null) {
                     lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
-                                      //Add it to arraylist of the turns
+
+                    //Add it to arraylist of the turns
                      if (currentPlayer.equals(playerRed)) {
                         currentMatch.addPlayerTurn(playerRed);
                     } else {

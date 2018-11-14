@@ -1,6 +1,6 @@
 package windows;
 
-import controllers.serializeUtils;
+import controllers.Utils;
 import domains.Game;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -20,6 +20,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+/**
+ * @author Marco Fiorito and Felipe Najson
+ */
 
 public class MenuWindow extends javax.swing.JFrame implements Observer{
     
@@ -234,9 +237,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        serializeUtils.serialize(game);
+        Utils.serialize(game);
         try {
-            serializeUtils.serializeListOfPlayersToJson(game);
+            Utils.serializeListOfPlayersToJson(game);
         } catch (IOException ex) {
             Logger.getLogger(MenuWindow.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

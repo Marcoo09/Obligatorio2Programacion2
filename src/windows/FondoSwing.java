@@ -1,22 +1,17 @@
-
 package windows;
-   import java.awt.Component;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import javax.swing.border.Border;
 /**
  *
- * @author felip
+ * @author Felipe Najson and Marco Fiorito
  */
 public class FondoSwing implements Border {  
     
     private BufferedImage mImagen = null;
     
-    /**
-     * Constructor, indicamos la imagen que queremos que se redimensione
-     * @param pImagen ImageIO.read(new File(ruta imagen))
-     */
     public FondoSwing(BufferedImage pImagen) {
         mImagen = pImagen;       
     }

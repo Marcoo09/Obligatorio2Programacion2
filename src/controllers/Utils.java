@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import domains.Game;
 import domains.Player;
 import java.io.BufferedOutputStream;
@@ -23,7 +24,7 @@ import windows.MenuWindow;
  *
  * @author Marco Fiorito and Felipe Najson
  */
-public class serializeUtils {
+public class Utils {
   
      public static void serialize(Game game){
              FileOutputStream fileOutput = null;
@@ -53,6 +54,7 @@ public class serializeUtils {
     public static void serializeListOfPlayersToJson(Game game) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
         ArrayList<Player> listOfPlayers = game.getListOfPlayers();
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         
@@ -62,10 +64,15 @@ public class serializeUtils {
         int returnValue = jfc.showSaveDialog(null);
         if(returnValue == JFileChooser.APPROVE_OPTION){
             objectMapper.writeValue(new File(jfc.getSelectedFile()+"/"+"ListOfPlayers.json"),listOfPlayers);
-        }else{
+        }else{            
            objectMapper.writeValue(new File("ListOfPlayers.json"),listOfPlayers);
-        }
-        
-        
+        }         
     }
+    
+        public static boolean validateAttribute(int numberToValidate, int intialRange, int finalRange) {
+        //Check if the first parameter is between the range
+        boolean returnValue = (numberToValidate >= intialRange && numberToValidate <= finalRange);
+        return returnValue;
+    }
+        
 }
