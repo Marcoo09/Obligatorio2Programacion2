@@ -25,8 +25,10 @@ import windows.MenuWindow;
 public class Controller {
 
    
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-        
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException {
+        File font_file = new File("src/resources/ChalkDust.ttf");
+        Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
+
         Game game = new Game();
         File f1 = new File("Data");
         

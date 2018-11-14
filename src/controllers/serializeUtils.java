@@ -17,6 +17,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
 import windows.MenuWindow;
 
 /**
@@ -53,6 +55,14 @@ public class serializeUtils {
     public static void serializeListOfPlayersToJson(Game game) throws IOException{
         ArrayList<Player> listOfPlayers = game.getListOfPlayers();
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writeValue(new File("ListOfPlayers.json"),listOfPlayers);
+        
+        
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setDialogTitle("Elige donde quieres guardar la lista de jugadores: ");
+        jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnValue = jfc.showSaveDialog(null);
+		
+        objectMapper.writeValue(new File(jfc.getSelectedFile()+"/"+"ListOfPlayers.json"),listOfPlayers);
+        
     }
 }
