@@ -40,7 +40,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
     private static int newY;
     private static int lastNumberMoved;
     private boolean audioChanged;
-
+    
     private ArrayList<Integer> posibleTokenMovementsBlue = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
     private ArrayList<Integer> posibleTokenMovementsRed = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
 
@@ -562,7 +562,10 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
                 if (currentGameBoard.getTokenMatrix()[newY][newX] == null) {
                     lastNumberMoved = currentGameBoard.getTokenMatrix()[currentY][currentX].getTokenNumber();
                     currentGameBoard.movePiece(currentX, currentY, newX, newY);
-
+                    
+                    //Add it to arraylist of the turns
+                    currentMatch.addPlayerTurn(currentPlayer);
+                    
                     if (currentMatch.isFinished()) {
                         JOptionPane.showMessageDialog(this, "Terminó el juego", "Terminó", JOptionPane.ERROR_MESSAGE);
                         this.announceWinner();

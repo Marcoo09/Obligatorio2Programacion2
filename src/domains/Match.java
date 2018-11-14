@@ -19,6 +19,8 @@ public class Match implements Comparable, Serializable{
     private int qtyOfMovements;
     private final int initialQtyOfMovements;
     private boolean finished;
+    private ArrayList<Player> listOfPlayerTurns;
+
 
     public static String[] ways = {" Por cantidad de  movimientos", "Llevar una pieza", "Llevar todas las piezas"};
 
@@ -33,8 +35,18 @@ public class Match implements Comparable, Serializable{
         this.setQtyOfMovements(qtyOfMovements);
         
         initialQtyOfMovements = qtyOfMovements;
+        
+        listOfPlayerTurns = new ArrayList<>();
     }
 
+    public void addPlayerTurn(Player aPlayer){
+        listOfPlayerTurns.add(aPlayer);
+    }
+    
+    public ArrayList<Player> getListOfPlayerTurn() {
+        return listOfPlayerTurns;
+    } 
+    
     public ArrayList<Player> getListOfPlayers() {
         return listOfPlayers;
     }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileSystemView;
@@ -59,8 +60,12 @@ public class serializeUtils {
         jfc.setDialogTitle("Elige donde quieres guardar la lista de jugadores: ");
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = jfc.showSaveDialog(null);
-	
-        objectMapper.writeValue(new File(jfc.getSelectedFile()+"/"+"ListOfPlayers.json"),listOfPlayers);
+        if(returnValue == JFileChooser.APPROVE_OPTION){
+            objectMapper.writeValue(new File(jfc.getSelectedFile()+"/"+"ListOfPlayers.json"),listOfPlayers);
+        }else{
+           objectMapper.writeValue(new File("ListOfPlayers.json"),listOfPlayers);
+        }
+        
         
     }
 }

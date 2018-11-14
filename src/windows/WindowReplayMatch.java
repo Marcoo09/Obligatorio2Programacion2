@@ -155,6 +155,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         JSContainerLstMatches = new javax.swing.JScrollPane();
         lstMatches = new javax.swing.JList();
         btnConfirm = new javax.swing.JButton();
+        lblTurn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -180,7 +181,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             .addGap(0, 470, Short.MAX_VALUE)
         );
 
-        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 710, 470));
+        getContentPane().add(panelJuego, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 710, 470));
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
@@ -228,6 +229,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
             }
         });
         getContentPane().add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, -1, -1));
+        getContentPane().add(lblTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 320, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -246,9 +248,22 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnFollowGameBoardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFollowGameBoardActionPerformed
-        i++;
-        if (i<selectedMatch.getListOfGameBoard().size()) {
-                    this.fillButtonMatrix();
+        
+        
+        if (i<selectedMatch.getListOfGameBoard().size()-1) {
+            i++;
+            
+            //TURN
+            Player currentPlayer = selectedMatch.getListOfPlayerTurn().get(i);
+            String player;
+            if(currentPlayer.equals(selectedMatch.getListOfPlayers().get(0))){
+                player = "Turno Jugador Rojo";
+            }else{
+                player = "Turno Jugador Azul" ;
+            }
+            
+            lblTurn.setText(player);
+            this.fillButtonMatrix();
         }else{
             JOptionPane.showMessageDialog(this, "No hay mas tableros", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -262,6 +277,16 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         if (lstMatches.getSelectedValue()!=null) {
             selectedMatch = (Match)lstMatches.getSelectedValue();
             this.fillButtonMatrix();
+            
+            Player currentPlayer = selectedMatch.getListOfPlayerTurn().get(i);
+            String player;
+            if(currentPlayer.equals(selectedMatch.getListOfPlayers().get(0))){
+                player = "Turno Jugador Rojo";
+            }else{
+                player = "Turno Jugador Azul" ;
+            }
+            lblTurn.setText(player);
+
             
             JSContainerLstMatches.setVisible(false);
             panelJuego.setVisible(true);
@@ -322,6 +347,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton btnFollowGameBoard;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
+    private javax.swing.JLabel lblTurn;
     private javax.swing.JList lstMatches;
     private javax.swing.JPanel panelJuego;
     // End of variables declaration//GEN-END:variables
