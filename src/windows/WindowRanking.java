@@ -3,21 +3,16 @@ package windows;
 import domains.Game;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static windows.MenuWindow.sound;
-
 /**
- *
  * @author Marco Fiorito and Felipe Najson
  */
 public class WindowRanking extends javax.swing.JFrame implements Observer {
@@ -56,9 +51,11 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        lblTitle.setLocation((int) (screenWidth / 100) * 40, (int) (screenHeight / 100) * 15);
-        JSContainterRanking.setLocation((int) (screenWidth / 100) * 20, (int) (screenHeight / 100) * 30);
-        btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 150));
+        lblTitle.setLocation((int) (screenWidth * 0.4 ), (int) (screenHeight * 0.01) );
+        JSContainterRanking.setLocation((int) (screenWidth * 0.25), (int) (screenHeight * 0.1) );
+        
+        btnHome.setLocation((int) (screenWidth - 100) ,(int) ( 30));
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
 
     private void loadList() {

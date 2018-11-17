@@ -3,7 +3,6 @@ package windows;
 import domains.*;
 import java.awt.event.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import javax.swing.border.LineBorder;
 import static windows.MenuWindow.sound;
 
 /**
- *
  * @author Felipe Najson and Marco Fiorito
  */
 public class WindowGameBoard extends javax.swing.JFrame implements Observer,Serializable {

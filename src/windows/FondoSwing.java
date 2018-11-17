@@ -5,7 +5,6 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import javax.swing.border.Border;
 /**
- *
  * @author Felipe Najson and Marco Fiorito
  */
 public class FondoSwing implements Border {  

@@ -1,25 +1,21 @@
 package windows;
 
-import controllers.utils;
+import controllers.Utils;
 import domains.Game;
 import domains.Player;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static windows.MenuWindow.sound;
-
 /**
- *
  * @author Felipe Najson and Marco Fiorito
  */
 public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
@@ -57,16 +53,16 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        lblTitle.setLocation((int) (screenWidth / 100) * 25, (int) (screenHeight / 100) * 1);
-        lblName.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 20);
-        lblNickname.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 40);
-        lblAge.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 60);
+        lblTitle.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 1);
+        lblName.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 20);
+        lblNickname.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 40);
+        lblAge.setLocation((int) (screenWidth / 100) * 1, (int) (screenHeight / 100) * 60);
 
-        txtName.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 22);
-        txtNickName.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 42);
-        txtAge.setLocation((int) (screenWidth / 100) * 45, (int) (screenHeight / 100) * 62);
+        txtName.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 22);
+        txtNickName.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 42);
+        txtAge.setLocation((int) (screenWidth / 100) * 30, (int) (screenHeight / 100) * 62);
         
-        btnAddPlayer.setLocation((int) (screenWidth / 100) * 80, (int) (screenHeight / 100) * 70);
+        btnAddPlayer.setLocation((int) (screenWidth / 100) * 75, (int) (screenHeight / 100) * 80);
         btnHome.setLocation((int) (screenWidth - 100) ,(int) (30));
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
@@ -201,7 +197,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         //Validation of age
         try{
             age = Integer.parseInt(txtAge.getText());
-            ageValidator = utils.validateAttribute(age, 0, 120);
+            ageValidator = Utils.validateAttribute(age, 0, 120);
 
         }catch(NumberFormatException e){
              ageValidator = false;

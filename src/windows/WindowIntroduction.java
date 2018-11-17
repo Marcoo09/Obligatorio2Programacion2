@@ -2,30 +2,48 @@ package windows;
 
 import domains.Game;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import static windows.MenuWindow.sound;
-
+import javax.swing.Timer;
 /**
- *
  * Marco Fiorito and Felipe Najson
  */
 public class WindowIntroduction extends javax.swing.JFrame {
 
     private Game game;
-
-    public WindowIntroduction(Game aGame) {
+    private Timer timer;
+    private ActionListener actionListener;
+    private static WindowIntroduction wIntroduction;
+   static  MenuWindow menuWindow;
+   static  int imageIndex;
+   String[] listOfResources = {
+                "/resources/transition1-img.png",
+                "/resources/transition2-img.png",
+                "/resources/transition3-img.png",
+                "/resources/transition4-img.png",
+                "/resources/transition5-img.png"
+    };
+    
+    public WindowIntroduction(Game aGame) throws IOException {
         initComponents();
         game = aGame;
+        wIntroduction = this;
+        menuWindow = new MenuWindow(game);
+        imageIndex = 0;
+        
         
         try {
-            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/1.jpg")));
+            FondoSwing fondo = new FondoSwing(ImageIO.read(getClass().getResource("/resources/background.jpg")));
 
             JPanel panel = (JPanel) this.getContentPane();
             panel.setBorder(fondo);
@@ -36,13 +54,14 @@ public class WindowIntroduction extends javax.swing.JFrame {
             
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTransparent();
         this.alignItems();
-        
-        //Sound
-        sound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/menuSound.wav"));
-        game.setMusicState(true);
-
+       
+       //Slider
+        setImageSize(0);
+        img.setVisible(true);
+        //ProgressBar
+        this.beginProgressBar();
+       
     }
     
     public void alignItems(){
@@ -50,58 +69,102 @@ public class WindowIntroduction extends javax.swing.JFrame {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
         
-      /*  lblLogo.setLocation((int) (screenWidth / 100) * 50 - 150, (int) (screenHeight / 100) *1);
-        lblLegtToTheLogo.setLocation((int) (screenWidth / 100) * 32, (int) (screenHeight / 100) * 26 );
-        lblRightToTheLogo.setLocation((int) (screenWidth / 100) * 62, (int) (screenHeight / 100) * 24);
-        lblNameOfThePlay.setLocation((int) (screenWidth / 100) * 50 - 270, (int) (screenHeight / 100) * 35);
+        img.setSize((int)(screenWidth * 0.7), (int)(screenHeight * 0.7));
+        img.setLocation((int) (screenWidth * 0.175) , (int) (screenHeight * 0.05));
         
-        lblLeftToTheMenu.setLocation((int) (screenWidth / 100) * 15 ,(int) (screenHeight / 100) * 75);
-        lblRightToTheMenu.setLocation((int) (screenWidth / 100) * 70 ,(int) (screenHeight / 100) * 65);
+        jpgBar.setSize((int)(screenWidth * 0.8), 30);
+        jpgBar.setLocation((int) (screenWidth * 0.125) , (int) (screenHeight * 0.8));
         
-        btnAddPlayer.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 47);
-        btnPlay.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 56);
-        btnReplayMatch.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 64);
-        btnRanking.setLocation((int) (screenWidth / 100) * 42 ,(int) (screenHeight / 100) * 74);
-        btnExit.setLocation((int) (screenWidth / 100) * 41 ,(int) (screenHeight / 100) * 84);
-        
-        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));*/
+        btnSkip.setLocation((int) (screenWidth - 125) ,(int) (screenHeight - 75));
+
     }
-    
-    public void setTransparent(){
-/*        ArrayList jbuttons = new ArrayList<>();
-         for (int i = 0; i < jbuttons.size(); i++) {
-              JButton buttonAux = (JButton) jbuttons.get(i);
-              buttonAux.setOpaque(false);
-              buttonAux.setContentAreaFilled(false);
-              buttonAux.setBorderPainted(false);
-           }*/
+        
+    private void setImageSize(int i){
+        ImageIcon icon = new ImageIcon(getClass().getResource(listOfResources[i]));
+        Image imgResource = icon.getImage();
+        Image newImage = imgResource.getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newImc = new ImageIcon(newImage);
+        img.setIcon(newImc);
     }
+    private static void openMenu() throws IOException{
+         menuWindow.setVisible(true);
+    }
+    private void beginProgressBar(){
+        jpgBar.setVisible(true);
+        
+        timer = new Timer(200, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int jpgBarValue = jpgBar.getValue();
+                if( jpgBarValue < 100){
+                    if(jpgBarValue % 20 == 0){
+                        setImageSize(imageIndex);
+                        imageIndex++;
+                        if(imageIndex>= listOfResources.length){
+                            imageIndex = 0;
+                        }
+                    }
+                  jpgBar.setValue(jpgBarValue + 1);                  
+                }else{                    
+                    try {
+                        openMenu();
+                    } catch (IOException ex) {
+                        Logger.getLogger(WindowIntroduction.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    dispose();
+                    timer.stop();
+                };
+            }
+        });
+        
+        timer.start();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jpgBar = new javax.swing.JProgressBar();
+        img = new javax.swing.JLabel();
+        btnSkip = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 810, 1000, 30));
 
-        jLabel2.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cargando...");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 770, -1, -1));
+        jpgBar.setForeground(new java.awt.Color(0, 132, 55));
+        jpgBar.setOpaque(true);
+        jpgBar.setStringPainted(true);
+        getContentPane().add(jpgBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, 1000, 30));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/transition1-img.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, -1, -1));
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/transition1-img.png"))); // NOI18N
+        getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 970, 540));
+
+        btnSkip.setText("Skip");
+        btnSkip.setBorderPainted(false);
+        btnSkip.setOpaque(false);
+        btnSkip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSkipActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSkip, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 660, 80, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSkipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipActionPerformed
+        try {
+            openMenu();
+        } catch (IOException ex) {
+            Logger.getLogger(WindowIntroduction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSkipActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JButton btnSkip;
+    private javax.swing.JLabel img;
+    private javax.swing.JProgressBar jpgBar;
     // End of variables declaration//GEN-END:variables
 }

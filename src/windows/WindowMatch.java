@@ -3,25 +3,17 @@ package windows;
 import domains.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import windows.FondoSwing;
-import windows.MenuWindow;
-import windows.WindowGameBoard;
 import static windows.MenuWindow.sound;
 
 /**
- *
  * @author Felipe Najson and Marco Fiorito
  */
 public class WindowMatch extends javax.swing.JFrame implements Observer {

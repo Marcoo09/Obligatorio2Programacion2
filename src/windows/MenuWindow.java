@@ -2,24 +2,16 @@ package windows;
 
 import controllers.*;
 import domains.Game;
-import java.util.ArrayList;
 import javax.swing.*;
 import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-
 /**
  * @author Marco Fiorito and Felipe Najson
  */
@@ -179,7 +171,6 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         btnSound.setBorderPainted(false);
         btnSound.setContentAreaFilled(false);
         btnSound.setFocusPainted(false);
-        btnSound.setOpaque(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -232,9 +223,9 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_btnAddPlayerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        utils.serialize(game);
+        Utils.serialize(game);
         try {
-            utils.serializeListOfPlayersToJson(game);
+            Utils.serializeListOfPlayersToJson(game);
         } catch (IOException ex) {
             Logger.getLogger(MenuWindow.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

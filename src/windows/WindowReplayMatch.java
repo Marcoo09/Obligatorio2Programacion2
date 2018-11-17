@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -18,9 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import static windows.MenuWindow.sound;
-
 /**
- *
  * @author Felipe Najson and Marco Fiorito
  */
 public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
@@ -66,9 +63,8 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
 
-        // panelJuego.setLocation((int) (screenWidth / 100) *1 ,(int) (screenHeight  / 100) * 1);
-        btnHome.setLocation((int) (screenWidth - 100) ,(int) (30));        
-        btnSound.setLocation((int) (screenWidth - 100), (int) (screenHeight - 75));
+        btnHome.setLocation((int) (screenWidth - 100) ,(int) ( 30));
+        btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
     }
     
     private void createButtonMatrix(){

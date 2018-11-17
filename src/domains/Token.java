@@ -1,7 +1,6 @@
 package domains;
 
 import java.io.Serializable;
-
 /**
  * @author Marco Fiorito and Felipe Najson
  */
