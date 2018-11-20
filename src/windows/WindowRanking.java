@@ -59,6 +59,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     }
 
     private void loadList() {
+        game.sortPlayersByWonGames();
         lstRanking.setListData(game.getListOfPlayers().toArray());
     }
 

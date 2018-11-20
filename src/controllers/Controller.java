@@ -3,11 +3,13 @@ package controllers;
 import domains.Game;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import windows.WindowIntroduction;
 /**
@@ -17,12 +19,11 @@ public class Controller {
 
    
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException {
-        File font_file = new File("src/resources/ChalkDust.ttf");
-        Font font = Font.createFont(Font.TRUETYPE_FONT, font_file);
-
         Game game = new Game();
         File f1 = new File("Data");
-
+        
+        createFonts();
+        
         if(f1.exists()){
                 FileInputStream file = new FileInputStream("Data");
                 BufferedInputStream buffer = new BufferedInputStream(file);
@@ -32,6 +33,18 @@ public class Controller {
           WindowIntroduction windowIntroduction = new WindowIntroduction(game);
           windowIntroduction.setVisible(true);
 
+    }
+    
+    public static void createFonts() throws FontFormatException, IOException{
+        InputStream font = Controller.class.getResourceAsStream("/resources/ChalkDust.ttf");
+         Font ChalkDust = Font.createFont(Font.TRUETYPE_FONT, font);
+         
+         font = Controller.class.getResourceAsStream("/resources/snubnose.otf");
+         Font SnubnoseDemo = Font.createFont(Font.TRUETYPE_FONT, font);
+         
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(ChalkDust);
+        ge.registerFont(SnubnoseDemo);
     }
     
 }
