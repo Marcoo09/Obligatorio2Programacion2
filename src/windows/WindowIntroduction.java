@@ -140,8 +140,11 @@ public class WindowIntroduction extends javax.swing.JFrame {
         img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/transition1-img.png"))); // NOI18N
         getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 970, 540));
 
+        btnSkip.setBackground(new java.awt.Color(255, 255, 255));
+        btnSkip.setFont(new java.awt.Font("Snubnose DEMO", 0, 18)); // NOI18N
         btnSkip.setText("Skip");
         btnSkip.setBorderPainted(false);
+        btnSkip.setFocusPainted(false);
         btnSkip.setOpaque(false);
         btnSkip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

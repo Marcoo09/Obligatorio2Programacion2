@@ -183,7 +183,7 @@ public class MenuWindow extends javax.swing.JFrame implements Observer{
         lblRightToTheMenu.setText("1+1=2");
         getContentPane().add(lblRightToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 530, -1, -1));
 
-        lblLeftToTheMenu.setFont(new java.awt.Font("Snubnose DEMO", 0, 48)); // NOI18N
+        lblLeftToTheMenu.setFont(new java.awt.Font("ChalkDust", 0, 48)); // NOI18N
         lblLeftToTheMenu.setForeground(new java.awt.Color(255, 255, 255));
         lblLeftToTheMenu.setText("23+7=30");
         getContentPane().add(lblLeftToTheMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));

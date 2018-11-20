@@ -109,7 +109,7 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         lblTitle.setText("Ingreso de jugador");
         getContentPane().add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, -1, -1));
 
-        txtName.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtName.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         txtName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 300, 160, 30));
 
@@ -128,11 +128,11 @@ public class WindowAddPlayer extends javax.swing.JFrame implements Observer {
         lblName.setText("Nombre:");
         getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, -1));
 
-        txtNickName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtNickName.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         txtNickName.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(txtNickName, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 410, 160, 30));
 
-        txtAge.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtAge.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         txtAge.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 520, 160, 30));
 

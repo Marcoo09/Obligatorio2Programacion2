@@ -172,10 +172,12 @@ public class WindowMatch extends javax.swing.JFrame implements Observer {
         });
         getContentPane().add(btnSound, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 700, -1, -1));
 
+        lstPlayerBlue.setFont(new java.awt.Font("Snubnose DEMO", 0, 15)); // NOI18N
         JSContainerBluePlayer.setViewportView(lstPlayerBlue);
 
         getContentPane().add(JSContainerBluePlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 390, 110));
 
+        lstPlayerRed.setFont(new java.awt.Font("Snubnose DEMO", 0, 15)); // NOI18N
         JSContainterRedPlayer.setViewportView(lstPlayerRed);
 
         getContentPane().add(JSContainterRedPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 390, 110));
