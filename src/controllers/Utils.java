@@ -51,13 +51,11 @@ public class Utils {
         }  
     }
         
-    public static void serializeListOfPlayersToJson(Game game) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+    public static void serializeListOfPlayersToJson(Game game) throws IOException, ClassNotFoundException {
         ArrayList<Player> listOfPlayers = game.getListOfPlayers();
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        
+                
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Elige donde quieres guardar la lista de jugadores: ");
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -70,7 +68,7 @@ public class Utils {
         }         
     }
     
-        public static boolean validateAttribute(int numberToValidate, int intialRange, int finalRange) {
+    public static boolean validateAttribute(int numberToValidate, int intialRange, int finalRange) {
         //Check if the first parameter is between the range
         boolean returnValue = (numberToValidate >= intialRange && numberToValidate <= finalRange);
         return returnValue;

@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import windows.WindowIntroduction;
 /**
  * @author Marco Fiorito and Felipe Najson
@@ -18,10 +20,12 @@ import windows.WindowIntroduction;
 public class Controller {
 
    
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         Game game = new Game();
         File f1 = new File("Data");
         
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
         createFonts();
         
         if(f1.exists()){

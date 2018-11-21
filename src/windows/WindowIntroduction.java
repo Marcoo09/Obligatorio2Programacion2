@@ -20,10 +20,10 @@ import javax.swing.Timer;
  */
 public class WindowIntroduction extends javax.swing.JFrame {
 
-    private Game game;
-    private Timer timer;
-    private ActionListener actionListener;
-    private static WindowIntroduction wIntroduction;
+   private Game game;
+   private Timer timer;
+   private ActionListener actionListener;
+   private static WindowIntroduction wIntroduction;
    static  MenuWindow menuWindow;
    static  int imageIndex;
    String[] listOfResources = {
@@ -165,6 +165,7 @@ public class WindowIntroduction extends javax.swing.JFrame {
             Logger.getLogger(WindowIntroduction.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
+        timer.stop();
     }//GEN-LAST:event_btnSkipActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
