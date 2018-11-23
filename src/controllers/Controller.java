@@ -20,12 +20,10 @@ import windows.WindowIntroduction;
 public class Controller {
 
    
-    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException, FontFormatException {
         Game game = new Game();
         File f1 = new File("Data");
         
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
         createFonts();
         
         if(f1.exists()){

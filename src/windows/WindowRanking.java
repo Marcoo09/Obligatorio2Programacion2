@@ -1,9 +1,11 @@
 package windows;
 
 import domains.Game;
+import domains.Player;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -11,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import windows.FondoSwing;
+import windows.MenuWindow;
 import static windows.MenuWindow.sound;
 /**
  * @author Marco Fiorito and Felipe Najson
@@ -52,7 +56,12 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         int screenHeight = (int) screenSize.getHeight();
 
         lblTitle.setLocation((int) (screenWidth * 0.4 ), (int) (screenHeight * 0.01) );
-        JSContainterRanking.setLocation((int) (screenWidth * 0.25), (int) (screenHeight * 0.1) );
+        lblPodium.setLocation((int) (screenWidth * 0.3), (int) (screenHeight * 0.1));
+        lblFirst.setLocation((int) (screenWidth * 0.5), (int) (screenHeight * 0.1));
+        lblSecond.setLocation((int) (screenWidth * 0.3), (int) (screenHeight * 0.1));
+        lblThird.setLocation((int) (screenWidth * 0.6), (int) (screenHeight * 0.1));
+        
+        JSContainterRanking.setLocation((int) (screenWidth * 0.25), (int) (screenHeight * 0.5) );
         
         btnHome.setLocation((int) (screenWidth - 100) ,(int) ( 30));
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
@@ -60,7 +69,34 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
 
     private void loadList() {
         game.sortPlayersByWonGames();
-        lstRanking.setListData(game.getListOfPlayers().toArray());
+        ArrayList<Player> listOfPlayer = (ArrayList<Player>) game.getListOfPlayers().clone();
+        if(listOfPlayer.size() >= 3){
+            lblFirst.setText(listOfPlayer.get(0).getNickName());
+            lblSecond.setText(listOfPlayer.get(1).getNickName());
+            lblThird.setText(listOfPlayer.get(2).getNickName());
+            listOfPlayer.remove(0);
+            listOfPlayer.remove(0);
+            listOfPlayer.remove(0);
+
+        }else if(listOfPlayer.size() == 2){
+            lblFirst.setText(listOfPlayer.get(0).getNickName());
+            lblSecond.setText(listOfPlayer.get(1).getNickName());
+            lblThird.setText("");
+            listOfPlayer.remove(0);
+            listOfPlayer.remove(0);
+        }else if(listOfPlayer.size()== 1){
+            lblFirst.setText(listOfPlayer.get(0).getNickName());
+            lblSecond.setText("");
+            lblThird.setText("");
+            listOfPlayer.remove(0);
+        }else{
+            lblFirst.setText("No hay jugadores");
+            lblSecond.setText("No hay jugadores");
+            lblThird.setText("No hay jugadores");
+        }
+
+
+        lstRanking.setListData(listOfPlayer.toArray());
     }
 
     @SuppressWarnings("unchecked")
@@ -72,6 +108,10 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         JSContainterRanking = new javax.swing.JScrollPane();
         lstRanking = new javax.swing.JList();
         btnHome = new javax.swing.JButton();
+        lblPodium = new javax.swing.JLabel();
+        lblThird = new javax.swing.JLabel();
+        lblFirst = new javax.swing.JLabel();
+        lblSecond = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1020, 700));
@@ -81,7 +121,6 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         btnSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/speakerOn-img.png"))); // NOI18N
         btnSound.setBorderPainted(false);
         btnSound.setContentAreaFilled(false);
-        btnSound.setOpaque(false);
         btnSound.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSoundActionPerformed(evt);
@@ -98,7 +137,7 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
         lstRanking.setFont(new java.awt.Font("Snubnose DEMO", 0, 24)); // NOI18N
         JSContainterRanking.setViewportView(lstRanking);
 
-        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, 750, 550));
+        getContentPane().add(JSContainterRanking, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, 750, 320));
 
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/home-img.png"))); // NOI18N
         btnHome.setBorderPainted(false);
@@ -110,6 +149,24 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
             }
         });
         getContentPane().add(btnHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 0, -1, -1));
+
+        lblPodium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/podium-img.png"))); // NOI18N
+        getContentPane().add(lblPodium, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, -1, -1));
+
+        lblThird.setFont(new java.awt.Font("Snubnose DEMO", 0, 30)); // NOI18N
+        lblThird.setForeground(new java.awt.Color(255, 255, 255));
+        lblThird.setText("jLabel1");
+        getContentPane().add(lblThird, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 380, 120, 30));
+
+        lblFirst.setFont(new java.awt.Font("Snubnose DEMO", 0, 30)); // NOI18N
+        lblFirst.setForeground(new java.awt.Color(255, 255, 255));
+        lblFirst.setText("jLabel1");
+        getContentPane().add(lblFirst, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 240, 120, 30));
+
+        lblSecond.setFont(new java.awt.Font("Snubnose DEMO", 0, 30)); // NOI18N
+        lblSecond.setForeground(new java.awt.Color(255, 255, 255));
+        lblSecond.setText("jLabel1");
+        getContentPane().add(lblSecond, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 330, 120, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,6 +189,10 @@ public class WindowRanking extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane JSContainterRanking;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnSound;
+    private javax.swing.JLabel lblFirst;
+    private javax.swing.JLabel lblPodium;
+    private javax.swing.JLabel lblSecond;
+    private javax.swing.JLabel lblThird;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JList lstRanking;
     // End of variables declaration//GEN-END:variables
