@@ -137,6 +137,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
            }
        }        
    }
+        
 
         private void giveUp(){
        currentMatch.setFinished(true);

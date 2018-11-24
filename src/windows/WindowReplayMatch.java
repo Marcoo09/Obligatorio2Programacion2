@@ -62,6 +62,9 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
+        
+        panelJuego.setLocation((int)(screenWidth * 0.35), (int)(screenHeight * 0.2));
+        lblTurn.setLocation((int)(screenWidth * 0.30), (int)(screenHeight * 0.15));
 
         btnHome.setLocation((int) (screenWidth - 100) ,(int) ( 30));
         btnSound.setLocation((int) (screenWidth - 100) ,(int) (screenHeight - 75));
@@ -219,7 +222,7 @@ public class WindowReplayMatch extends javax.swing.JFrame implements Observer {
 
         lblTurn.setFont(new java.awt.Font("Snubnose DEMO", 0, 36)); // NOI18N
         lblTurn.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lblTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 320, 50));
+        getContentPane().add(lblTurn, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 320, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

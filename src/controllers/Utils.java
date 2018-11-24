@@ -75,5 +75,10 @@ public class Utils {
         boolean returnValue = (numberToValidate >= intialRange && numberToValidate <= finalRange);
         return returnValue;
     }
+    
+    public static boolean validateRange(int numberToValidate, int intialRange, int finalRange) {
+        //Check if the first parameter is between the range        
+        return (numberToValidate >= intialRange && numberToValidate <= finalRange);
+    }
         
 }

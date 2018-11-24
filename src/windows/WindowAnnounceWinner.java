@@ -19,7 +19,8 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
     private Match currentMatch;
     private Game game;
     static AudioClip applauseSound;
-   
+    static AudioClip buhSound;
+    
     public WindowAnnounceWinner(Match aMatch, MenuWindow mainWindow, Game aGame) {
         initComponents();
         menuWindow = mainWindow;
@@ -46,11 +47,7 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         this.showWinner();
         this.alignItems();
         
-        //ApplauseSound
-        applauseSound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/applause.wav"));
-        applauseSound.play();
 
-        //Sound
         ImageIcon iconOff = new ImageIcon(getClass().getResource("/resources/speakerOff-img.png"));
         ImageIcon iconOn = new ImageIcon(getClass().getResource("/resources/speakerOn-img.png"));
         if (!game.musicOn()) {
@@ -63,9 +60,9 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
         
-        leftTrophy.setLocation((int) (screenWidth / 100) *30, (int) (screenHeight / 100) * 25);
-        lblWinner.setLocation((int) (screenWidth / 100) *40, (int) (screenHeight / 100) * 25);
-        rightTrophy.setLocation((int) (screenWidth / 100) *72, (int) (screenHeight / 100) * 25);
+        leftTrophy.setLocation((int) (screenWidth / 100) *34, (int) (screenHeight / 100) * 25);
+        lblWinner.setLocation((int) (screenWidth / 100) *44, (int) (screenHeight / 100) * 25);
+        rightTrophy.setLocation((int) (screenWidth / 100) *69, (int) (screenHeight / 100) * 25);
         
         txtWinner.setLocation((int) (screenWidth / 100) *35, (int) (screenHeight / 100) * 45);
         txtWonGames.setLocation((int) (screenWidth / 100) *40, (int) (screenHeight / 100) * 65);
@@ -76,9 +73,11 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
         
         public void showWinner(){
         Player playerWinner = currentMatch.getWinner();
-       
+         applauseSound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/applause.wav"));
+        buhSound = java.applet.Applet.newAudioClip(getClass().getResource("/resources/buh.wav"));
         
         if (playerWinner != null) {
+                applauseSound.play();
                 String [] data = playerWinner.toString().split(",");
                 lblWinner.setVisible(true);
                 txtWonGames.setVisible(true);
@@ -89,6 +88,7 @@ public class WindowAnnounceWinner extends javax.swing.JFrame {
                 game.setMusicState(false);
                 
         }else{
+                buhSound.play();
                 txtWinner.setText(" Termino en empate");
         }
     }

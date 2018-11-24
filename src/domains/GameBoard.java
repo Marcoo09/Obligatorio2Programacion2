@@ -1,5 +1,6 @@
 package domains;
 
+import controllers.Utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -93,7 +94,7 @@ public class GameBoard extends Observable implements Serializable{
             counter++;
         }
     }
-
+        
     public void searchPositionOfToken(int tokenNumber, Player aPlayer) {
         Token[][] tokenMatrix = this.getTokenMatrix();
         int positionX = 0;
@@ -241,6 +242,101 @@ public class GameBoard extends Observable implements Serializable{
          return returnedValue;
      }
      
+      public  boolean validateTokenPosibleMovement(Player parmPlayer, int currentPositionY,int currentPositionX,int newPositionY, int newPositionX){
+        Player playerRed = this.getPlayerRed();
+        
+        boolean isValidPositionMovement = false;
+        
+        Token auxTokenToCompare = null;
+
+        boolean isOutOfRangeX;
+        boolean isOutOfRangeY;
+        
+        if (parmPlayer.equals(playerRed) ) {
+            isOutOfRangeY = Utils.validateRange(currentPositionY - 1, 0, 7);
+
+            if ((newPositionY == currentPositionY - 1) &&  (newPositionX == currentPositionX + 1)) {
+                isOutOfRangeX = Utils.validateRange(currentPositionX + 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = this.getTokenMatrix()[currentPositionY - 1][currentPositionX + 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+                }
+
+            } else if ((newPositionY == currentPositionY - 1) &&  (newPositionX == currentPositionX - 1)) {
+                isOutOfRangeX = Utils.validateRange(currentPositionX - 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = this.getTokenMatrix()[currentPositionY - 1][currentPositionX - 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+                }
+
+            } else if ((newPositionY == currentPositionY - 1) &&  (newPositionX == currentPositionX)) {
+                isOutOfRangeX = Utils.validateRange(currentPositionX, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = this.getTokenMatrix()[currentPositionY - 1][currentPositionX];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            }
+        } //Player blue
+        else {
+
+            isOutOfRangeY = Utils.validateRange(currentPositionY + 1, 0, 7);
+
+            if ((newPositionY == currentPositionY + 1) &&  (newPositionX == currentPositionX - 1)) {
+                isOutOfRangeX = Utils.validateRange(currentPositionX - 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = this.getTokenMatrix()[currentPositionY + 1][currentPositionX - 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            } else if ((newPositionY == currentPositionY + 1) &&  (newPositionX == currentPositionX + 1)) {
+                isOutOfRangeX = Utils.validateRange(currentPositionX + 1, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = this.getTokenMatrix()[currentPositionY + 1][currentPositionX + 1];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            } else if ((newPositionY == currentPositionY + 1) &&  (newPositionX == currentPositionX)) {
+                isOutOfRangeX = Utils.validateRange(currentPositionX, 0, 8);
+
+                if (isOutOfRangeX && isOutOfRangeY) {
+                    auxTokenToCompare = this.getTokenMatrix()[currentPositionY + 1][currentPositionX];
+
+                    if (auxTokenToCompare == null) {
+                        isValidPositionMovement = true;
+                    }
+
+                }
+
+            }
+        }
+         
+         return isValidPositionMovement;
+     }
+      
     public ArrayList<Integer> removeTokensWithAnyPosibleMovement(ArrayList<Integer> posibleTokenMovements, Player currentPlayer) {
         int size = posibleTokenMovements.size();
         int currentTokenValue;
@@ -261,9 +357,9 @@ public class GameBoard extends Observable implements Serializable{
                 positionOfTokenX = this.getTokenPositionX();
                 positionOfTokenY = this.getTokenPositionY();
                 
-                hasMovementsToA = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY - 1, tokenPositionX);
-                hasMovementsToD = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY - 1, tokenPositionX + 1);
-                hasMovementsToI = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY - 1, tokenPositionX - 1);
+                hasMovementsToA = this.validateTokenPosibleMovement(currentPlayer, tokenPositionY, tokenPositionX, positionOfTokenY - 1, positionOfTokenX);
+                hasMovementsToD = this.validateTokenPosibleMovement(currentPlayer, tokenPositionY, tokenPositionX, positionOfTokenY - 1, positionOfTokenX + 1);
+                hasMovementsToI = this.validateTokenPosibleMovement(currentPlayer, tokenPositionY, tokenPositionX, positionOfTokenY - 1, positionOfTokenX - 1);
                 
                if(hasMovementsToA || hasMovementsToD || hasMovementsToI){
                     returnedArrayList.add(currentTokenValue);
@@ -277,9 +373,9 @@ public class GameBoard extends Observable implements Serializable{
                 positionOfTokenX = this.getTokenPositionX();
                 positionOfTokenY = this.getTokenPositionY();
                 
-                hasMovementsToA = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY +1, tokenPositionX);
-                hasMovementsToD = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY + 1, tokenPositionX - 1);
-                hasMovementsToI = this.validatePositionMovement(currentPlayer, tokenPositionY, tokenPositionX, tokenPositionY + 1, tokenPositionX + 1);
+                hasMovementsToA = this.validateTokenPosibleMovement(currentPlayer, tokenPositionY, tokenPositionX, positionOfTokenY +1, positionOfTokenX);
+                hasMovementsToD = this.validateTokenPosibleMovement(currentPlayer, tokenPositionY, tokenPositionX, positionOfTokenY + 1, positionOfTokenX - 1);
+                hasMovementsToI = this.validateTokenPosibleMovement(currentPlayer, tokenPositionY, tokenPositionX, positionOfTokenY + 1, positionOfTokenX + 1);
                 
                 if(hasMovementsToA || hasMovementsToD || hasMovementsToI){
                     returnedArrayList.add(currentTokenValue);
