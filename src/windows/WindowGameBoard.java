@@ -94,7 +94,7 @@ public class WindowGameBoard extends javax.swing.JFrame implements Observer,Seri
          }
             currentGameBoard = auxGameboard;
         }
-         currentMatch.addPlayerTurn(playerRed);
+        currentMatch.addPlayerTurn(playerRed);
         //Subscribe as observers
         game.addObserver(this);
         currentGameBoard.addObserver(this);
